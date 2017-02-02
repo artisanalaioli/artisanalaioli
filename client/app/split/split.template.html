@@ -1,0 +1,22 @@
+<h1>Split the bill</h1>
+<div>
+	<ul class="eachFriend">
+		<li ng-repeat="friend in $ctrl.friends">
+			<h2>{{$ctrl.friend.name}}</h2>
+			<form>
+				<label>Add item and price</label>
+				<input type="text" name="itemname">
+				<input type="text" name="itemprice">
+			</form>
+			<div class="itemlist">
+				<table>
+					<tr>tip: {{$ctrl.tip}}</tr>
+					<tr ng-repeat="item in items" ng-click="$ctrl.additem(item)">
+						<td>{{$ctrl.item.name}}</td>
+						<td>{{$ctrl.item.price}}</td>
+					</tr>
+				</table>
+			</div>
+		</li>
+	</ul>
+</div>

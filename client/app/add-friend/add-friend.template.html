@@ -1,0 +1,19 @@
+<h1>Add friend</h1>
+<div>
+	<form ng-submit="addOne(friendname)">
+		<label>Add friends to share the bill<br></label>
+		<input ng-model="friendname" type="text" name="friendname" placeholder="add friend name">
+		<input type="submit" value="Add">
+	</form>
+
+	<table ng-if="friends">
+		<tr ng-repeat="friend in friends">
+			<td>{{friend}}</td>
+			<td ng-click="remove(friend)">Remove</td>
+		</tr>
+	</table>
+</div>
+
+<div ng-if="friendname">
+{{friendname}}
+</div>
