@@ -15,7 +15,8 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 	$scope.readyToSplit = false;
 	$scope.item; // single item
 	$scope.price; // price for single item
-	$scope.items = []; // items is an array of [item, price]
+	$scope.items = []; // items is an array of [id, item, price, people]
+	$scope.count = 0; // when remove item, currentItemId will not decrease
 
 	$scope.addbillinfo = function() {
 		// priceBeforeTip is a float number
@@ -30,8 +31,9 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 	}
 
 	$scope.additeminfo = function() {
+		$scope.count += 1;
 		$scope.price = Number.parseFloat($scope.price);
-		$scope.items.push([$scope.item, $scope.price]);
+		$scope.items.push([$scope.count, $scope.item, $scope.price, '']);
 		$scope.item = "";
 		$scope.price = "";
 	}
@@ -48,6 +50,10 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 	$scope.removeitem = function(singleitem) {
 		var index = $scope.items.indexOf(singleitem);
 		$scope.items.splice(index, 1);
+		$scope.count -= 1;
+		for (var i = 0; i < $scope.items.length; i++) {
+			$scope.items[i][0] = i + 1;
+		}
 	}
 
 	// $scope.removeimg = function() {

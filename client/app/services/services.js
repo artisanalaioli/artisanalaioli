@@ -87,13 +87,13 @@ angular.module('myApp.services',[])
 	.factory('Bill', function() {
 		var mybill = {}; 
 		mybill.name;
-		mybill.items; // an array of [itemName, price]
+		mybill.items; // an array of [itemName, price, people]
 		mybill.priceBeforeTip;
 		mybill.tiprate;
 
 		var addBill = function(bill) {
 			mybill.name = bill.name;
-			mybill.items = bill.items; // an array of [itemName, price]
+			mybill.items = bill.items; // an array of [itemName, price, people]
 			mybill.priceBeforeTip = bill.priceBeforeTip;
 			mybill.tiprate = bill.tiprate;			
 		}

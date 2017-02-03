@@ -23,12 +23,14 @@
         <div ng-if="items.length>0">
         <table>
             <tr>
+                <th>count(need a better name)</th>
                 <th>item</th>
                 <th>price</th>
             </tr>
             <tr ng-repeat="singleitem in items" ng-click="removeitem(singleitem)">
                 <td>{{singleitem[0]}}</td>
                 <td>{{singleitem[1]}}</td>
+                <td>{{singleitem[2]}}</td>
             </tr>
         </table>       
         </div>
