@@ -54,6 +54,7 @@ function register(req, res, next) {
 
             return newUser.save();
           }).then(function(user) {
+            req.session.username = user.username;
             res.end('saved');
           }).catch(function(err) {
             res.status(400).end();
