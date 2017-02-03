@@ -16,6 +16,7 @@ angular.module('myApp.split', ['ngRoute'])
     $scope.items = $scope.bill.items;
 
     /******************************************/
+    // bill: {name: string, items:[], priceBeforeTip: number, taxRate: number, tipRate: number}
     // item: [id, itemname, price, people.name];
     // friend: {name: string, items: []}
     /*****************************************/ 
@@ -25,8 +26,9 @@ angular.module('myApp.split', ['ngRoute'])
         friend.items.forEach(function(singleitem) {
             totalBeforeTip += singleitem[2];
         });
-        friend.tip = totalBeforeTip * $scope.bill.tiprate;
-        friend.total = totalBeforeTip + friend.tip;
+        friend.tip = Number.parseFloat((totalBeforeTip * $scope.bill.tipRate).toFixed(2));
+        friend.tax = Number.parseFloat((totalBeforeTip * $scope.bill.taxRate).toFixed(2));
+        friend.total = Number.parseFloat((totalBeforeTip + friend.tip + friend.tax).toFixed(2));
         Friends.getAll();        
     }
 
@@ -34,7 +36,6 @@ angular.module('myApp.split', ['ngRoute'])
         item[3] = friend.name; 
         friend.items.push(item); // add item for friend               
         $scope.assigneditems.push(item); // add item into assigneditems list
-        // Friends.getAll();   
         $scope.grandTotal(friend); 
     }
 
@@ -44,7 +45,6 @@ angular.module('myApp.split', ['ngRoute'])
         var indexForAllAssigned = $scope.assigneditems.indexOf(item);
         $scope.assigneditems.splice(indexForAllAssigned, 1); // remove item from assigneditems list
         item[3] = "";
-        // Friends.getAll();   
         $scope.grandTotal(friend);
     }
 

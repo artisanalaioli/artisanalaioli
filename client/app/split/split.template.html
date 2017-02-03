@@ -11,7 +11,10 @@
 			</form> -->
 			<div class="itemlist">
 				<table>
-					<tr>tip: {{friend.tip}}</tr>
+					<tr>
+						<td>tax: {{friend.tax}}</td>
+						<td>tip: {{friend.tip}}</td>
+					</tr>
 					<tr ng-repeat="item in items" ng-click="checkAssign(item, friend)">
 						<td>{{item[0]}}</td>
 						<td>{{item[1]}}</td>

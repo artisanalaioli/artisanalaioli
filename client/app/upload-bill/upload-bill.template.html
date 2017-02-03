@@ -4,10 +4,12 @@
             <label>Who is the bill from?<br></label>
             <input type="text" name="restaurant-name" ng-model="name" placeholder="Restaurant Name"><br>
             <label>Before tips<br></label>
-            <input type="text" name="priceBeforeTip" ng-model="priceBeforeTip" required><br>
+            <input type="number" string-to-number step="any" name="priceBeforeTip" ng-model="priceBeforeTip" required><br>
+            <label>Tax</label>
+            <input type="number" string-to-number step="any" name="tax" ng-model="tax">
             <label>Tip rate or number<br></label>
-            <input type="text" name="tiprate" ng-model="tiprate" placeholder="%"> or 
-            <input type="text" name="tipnum" ng-model="tipnum" placeholder="$"><br>
+            <input type="number" string-to-number step="any" name="tipRate" ng-model="tipRate" placeholder="%"> or 
+            <input type="number" string-to-number step="any" name="tipnum" ng-model="tipnum" placeholder="$"><br>
             <input type="submit" value="Submit">
             <!-- <label>Upload bill image<br></label> -->
             <!-- <input my-upload type="file" name="upload"><br> -->
@@ -16,7 +18,7 @@
         <form ng-submit="additeminfo()">
             <label>Add item and price</label><br>
             <input type="text" name="item" ng-model="item" placeholder="item">
-            <input type="text" name="price" ng-model="price" placeholder="price">
+            <input type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price">
             <input type="submit" value="Add">
         </form>
 
@@ -41,7 +43,8 @@
 <div ng-if="name">
     {{name}}
     {{priceBeforeTip}}
-    {{tiprate}}
+    {{tipRate}}
+    {{taxRate}}
     {{tipnum}}
     {{readyToSplit}}
 </div>

@@ -89,13 +89,15 @@ angular.module('myApp.services',[])
 		mybill.name;
 		mybill.items; // an array of [itemName, price, people]
 		mybill.priceBeforeTip;
-		mybill.tiprate;
+		mybill.tipRate;
+		mybill.taxRate;
 
 		var addBill = function(bill) {
 			mybill.name = bill.name;
 			mybill.items = bill.items; // an array of [itemName, price, people]
 			mybill.priceBeforeTip = bill.priceBeforeTip;
-			mybill.tiprate = bill.tiprate;			
+			mybill.tipRate = bill.tipRate;	
+			mybill.taxRate = bill.taxRate;		
 		}
 
 		var removeBill = function() {
@@ -118,8 +120,12 @@ angular.module('myApp.services',[])
 			return mybill.bill.priceBeforeTip;
 		}
 
-		var getTiprate = function() {
-			return mybill.bill.tiprate;
+		var getTipRate = function() {
+			return mybill.bill.tipRate;
+		}
+
+		var getTaxRate = function() {
+			return mybill.bill.taxRate;
 		}
 
 		return {
@@ -129,6 +135,7 @@ angular.module('myApp.services',[])
 			getName: getName,
 			getItems: getItems,
 			getPriceBeforeTip: getPriceBeforeTip,
-			getTiprate: getTiprate
+			getTipRate: getTipRate,
+			getTaxRate: getTaxRate
 		}
 	})

@@ -11,22 +11,27 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 
 .controller('UploadBillCtrl', function ($scope, Bill) {
 	// $scope.image = "";
-	$scope.priceBeforeTip = "";
+	$scope.priceBeforeTip = 0;
 	$scope.readyToSplit = false;
 	$scope.item; // single item
 	$scope.price; // price for single item
+	$scope.tax = 0;
+	$scope.taxRate = 0;
+	$scope.tipRate = 0; // this 'rate' is percentage 
 	$scope.items = []; // items is an array of [id, item, price, people]
 	$scope.count = 0; // when remove item, currentItemId will not decrease
-
+	
 	$scope.addbillinfo = function() {
-		// priceBeforeTip is a float number
 		$scope.priceBeforeTip = Number.parseFloat($scope.priceBeforeTip);
-		if (!$scope.tiprate) {
-			$scope.tiprate = $scope.tipnum / $scope.priceBeforeTip;
-		} else {
-		// tip rate is a float number
-			$scope.tiprate = Number.parseFloat($scope.tiprate/100);
+		// calculate tax rate
+		if ($scope.tax) {
+			$scope.tax = Number.parseFloat($scope.tax);
+			$scope.taxRate = $scope.tax / $scope.priceBeforeTip;
 		}
+		// calculate tiprate
+		if (!$scope.tipRate) {
+			$scope.tipRate = ($scope.tipnum / $scope.priceBeforeTip * 100).toFixed(2);
+		} 
 		$scope.readyToSplit = true;
 	}
 
@@ -35,7 +40,7 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 		$scope.price = Number.parseFloat($scope.price);
 		$scope.items.push([$scope.count, $scope.item, $scope.price, '']);
 		$scope.item = "";
-		$scope.price = "";
+		$scope.price = 0;
 	}
 
 	$scope.addBill = function() {
@@ -43,7 +48,8 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 		bill.name = $scope.name;
 		bill.items = $scope.items;
 		bill.priceBeforeTip = $scope.priceBeforeTip;
-		bill.tiprate = $scope.tiprate;
+		bill.taxRate = $scope.taxRate; 
+		bill.tipRate = $scope.tipRate / 100; // convert percentage to decimal
 		Bill.addBill(bill);
 	}
 
@@ -63,7 +69,19 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 	// }
 
 })
-
+.directive('stringToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+        return parseFloat(value);
+      });
+    }
+  };
+});
 // .directive('myUpload', [function () {
 // 	return {
 // 		restrict: 'A',
