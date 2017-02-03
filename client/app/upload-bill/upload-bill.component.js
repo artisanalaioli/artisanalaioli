@@ -24,7 +24,7 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 			$scope.tiprate = $scope.tipnum / $scope.priceBeforeTip;
 		} else {
 		// tip rate is a float number
-			$scope.tiprate = Number.parseFloat($scope.tiprate);
+			$scope.tiprate = Number.parseFloat($scope.tiprate/100);
 		}
 		$scope.readyToSplit = true;
 	}
@@ -43,6 +43,11 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 		bill.priceBeforeTip = $scope.priceBeforeTip;
 		bill.tiprate = $scope.tiprate;
 		Bill.addBill(bill);
+	}
+
+	$scope.removeitem = function(singleitem) {
+		var index = $scope.items.indexOf(singleitem);
+		$scope.items.splice(index, 1);
 	}
 
 	// $scope.removeimg = function() {

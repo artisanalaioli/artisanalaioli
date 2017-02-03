@@ -1,22 +1,30 @@
 <h1>Split the bill</h1>
 <div>
 	<ul class="eachFriend">
-		<li ng-repeat="friend in $ctrl.friends">
-			<h2>{{$ctrl.friend.name}}</h2>
-			<form>
+		<li ng-repeat="friend in friends">
+			<h2>{{friend.name}}</h2>
+			<h3>Total: {{friend.total}}</h3>
+<!-- 			<form>
 				<label>Add item and price</label>
 				<input type="text" name="itemname">
 				<input type="text" name="itemprice">
-			</form>
+			</form> -->
 			<div class="itemlist">
 				<table>
-					<tr>tip: {{$ctrl.tip}}</tr>
-					<tr ng-repeat="item in items" ng-click="$ctrl.additem(item)">
-						<td>{{$ctrl.item.name}}</td>
-						<td>{{$ctrl.item.price}}</td>
+					<tr>tip: {{friend.tip}}</tr>
+					<tr ng-repeat="item in items" ng-click="addItemToFriend(item, friend)">
+						<td>{{item[0]}}</td>
+						<td>{{item[1]}}</td>
 					</tr>
 				</table>
 			</div>
 		</li>
 	</ul>
+</div>
+<div>
+<br>
+<br>
+{{bill}}
+{{friends}}
+{{items}}
 </div>

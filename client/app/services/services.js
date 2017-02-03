@@ -1,20 +1,31 @@
 angular.module('myApp.services',[])
 	.factory('Friends', function() {
 
-		var friends = [];
+		var friends = []; // friend is object
 
 		var getAll = function() {
 			return friends;
 		}
 
-		var addOne = function(friend) {
-			if (!friends.includes(friend)) {
-				friends.push(friend);
+		var addOne = function(friendname) {
+			var index = -1;
+			for (var i = 0; i < friends.length; i++) {
+				if (friends[i].name === friendname) {
+					index = i;
+				}
+			}
+			if (index === -1) {
+				friends.push({name: friendname, items: []});
 			}
 		}
 
 		var removeOne = function(friend) {
-			var index = friends.indexOf(friend);
+			var index = -1;
+			for (var i = 0; i < friends.length; i++) {
+				if (friends[i].name === friend.name) {
+					index = i;
+				}
+			}
 			if (index !== -1) {
 				friends.splice(index, 1);
 			}

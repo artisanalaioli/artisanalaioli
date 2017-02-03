@@ -8,12 +8,10 @@
 
 	<table ng-if="friends">
 		<tr ng-repeat="friend in friends">
-			<td>{{friend}}</td>
-			<td ng-click="remove(friend)">Remove</td>
+			<td>{{friend.name}}</td>
+			<td ng-click="removeOne(friend)">Remove</td>
 		</tr>
 	</table>
-</div>
 
-<div ng-if="friendname">
-{{friendname}}
+	<a href="#!/split">Next</a>
 </div>

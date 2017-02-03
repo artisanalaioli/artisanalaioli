@@ -26,14 +26,14 @@
                 <th>item</th>
                 <th>price</th>
             </tr>
-            <tr ng-repeat="singleitem in items">
+            <tr ng-repeat="singleitem in items" ng-click="removeitem(singleitem)">
                 <td>{{singleitem[0]}}</td>
                 <td>{{singleitem[1]}}</td>
             </tr>
         </table>       
         </div>
 
-        <button ng-click="addBill()" href="#/split">Next</button>
+        <a ng-click="addBill()" href="#!/addfriend">Next</a>
 
 <!-- the following is for pre -->
 <div ng-if="name">
