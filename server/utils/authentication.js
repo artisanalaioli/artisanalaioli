@@ -34,6 +34,11 @@ passport.use(new LocalStrategy({ passReqToCallback: true },
     });
   }));
 
+function login(req, res, next) {
+  req.session.username = req.user.username;
+  res.redirect('/');
+}
+
 function register(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
@@ -72,4 +77,4 @@ function logout(req, res, next) {
   });
 }
 
-export { passport, register, logout };
+export { passport, login, register, logout };
