@@ -6,10 +6,12 @@ angular.module('myApp', [
   'myApp.uploadbill',
   'myApp.addfriend',
   'myApp.split',
-  'myApp.services'
+  'myApp.services',
+  'myApp.auth'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
   $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+}
+]);
