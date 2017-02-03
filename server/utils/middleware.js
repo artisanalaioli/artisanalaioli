@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 
 export default function middleware(app, express) {
+  app.use(express.static(__dirname + '/../../client/app'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
