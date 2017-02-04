@@ -17,7 +17,7 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 	$scope.price; // price for single item
 	$scope.tax = 0;
 	$scope.taxRate = 0;
-	$scope.tipRate = 0; // this 'rate' is percentage 
+	$scope.tipRate = '$'; // this 'rate' is percentage 
 	$scope.items = []; // items is an array of [id, item, price, people]
 	$scope.count = 0; // when remove item, currentItemId will not decrease
 	

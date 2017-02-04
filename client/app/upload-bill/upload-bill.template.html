@@ -1,56 +1,81 @@
 <h1>Upload bill</h1>
+<hr class="my-4">
+
 <div>
-        <form>
-            <div class="form-group">
+        <form class="row">
+            <div class="form-group col-xs-12">
                 <label class="col-form-label">Who is the bill from?</label>     
                 <input class="form-control" type="text" name="restaurant-name" ng-model="name" placeholder="Restaurant Name">        
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-12 col-md-6">
                 <label class="col-form-label">Before tips</label>
                 <input class="form-control" type="number" string-to-number step="any" name="priceBeforeTip" ng-model="priceBeforeTip" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-12 col-md-6">
                 <label class="col-form-label">Tax</label>
                 <input class="form-control" type="number" string-to-number step="any" name="tax" ng-model="tax">
             </div>
 
-            <div class="form-group">
-                <label class="col-form-label">Tip rate or number</label>
-                <input class="form-control" type="number" string-to-number step="any" name="tipRate" ng-model="tipRate" placeholder="%"> 
-                 or 
+            <div class="form-group col-xs-12">
+                <label class="col-form-label">Tip rate or amount</label>
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <input class="form-control" type="number" string-to-number step="any" name="tipRate" ng-model="tipRate" placeholder="%">
+                </div>            
+                <div class="col-xs-12 col-sm-12 col-md-6">
                 <input class="form-control" type="number" string-to-number step="any" name="tipnum" ng-model="tipnum" placeholder="$">
                 </div>
+                </div>
+                </div>
             </div>
-            <input ng-click="addbillinfo()" class="btn btn-primary btn-lg" type="submit" value="Submit">
+            <input ng-click="addbillinfo()" class="btn btn-primary" type="submit" value="Add bill info">
             <!-- <label>Upload bill image<br></label> -->
             <!-- <input my-upload type="file" name="upload"><br> -->
         </form>
-
-        <form ng-submit="additeminfo()">
-            <label>Add item and price</label><br>
-            <input type="text" name="item" ng-model="item" placeholder="item">
-            <input type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price">
-            <input type="submit" value="Add">
+        
+        <hr class="my-4">
+        
+        <form class="row" ng-submit="additeminfo()">
+            <div class="form-group col-xs-12">
+            <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <label class="col-form-label">Add item</label>
+                <input class="form-control" type="text" name="item" ng-model="item" placeholder="item">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5">
+                <label class="col-form-label">Add price</label>
+                <input class="form-control" type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-1">
+                <label><br></label><input class="btn btn-primary form-control" type="submit" value="Add">
+            </div>
+            </div>
         </form>
 
         <div ng-if="items.length>0">
-        <table>
-            <tr>
-                <th>count(need a better name)</th>
-                <th>item</th>
-                <th>price</th>
-            </tr>
-            <tr ng-repeat="singleitem in items" ng-click="removeitem(singleitem)">
-                <td>{{singleitem[0]}}</td>
-                <td>{{singleitem[1]}}</td>
-                <td>{{singleitem[2]}}</td>
-            </tr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th >#</th>
+                    <th >item</th>
+                    <th >price</th>
+                </tr>
+            </thead>  
+            <tbody>
+                <tr ng-repeat="singleitem in items" ng-click="removeitem(singleitem)">
+                    <td>{{singleitem[0]}}</td>
+                    <td>{{singleitem[1]}}</td>
+                    <td>{{singleitem[2]}}</td>
+                </tr>
+            </tbody>  
         </table>       
         </div>
 
-        <a ng-click="addBill()" href="#!/addfriend">Next</a>
+        <hr class="my-4">
+
+        <a class="btn btn-primary" ng-click="addBill()" href="#!/addfriend">Next Step</a>
 
 <!-- the following is for pre -->
 <div ng-if="name">
