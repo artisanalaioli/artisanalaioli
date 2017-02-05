@@ -81,5 +81,15 @@ angular.module('myApp.split', ['ngRoute'])
         }
 
     }
+
+    $scope.changeClass = function() {
+        for (var i = 0; i < $scope.items.length; i++) {
+            if ($scope.items[i][3]) {
+                $scope.class = "table-success"
+            } else {
+                $scope.class = "";
+            }
+        }
+    }    
 }
 );

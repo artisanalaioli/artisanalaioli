@@ -1,28 +1,39 @@
 <h1>Split the bill</h1>
+<hr class="my-4">
+
 <div>
-	<ul class="eachFriend">
-		<li ng-repeat="friend in friends">
-			<h2>{{friend.name}}</h2>
-			<h3>Total: {{friend.total}}</h3>
-<!-- 			<form>
-				<label>Add item and price</label>
-				<input type="text" name="itemname">
-				<input type="text" name="itemprice">
-			</form> -->
-			<div class="itemlist">
-				<table>
-					<tr>
-						<td>tax: {{friend.tax}}</td>
-						<td>tip: {{friend.tip}}</td>
-					</tr>
-					<tr ng-repeat="item in items" ng-click="checkAssign(item, friend)">
+	<ul class="row">
+		<li class="col-sm-12 col-md-6 col-lg-4" ng-repeat="friend in friends">
+		<div class="card">
+		<div class="card-header text-center">
+			{{friend.name}}
+		</div>
+		<div class="card-block">
+			<ul class="price-for-friend row">
+				<li class="col-3">tax: {{friend.tax}}</li>
+				<li class="col-3">tip: {{friend.tip}}</li>
+				<li class="col-3">Total:  {{friend.total}}</li>
+			</ul>
+		</div>
+			<div>
+				<table class="table table-striped">
+					<thead class="thead-default">
+                	<tr>
+                    <th >#</th>
+                    <th >item</th>
+                    <th >price</th>
+                	</tr>
+            		</thead> 
+            		<tbody>
+            		<tr ng-repeat="item in items" ng-click="checkAssign(item, friend); changeClass()" ng-class="class">
 						<td>{{item[0]}}</td>
 						<td>{{item[1]}}</td>
 						<td>{{item[2]}}</td>
-						<td>{{item[3]}}</td>
 					</tr>
+					</tbody>
 				</table>
 			</div>
+		</div>
 		</li>
 	</ul>
 </div>
