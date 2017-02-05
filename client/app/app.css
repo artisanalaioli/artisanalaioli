@@ -51,3 +51,34 @@ h3 {
 li {
   list-style: none;
 }
+
+#signin, #signup{
+  width: 400px;
+}
+.addHPadding {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+.addVPadding {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.hcenter {
+  margin-left:auto;
+  margin-right:auto; 
+}
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.input-group {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.spacer {
+  margin: 0;
+  padding: 0;
+  height: 50px;
+}

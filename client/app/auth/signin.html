@@ -1,11 +1,26 @@
-<div id='signin'>
-  <h1>Sign In</h1>
-  <form name="signinForm" ng-submit='signin()'>
-    Username
-    <input type='text' ng-model='user.username'>
-    Password
-    <input type="password" ng-model='user.password'>
-    <button>signin</button>
-  </form>
-  <a href="#!/signup">Don't have an account? <strong>Signup</strong> ...</a>
+
+<div class="panel panel-default hcenter" id='signin'>
+	<div class="panel-heading text-center">
+	  <h3 class="panel-title">Sign In</h3>
+	</div>
+
+	<div class="panel-body addVPadding addHPadding">
+
+	  <form class="addVPadding" name="signinForm" ng-submit='signin()'>
+	  	<div class="input-group">
+	  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+	    	<input class="form-control" type='text' ng-model='user.username' placeholder="username">
+	  	</div>
+	    
+	    <div class="input-group">
+	    	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	    	<input class="form-control" type="password" ng-model='user.password' placeholder="password">
+	    </div>
+	  	<div class="spacer"></div>
+	    <button class="btn btn-primary btn-block">signin</button>
+	  </form>
+
+	  <a href="#!/signup">Don't have an account? <strong>Signup</strong> ...</a>
+  </div>
 </div>
+
