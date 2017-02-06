@@ -7,7 +7,8 @@ angular.module('myApp', [
   'myApp.addfriend',
   'myApp.split',
   'myApp.services',
-  'myApp.auth'
+  'myApp.auth',
+  'myApp.bills'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');

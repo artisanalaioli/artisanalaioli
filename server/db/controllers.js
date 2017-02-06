@@ -14,7 +14,7 @@ function getAllUsers(req, res, next) {
 }
 
 function getFriends(req, res, next) {
-  User.findOne({id: SOMETHING})
+  User.findOne({id: req.session.passport.user})
   .then(function(user) {
     User.find({})
     .where(id).in(user.friends)
@@ -23,11 +23,11 @@ function getFriends(req, res, next) {
     });
   });
 }
-
+//edit
 function addFriend(req, res, next) {
-  User.findOne({id: SOMETHING})
+  User.findOne({id: req.session.passport.user})
   .then(function(user) {
-    User.findOne({username: req.body.SOMETHING})
+    User.findOne({username: req.body.FRIENDUSERNAME})
     .then(function(friend) {
       user.friends.push(friend.id);
       user.save(function(error, savedUser) {
@@ -40,12 +40,12 @@ function addFriend(req, res, next) {
     });
   });
 }
-
+//edit
 function removeFriend(req, res, next) {
-  User.findOne({id: SOMETHING})
+  User.findOne({id: req.session.passport.user})
   .then(function(user) {
     for (var i = 0; i < user.friends.length; i++) {
-      if (user.friends[i].username === req.body.SOMETHING) {
+      if (user.friends[i].username === req.body.FRIENDUSERNAME) {
         user.friends.splice(i,1);
       }
     }
@@ -71,19 +71,26 @@ send an object instead of an array:
   };
 */
 function getOwnBills(req, res, next) {
-  User.findOne({_id: req.body.userID})
-  .then(function(user) {
-    Bill.find({})
-    .where('_id').in(user.bills)
-    .then(function(bills) {
-      res.send(bills);
+  console.log(req.session);
+  if (req.session.passport !== undefined) {
+    User.findOne({_id: req.session.passport.user})
+    .then(function(user) {
+      console.log(user);
+      Bill.find({})
+      .where('_id').in(user.bills)
+      .then(function(bills) {
+        res.send(bills);
+      });
     });
-  });
+  } else {
+    res.end('Not logged in');
+  }
+
 }
 
 function postBill(req, res, next) {
   var newBill = {
-    userID: req.body.userID,
+    userID: req.session.passport.user,
     total: req.body.total,
     people: req.body.people,
     info: req.body.info
