@@ -1,6 +1,6 @@
 <h1>Add friend</h1>
 <hr class="my-4">
-
+<div class="spacer"></div>
 <div>
 	<form class="row" ng-submit="addOne(friendname)">
 		<div class="form-group col-xs-12">
@@ -16,19 +16,18 @@
 	</form>
 
 	<div ng-if="friends">
-	<table class="table table-striped">
-		<tbody>
-		<tr ng-repeat="friend in friends">
-			<th scope="row">{{friends.indexOf(friend) + 1}}</th>
-			<td>{{friend.name}}</td>
-			<td ng-click="removeOne(friend)">Remove</td>
-		</tr>
-		</tbody>
-	</table>
+		<table class="table table-striped">
+			<tbody>
+			<tr ng-repeat="friend in friends">
+				<th scope="row">{{friends.indexOf(friend) + 1}}</th>
+				<td>{{friend.name}}</td>
+				<td ng-click="removeOne(friend)">Remove</td>
+			</tr>
+			</tbody>
+		</table>
+		<hr class="my-4">
+		<a class="btn btn-primary" ng-click="addBill()" href="#!/split">Next Step</a>
 	</div>
 
-	<hr class="my-4">
-
-    <a class="btn btn-primary" ng-click="addBill()" href="#!/split">Next Step</a>
 
 </div>

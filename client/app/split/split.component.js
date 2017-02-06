@@ -16,11 +16,17 @@ angular.module('myApp.split', ['ngRoute'])
     $scope.items = $scope.bill.items;
 
     /******************************************/
-    // bill: {name: string, items:[], priceBeforeTip: number, taxRate: number, tipRate: number}
-    // item: [id, itemname, price, people.name];
-    // friend: {name: string, items: []}
+    /* THIS IS STRUCTURE OF bill, item, friend
+    /* bill: {name: string, items:[], priceBeforeTip: number, taxRate: number, tipRate: number}
+    /* item: [id, itemname, price, people.name];
+    /* friend: {name: string, items: []}
     /*****************************************/ 
 
+    /**
+    * This function calculate the grand total price for a single friend. Grand total
+    * includes total price, tax and tip.
+    * @param {object} input a friend object
+    */
     $scope.grandTotal = function(friend) {
         var totalBeforeTip = 0;
         friend.items.forEach(function(singleitem) {
@@ -32,6 +38,11 @@ angular.module('myApp.split', ['ngRoute'])
         Friends.getAll();        
     }
 
+    /**
+    * This function assign an item to a friend, add this item to $scope.assignedItems,
+    * and update the grand total for this friend
+    * @params {array} item, {object} friend
+    */
     $scope.assign = function(item, friend) {
         item[3] = friend.name; 
         friend.items.push(item); // add item for friend               
@@ -39,6 +50,11 @@ angular.module('myApp.split', ['ngRoute'])
         $scope.grandTotal(friend); 
     }
 
+    /**
+    * This function unassign an item from a friend, remove this item from $scope.assignedItems,
+    * and update the total grand for this friend.
+    * @params {array} item to be unassigned, {object} friend
+    */
     $scope.unassign = function(item, friend) {
         var indexforFriend = friend.items.indexOf(item);
         friend.items.splice(indexforFriend, 1);
@@ -48,7 +64,14 @@ angular.module('myApp.split', ['ngRoute'])
         $scope.grandTotal(friend);
     }
 
-    // check if this item is already been assigned
+    /**
+     * This function check if this item is already been assigned. 
+     * If this item is not assigned, it will call 'assign function'.
+     * If this item is assigned to the same person, it will unassign from this person.
+     * If this item is assigned to a different person, it will unassign the item from
+     * the origin person, and assign the item to the new person.
+     * @param {array} input an item object, {object} input a friend object.
+     */
     $scope.checkAssign = function(item, friend) {
         var needReassign = false;
 
