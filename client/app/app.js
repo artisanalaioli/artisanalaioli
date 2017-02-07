@@ -13,7 +13,6 @@ angular.module('myApp', [
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
 
-
   $routeProvider
     .when('/addfriend', {
       templateUrl: 'add-friend/add-friend.template.html',
