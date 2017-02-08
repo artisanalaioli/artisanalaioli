@@ -2,50 +2,61 @@
 <hr class="my-4">
 
 <div>
-
-    <h3 >Add items you want to get paid</h3>
-    <form class="row" ng-submit="additeminfo()">
-        <div class="form-group col-xs-12">
-        <div class="row">
+  <h4>Enter items from receipt</h3>
+  <form class="row" ng-submit="additeminfo()">
+    <div class="form-group col-xs-12">
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6">
-            <label class="col-form-label">Add item</label>
-            <input class="form-control" type="text" name="item" ng-model="item" placeholder="item">
+          <label class="col-form-label">Add item</label>
+          <input class="form-control" type="text" name="item" ng-model="item" placeholder="item">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
-            <label class="col-form-label">Add price</label>
-            <input class="form-control" type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price" required>
+          <label class="col-form-label">Add price</label>
+          <input class="form-control" type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-2">
-            <label><br></label><input class="btn btn-primary form-control" type="submit" value="Add">
+          <label><br></label><input class="btn btn-primary form-control" type="submit" value="Add">
         </div>
-        </div>
+      </div>
     </form>
 
     <div ng-if="items.length > 0">
-    <table class="table table-striped table-hover">
+      <table class="table table-striped table-hover">
         <thead class="thead-default">
-            <tr>
-                <th>#</th>
-                <th>item</th>
-                <th>price</th>
-            </tr>
+          <tr>
+            <th>#</th>
+            <th>item</th>
+            <th>price</th>
+          </tr>
         </thead>  
         <tbody>
-            <tr ng-repeat="singleitem in items" ng-click="removeitem(singleitem)">
-                <td>{{singleitem[0]}}</td>
-                <td>{{singleitem[1]}}</td>
-                <td>{{singleitem[2]}}</td>
-            </tr>
+          <tr ng-repeat="singleitem in items" ng-click="removeitem(singleitem)">
+            <td>{{singleitem[0]}}</td>
+            <td>{{singleitem[1]}}</td>
+            <td>{{singleitem[2]}}</td>
+          </tr>
         </tbody>  
-    </table>       
+      </table>       
     </div>
     <div class="spacer"></div>
 
     <hr class="my-4">
 
 
-    <input type="file" class="inputfile" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" ng-model="cameraInput">
-    <label for="cameraInput" class="btn-primary camera-input text-center">Choose a file</label>
+    <h4>Upload a receipt</h4>
+    <button ngf-select="uploadFiles($files, $invalidFiles)" class="btn btn-primary" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Select Files</button>
+    <br><br>
+    Files:
+    <ul class="loading-bar">
+      <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
+        <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"  
+          ng-bind="f.progress + '%'"></div>
+        </span>
+      </li>
+      <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}
+      </li> 
+    </ul>
     <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="calculateSubtotal()" href="/#!/uploadbill">Next Step</a>
     <a class="btn btn-primary pull-right" href='/#!/addfriend'>Back</a>
 <!-- the following is for uploading bill image -->
