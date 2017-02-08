@@ -170,7 +170,7 @@ angular.module('myApp.services',[])
 
   	var addOne = function(userObj) {
   		var user = {
-  			username: userObj.username,
+  			name: userObj.username,
   			email: userObj.email,
   			items: []
   		};
@@ -183,17 +183,22 @@ angular.module('myApp.services',[])
 
   	var remove = function(username) {
   		for (var i = 0; i < party.length; i++) {
-  			if (party[i].username === username) {
+  			if (party[i].name === username) {
   				party.splice(i, 1);
   			}
   		}
+  	}
+
+  	var removeAll = function() {
+  		party = [];
   	}
 
   	return {
   		party: party,
   		addOne: addOne,
   		getAll: getAll,
-  		remove: remove
+  		remove: remove,
+  		removeAll: removeAll
   	}
 
   });
