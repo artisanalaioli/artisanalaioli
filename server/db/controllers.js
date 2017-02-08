@@ -107,6 +107,7 @@ function postBill(req, res, next) {
           console.log(error); 
         } else {
           res.status(201).end('Bill saved');
+          // res.redirect('/#!/bills')
         }
       });
     });
