@@ -31,7 +31,6 @@
       <link rel="stylesheet" href="app.css">
     </head>
 
-
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
@@ -55,7 +54,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li ng-show="signedIn" ><a href="#!/addfriend">New Bill</a></li>
+          <li ng-show="signedIn" ><a href="#!/addfriend" ng-click="clearParty()">New Bill</a></li>
           <li ng-show="signedIn"><a href="#!/bills">My Bills</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -77,6 +76,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="app.js"></script>
   <script src="services/services.js"></script>
   <script src="add-items/add-items.component.js"></script>

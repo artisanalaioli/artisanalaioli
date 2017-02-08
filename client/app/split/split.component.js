@@ -9,8 +9,8 @@ angular.module('myApp.split', ['ngRoute'])
   });
 }])
 
-.controller('SplitCtrl', function($scope, Friends, Bill) {
-  $scope.friends = Friends.getAll();
+.controller('SplitCtrl', function($scope, Friends, Bill, Party) {
+  $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];
   $scope.items = $scope.bill.items;
@@ -25,6 +25,7 @@ angular.module('myApp.split', ['ngRoute'])
     var array = [];
     $scope.friends.forEach(function(friend) {
       array.push(friend.name);
+      console.log('Adding friend name:', friend.name);
     });
     return array;
   }
@@ -43,7 +44,7 @@ angular.module('myApp.split', ['ngRoute'])
     friend.tip = Number.parseFloat((totalBeforeTip * $scope.bill.tipRate).toFixed(2));
     friend.tax = Number.parseFloat((totalBeforeTip * $scope.bill.taxRate).toFixed(2));
     friend.total = Number.parseFloat((totalBeforeTip + friend.tip + friend.tax).toFixed(2));
-    Friends.getAll();        
+    Party.getAll();        
   }
 
   /**
@@ -136,7 +137,7 @@ angular.module('myApp.split', ['ngRoute'])
       info: $scope.friends
     }
     Bill.clearAllBill();
-    Friends.removeAll();
+    Party.removeAll();
     Bill.submitSplit(finalBill);
   }
 
