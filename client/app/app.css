@@ -1,5 +1,20 @@
 /* app css stylesheet */
 
+body {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.signonBG {
+  background-image: url('https://1bk7xm3xz6cl1t7e5a1j641m-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/41203414-wine-bottles-with-grape-leaves-on-wooden-background-with-copy-space.jpg');
+  background-size: 100% cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.noSignonBG {
+  background-image: none;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -24,6 +39,9 @@
   padding-right: 0.3em;
 }
 
+.navbar {
+  border-radius: 0px;
+}
 
 label {
 	padding: 5px 15px 5px 5px;
@@ -81,4 +99,17 @@ li {
   margin: 0;
   padding: 0;
   height: 50px;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: rgba(0,0,0,.5);
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.panel-default>.panel-heading {
+  background-image: none;
+  color: #eee;
+  background-color: rgba(46, 110, 165, 0.85);
 }
