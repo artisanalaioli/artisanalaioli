@@ -2,21 +2,23 @@
 <hr class="my-4">
 
 <div>
-    <h3>Add something about this bill</h3>
+    <h3>Add Tax and Tip</h3>
+    <h4>Subtotal: ${{ subtotal }}</h4>
+    <!-- <h4>Total: ${{ +subtotal + +tax }}</h4> -->
         <form class="row">
-            <div class="form-group col-xs-12">
-                <label class="col-form-label">Who is the bill from?</label>     
-                <input class="form-control" type="text" name="restaurant-name" ng-model="name" placeholder="Restaurant Name">        
-            </div>
+            <!-- <div class="form-group col-xs-12">
+                <label class="col-form-label">Who is the bill from?</label>
+                <input class="form-control" type="text" name="restaurant-name" ng-model="name" placeholder="Restaurant Name">
+            </div> -->
 
-            <div class="form-group col-xs-12 col-sm-12 col-md-6">
+            <!-- <div class="form-group col-xs-12 col-sm-12 col-md-6">
                 <label class="col-form-label">Before tips</label>
                 <input class="form-control" type="number" string-to-number step="any" name="priceBeforeTip" ng-model="priceBeforeTip" required>
-            </div>
+            </div> -->
 
             <div class="form-group col-xs-12 col-sm-12 col-md-6">
                 <label class="col-form-label">Tax</label>
-                <input class="form-control" type="number" string-to-number step="any" name="tax" ng-model="tax">
+                <input class="form-control" type="number" string-to-number step="any" name="tax" ng-model="tax" placeholder="$">
             </div>
 
             <div class="form-group col-xs-12">
@@ -26,15 +28,15 @@
                     <input class="form-control" type="number" string-to-number step="any" name="tipRate" ng-model="tipRate" placeholder="%">
                 </div>            
                 <div class="col-xs-12 col-sm-12 col-md-6">
-                <input class="form-control" type="number" string-to-number step="any" name="tipnum" ng-model="tipnum" placeholder="$">
+                <input class="form-control" type="number" string-to-number step="any" name="tip" ng-model="tip" placeholder="$">
                 </div>
                 </div>
                 </div>
             </div>
-            <div ng-if="readyToSplit" class="alert alert-success" role="alert">
+           <!--  <div ng-if="readyToSplit" class="alert alert-success" role="alert">
                 You successfully add the bill info.
             </div>
-            <input ng-click="addbillinfo()" class="btn btn-primary pull-right" type="submit" value="Add bill info">
+            <input ng-click="addbillinfo()" class="btn btn-primary pull-right" type="submit" value="Add bill info"> -->
         </form>
         
         <div class="spacer"></div>
