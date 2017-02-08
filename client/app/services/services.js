@@ -7,7 +7,8 @@ angular.module('myApp.services',[])
        return friends;
     }
 
-    var addOne = function(friendname) {
+
+    var addOne = function(friendname, yourName) {
       var index = -1;
       for (var i = 0; i < friends.length; i++) {
         if (friends[i].name === friendname) {
@@ -15,6 +16,7 @@ angular.module('myApp.services',[])
         }
       }
       if (index === -1) {
+        if (friends.length === 0) friends.push({ name: yourName, items: []});
         friends.push({name: friendname, items: []});
       }
     }
@@ -99,6 +101,5 @@ angular.module('myApp.services',[])
       allItems: allItems,
       getItems: getItems,
       pushItems: pushItems,
-      
     }
   });
