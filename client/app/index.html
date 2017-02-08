@@ -1,28 +1,35 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js" ng-class="{signonBG: signedIn !== true, noSignonBG: signedIn === true}"> <!--<![endif]--><!---->
+  <html lang="en" ng-app="myApp" class="no-js" ng-class="{signonBG: signedIn !== true, noSignonBG: signedIn === true}"> <!--<![endif]--><!---->
 
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Divvy - Bill Splitter</title>
+      <link rel="shortcut icon" type="image/x-icon" href="https://cdn3.iconfinder.com/data/icons/glypho-money-and-finance/64/money-dollar-circle-512.png" />
 
+      
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/normalize.css">
+      <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/main.css">
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Divvy - Bill Splitter</title>
-  <link rel="shortcut icon" type="image/x-icon" href="https://cdn3.iconfinder.com/data/icons/glypho-money-and-finance/64/money-dollar-circle-512.png" />
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/main.css">
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+      <sc
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <script src="../bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+      <link rel="stylesheet" href="app.css">
+    </head>
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -47,7 +54,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li ng-show="signedIn" ><a href="#!/addfriend">New Bill</a></li>
+          <li ng-show="signedIn" ><a href="#!/addfriend" ng-click="clearParty()">New Bill</a></li>
           <li ng-show="signedIn"><a href="#!/bills">My Bills</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -69,13 +76,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="/bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+  <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="app.js"></script>
   <script src="services/services.js"></script>
+  <script src="add-items/add-items.component.js"></script>
   <script src="upload-bill/upload-bill.component.js"></script>
   <script src="add-friend/add-friend.component.js"></script>
   <script src="split/split.component.js"></script>
   <script src="auth/auth.js"></script>
-  <script src="user-details/bills.js"></script>  
+  <script src="user-details/bills.js"></script>
 <!--   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script> -->

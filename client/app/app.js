@@ -3,12 +3,14 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+  'ngFileUpload',
   'myApp.uploadbill',
   'myApp.addfriend',
   'myApp.split',
   'myApp.services',
   'myApp.auth',
-  'myApp.bills'
+  'myApp.bills',
+  'myApp.addItems'
 ])
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
@@ -38,9 +40,18 @@ angular.module('myApp', [
       templateUrl: 'upload-bill/upload-bill.template.html',
       controller: 'UploadBillCtrl'
     })
+    .when('/additems', {
+      templateUrl: 'add-items/add-items.template.html',
+      controller: 'AddItemCtrl'
+    })
     .otherwise({redirectTo: '/signin'});
 }
 ])
+.controller('AppCtrl', function($scope, Party) {
+  $scope.clearParty = function() {
+    Party.removeAll();
+  }
+})
 .run(function($rootScope, $http, $window) {
   $rootScope.signout = function() {
     console.log('trying to sign out');
