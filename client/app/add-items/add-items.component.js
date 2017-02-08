@@ -7,16 +7,13 @@ angular.module('myApp.addItems', ['ngRoute'])
   $scope.readyToSplit = true; // need this to be true to proceed
   $scope.price; // price for single item
 
-
-
   $scope.additeminfo = function() {
     $scope.count += 1;
     $scope.price = Number.parseFloat($scope.price);
     $scope.items.push([$scope.count, $scope.item, $scope.price, '']);
+    Bill.pushItems($scope.items);
     $scope.item = "";
     $scope.price = 0;
-    Bill.pushItems = $scope.items;
-
   }
 
   $scope.removeitem = function(singleitem) {
@@ -28,7 +25,13 @@ angular.module('myApp.addItems', ['ngRoute'])
     }
   }
 
-
+  $scope.calculateSubtotal = function() {
+    $scope.subtotal = 0;
+    for (var i = 0; i < $scope.items.length; i++) {
+      $scope.subtotal += $scope.items[i][2];
+    }
+    Bill.updateSubtotal($scope.subtotal);
+  }
 
   // $scope.removeimg = function() {
   //  $scope.image = "";

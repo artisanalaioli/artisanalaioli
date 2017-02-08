@@ -89,6 +89,8 @@ angular.module('myApp.services',[])
   .factory('Bill', function() {
     var allItems = [];
 
+    var subtotal = 0;
+
     var getItems = function() {
       return allItems;
     }
@@ -97,9 +99,24 @@ angular.module('myApp.services',[])
       allItems = items;
     }
 
+    var getSubtotal = function() {
+      return subtotal;
+    }
+
+    var updateSubtotal = function(newSub) {
+      subtotal = newSub;
+    }
+
     return {
       allItems: allItems,
+      subtotal: subtotal,
       getItems: getItems,
       pushItems: pushItems,
+      getSubtotal: getSubtotal,
+      updateSubtotal: updateSubtotal
     }
   });
+
+
+
+
