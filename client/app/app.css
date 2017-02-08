@@ -126,3 +126,23 @@ li {
   cursor: pointer;
 }
 
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.camera-input {
+  padding-left: 14px;
+  font-weight: normal;
+  border-radius: 4px;
+}
+
+.camera-input:hover {
+  cursor: pointer;
+}
+
+}
