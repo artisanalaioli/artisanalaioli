@@ -43,30 +43,6 @@ angular.module('myApp.services',[])
       removeAll: removeAll
     }
 
-/*
-    var getAll = function () {
-      return $http({
-        method: 'GET',
-        url: '/api/friends'
-      })
-      .then(function (response) {
-        return response.data;
-      });
-    };
-
-    var addOne = function (friend) {
-      return $http({
-        method: 'POST',
-        url: '/api/friends',
-        data: friend
-      });
-    };
-
-    return {
-      getAll: getAll,
-      addOne: addOne
-    };
-*/
   })
 
   /************ fetch data from database **************/
@@ -128,7 +104,7 @@ angular.module('myApp.services',[])
       return mybill.bill.taxRate;
     }
 
-///////////////////
+
     var allItems = [];
 
     var getItems = function() {
@@ -153,6 +129,7 @@ angular.module('myApp.services',[])
       getTaxRate: getTaxRate
     }
   })
+
   .factory('Party', function() {
   	var party = [];
 
