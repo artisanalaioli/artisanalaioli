@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('myApp.addfriend', ['ngRoute'])
+angular.module('myApp.addfriend', ['ui.bootstrap'])
 
-.controller('AddFriendCtrl',  function($scope, Friends, $rootScope) {
+.controller('AddFriendCtrl',  function($scope, Friends, $rootScope, $http) {
   $scope.friends = []; 
 
-  $scope.addOne = function(friendname) {
+  $scope.addOne = function(user) {
     var yourName = $rootScope.username;
-    Friends.addOne(friendname, yourName); 
+    console.log(user.username);
+    Friends.addOne(user.username, yourName); 
   	$scope.getAll();
   	$scope.friendname = "";
   }
@@ -20,5 +21,10 @@ angular.module('myApp.addfriend', ['ngRoute'])
   	Friends.removeOne(friend);
   	$scope.getAll();
   }
-}
-);
+
+  $http.get('users').then(function(res) {
+      $scope.users = res.data;
+      console.log(res.data);
+  });
+
+});
