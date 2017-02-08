@@ -38,7 +38,7 @@ angular.module('myApp', [
       templateUrl: 'upload-bill/upload-bill.template.html',
       controller: 'UploadBillCtrl'
     })
-    .otherwise({redirectTo: '/view1'});
+    .otherwise({redirectTo: '/signin'});
 }
 ])
 .run(function($rootScope, $http, $window) {
