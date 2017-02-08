@@ -16,7 +16,7 @@ angular.module('myApp.split', ['ngRoute'])
     $scope.items = $scope.bill.items;
     /******************************************/
     /* THIS IS STRUCTURE OF bill, item, friend
-    /* bill: {name: string, items:[], priceBeforeTip: number, taxRate: number, tipRate: number}
+    /* bill: {name: string, items:[], subtotal: number, taxRate: number, tipRate: number}
     /* item: [id, itemname, price, people.name];
     /* friend: {name: string, items: []}
     /*****************************************/ 
@@ -134,7 +134,7 @@ angular.module('myApp.split', ['ngRoute'])
             url: '/bills',
             data: {
                 restaurant: $scope.bill.name,
-                total: $scope.bill.priceBeforeTip * (1 + $scope.bill.tipRate + $scope.bill.taxRate),
+                total: $scope.bill.subtotal * (1 + $scope.bill.tipRate + $scope.bill.taxRate),
                 people: $scope.friendNames,
                 info: $scope.friends
             }
