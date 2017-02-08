@@ -128,6 +128,7 @@ angular.module('myApp.split', ['ngRoute'])
     * 
     */
     $scope.submitSplit = function() {
+        // console.log('she gave me a straight up grape soda')
         $http({
             method: 'POST',
             url: '/bills',
@@ -138,6 +139,7 @@ angular.module('myApp.split', ['ngRoute'])
                 info: $scope.friends
             }
         })
+
     }
 }
 );
