@@ -2,8 +2,9 @@
 
 angular.module('myApp.addfriend', ['ui.bootstrap'])
 
-.controller('AddFriendCtrl',  function($scope, Friends, $rootScope, $http) {
+.controller('AddFriendCtrl',  function($scope, Friends, $rootScope, $http, Party) {
   $scope.friends = []; 
+  $scope.party = [];
 
   $scope.addOne = function(user) {
     var yourName = $rootScope.username;
@@ -22,9 +23,35 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   	$scope.getAll();
   }
 
+  // NEW FUNCTIONALITY - 2.8.17 - JB
+
   $http.get('users').then(function(res) {
       $scope.users = res.data;
       console.log(res.data);
+      for (var i = 0; i < res.data.length; i++) {
+        if (res.data[i].username === $rootScope.username) {
+          $scope.addToParty(res.data[i]);
+          console.log('Added current user to party.');
+          return;
+        }
+      }
   });
+
+  var getParty = function() {
+    $scope.party = Party.getAll();
+    console.log('Current party is now:', $scope.party);
+  }
+
+  $scope.addToParty = function(user) {
+    Party.addOne(user);
+    getParty();
+    $scope.partymember = '';
+  }
+
+  $scope.removeFromParty = function(friend) {
+    console.log('Removing', friend.username);
+    Party.remove(friend.username);
+    getParty();
+  }
 
 });
