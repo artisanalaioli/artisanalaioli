@@ -5,10 +5,8 @@ angular.module('myApp.addItems', ['ngRoute'])
 .controller('AddItemCtrl', function ($scope, Bill) {
   // $scope.image = "";
   $scope.readyToSplit = true; // need this to be true to proceed
-  $scope.item; // single item
   $scope.price; // price for single item
-  $scope.items = []; // items is an array of [id, item, price, people]
-  $scope.count = 0; // when remove item, currentItemId will not decrease
+
 
 
   $scope.additeminfo = function() {
@@ -17,6 +15,8 @@ angular.module('myApp.addItems', ['ngRoute'])
     $scope.items.push([$scope.count, $scope.item, $scope.price, '']);
     $scope.item = "";
     $scope.price = 0;
+    Bill.pushItems = $scope.items;
+
   }
 
   $scope.removeitem = function(singleitem) {
@@ -35,6 +35,14 @@ angular.module('myApp.addItems', ['ngRoute'])
   // }
   // $scope.process = function() {
   // }
+
+
+  $scope.init = function() {
+    $scope.items = Bill.getItems(); // items is an array of [id, item, price, people]
+    $scope.count = $scope.items.length;
+  }
+
+  $scope.init();
 
 })
 .directive('stringToNumber', function() {

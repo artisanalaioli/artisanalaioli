@@ -7,6 +7,7 @@ angular.module('myApp.services',[])
        return friends;
     }
 
+
     var addOne = function(friendname, yourName) {
       var index = -1;
       for (var i = 0; i < friends.length; i++) {
@@ -86,49 +87,6 @@ angular.module('myApp.services',[])
   /*****************************************************/
   
   .factory('Bill', function() {
-    var mybill = {}; 
-    mybill.name;
-    mybill.items; // an array of [itemName, price, people]
-    mybill.priceBeforeTip;
-    mybill.tipRate;
-    mybill.taxRate;
-
-
-
-    var addBill = function(bill) {
-      mybill.name = bill.name;
-      mybill.items = bill.items; // an array of [itemName, price, people]
-      mybill.priceBeforeTip = bill.priceBeforeTip;
-      mybill.tipRate = bill.tipRate;	
-      mybill.taxRate = bill.taxRate;		
-    }
-
-    var removeBill = function() {
-      mybill = {}; 
-    }
-
-    var getBill = function() {
-      return mybill;
-    }
-
-    var getName = function() {
-      return mybill.bill.name;
-    }
-
-
-    var getPriceBeforeTip = function() {
-      return mybill.bill.priceBeforeTip;
-    }
-
-    var getTipRate = function() {
-      return mybill.bill.tipRate;
-    }
-
-    var getTaxRate = function() {
-      return mybill.bill.taxRate;
-    }
-
-///////////////////
     var allItems = [];
 
     var getItems = function() {
@@ -143,13 +101,5 @@ angular.module('myApp.services',[])
       allItems: allItems,
       getItems: getItems,
       pushItems: pushItems,
-
-      addBill: addBill,
-      removeBill: removeBill,
-      getBill: getBill,
-      getName: getName,
-      getPriceBeforeTip: getPriceBeforeTip,
-      getTipRate: getTipRate,
-      getTaxRate: getTaxRate
     }
   });
