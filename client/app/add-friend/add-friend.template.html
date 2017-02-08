@@ -21,7 +21,7 @@
 			<tr ng-repeat="friend in friends">
 				<th scope="row">{{friends.indexOf(friend) + 1}}</th>
 				<td>{{friend.name}}</td>
-				<td ng-click="removeOne(friend)">Remove</td>
+				<td class='remove' ng-click="removeOne(friend)">Remove</td>
 			</tr>
 			</tbody>
 		</table>

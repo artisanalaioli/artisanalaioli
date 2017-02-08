@@ -2,11 +2,12 @@
 
 angular.module('myApp.addfriend', ['ngRoute'])
 
-.controller('AddFriendCtrl',  function($scope, Friends) {
+.controller('AddFriendCtrl',  function($scope, Friends, $rootScope) {
   $scope.friends = []; 
 
   $scope.addOne = function(friendname) {
-  	Friends.addOne(friendname); 
+    var yourName = $rootScope.username;
+    Friends.addOne(friendname, yourName); 
   	$scope.getAll();
   	$scope.friendname = "";
   }

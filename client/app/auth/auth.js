@@ -14,6 +14,7 @@ angular.module('myApp.auth', ['ngRoute'])
       }
     })
     .then(function(response) {
+      $rootScope.username = $scope.user.username;
       $scope.user.username = '';
       $scope.user.password = '';
       $rootScope.signedIn = true;
