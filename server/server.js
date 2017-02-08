@@ -37,7 +37,7 @@ var parseImageData = function( data ) {
 		return typeof value === 'string';
 	})
 	for(var i = 1; i < strings.length; i++) {
-		
+		console.log(strings[i])
 		if( _.contains(strings[i].split(''), '.') ){
 		// 	var current = strings[i-1]
 		// 	var index = i - 1;
