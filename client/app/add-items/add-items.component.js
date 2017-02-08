@@ -8,6 +8,7 @@ angular.module('myApp.addItems', ['ngRoute'])
   $scope.price; // price for single item
 
 
+
   $scope.additeminfo = function() {
     $scope.count += 1;
     $scope.price = Number.parseFloat($scope.price);
@@ -15,6 +16,7 @@ angular.module('myApp.addItems', ['ngRoute'])
     $scope.item = "";
     $scope.price = 0;
     Bill.pushItems = $scope.items;
+
   }
 
   $scope.removeitem = function(singleitem) {
@@ -33,6 +35,7 @@ angular.module('myApp.addItems', ['ngRoute'])
   // }
   // $scope.process = function() {
   // }
+
 
   $scope.init = function() {
     $scope.items = Bill.getItems(); // items is an array of [id, item, price, people]
