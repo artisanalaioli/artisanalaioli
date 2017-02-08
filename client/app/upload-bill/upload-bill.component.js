@@ -2,17 +2,10 @@
 
 angular.module('myApp.uploadbill', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/uploadbill', {
-    templateUrl: 'upload-bill/upload-bill.template.html',
-    controller: 'UploadBillCtrl'
-  });
-}])
-
 .controller('UploadBillCtrl', function ($scope, Bill) {
   // $scope.image = "";
   $scope.priceBeforeTip = 0;
-  $scope.readyToSplit = false;
+  $scope.readyToSplit = true;
   $scope.item; // single item
   $scope.price; // price for single item
   $scope.tax = 0;

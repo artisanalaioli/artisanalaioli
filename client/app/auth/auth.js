@@ -1,17 +1,5 @@
 angular.module('myApp.auth', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
-  .when('/signin', {
-    templateUrl: 'auth/signin.html',
-    controller: 'AuthController'
-  })
-  .when('/signup', {
-    templateUrl: 'auth/signup.html',
-    controller: 'AuthController'
-  });
-}])
-
 .controller('AuthController', function ($scope, $http, $rootScope, $window) {
   $scope.user = {};
 
@@ -29,7 +17,7 @@ angular.module('myApp.auth', ['ngRoute'])
       $scope.user.username = '';
       $scope.user.password = '';
       $rootScope.signedIn = true;
-      $window.location.href = '/#!/uploadbill';
+      $window.location.href = '/#!/addfriend';
       console.log('login', response);
     })
     .catch(function(error) {
@@ -52,7 +40,7 @@ angular.module('myApp.auth', ['ngRoute'])
       $scope.user.email = '';
       $scope.user.password = '';
       $rootScope.signedIn = true;
-      $window.location.href = '/#!/uploadbill';
+      $window.location.href = '/#!/addfriend';
       console.log('signed up', response);
     })
     .catch(function(error) {

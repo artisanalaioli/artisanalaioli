@@ -5,31 +5,31 @@
   <ul class="row">
     <li class="col-sm-12 col-md-6 col-lg-4" ng-repeat="friend in friends">
     <div class="card">
-    <div class="card-header text-center">
-      <h4>{{friend.name}}</h4>
-    </div>
+      <div class="card-header text-center">
+        <h4>{{friend.name}}</h4>
+      </div>
     <div class="card-block">
       <ul class="price-for-friend row">
         <li class="col-3">tax: {{friend.tax}}</li>
         <li class="col-3">tip: {{friend.tip}}</li>
-        <li class="col-3">Total:  {{friend.total}}</li>
+        <li class="col-3">Total: {{friend.total}}</li>
       </ul>
     </div>
       <div>
         <table class="table table-striped">
           <thead class="thead-default">
-                  <tr>
-                    <th >#</th>
-                    <th >item</th>
-                    <th >price</th>
-                  </tr>
-                </thead> 
-                <tbody>
-                <tr ng-repeat="item in items" ng-click="checkAssign(item, friend); changeClass()" ng-class="class">
-            <td>{{item[0]}}</td>
-            <td>{{item[1]}}</td>
-            <td>{{item[2]}}</td>
-          </tr>
+            <tr>
+              <th >#</th>
+              <th >item</th>
+              <th >price</th>
+            </tr>
+          </thead>  
+          <tbody>
+            <tr ng-repeat="item in items" ng-click="checkAssign(item, friend); changeClass()" ng-class="class">
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td>{{item[2]}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -37,8 +37,9 @@
     </li>
   </ul>
 </div>
-
+<!---->
 <div class="spacer"></div>
 <hr class="my-4">
 
-<button ng-if="assigneditems.length > 0" class="btn btn-primary pull-right" ng-click="submitSplit()">Split the bill</button>
+<a ng-if="assigneditems.length > 0" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitSplit()" >Split the bill</a>
+<a class="btn btn-primary pull-right" href='/#!/uploadbill'>Back</a>
