@@ -1,12 +1,15 @@
-<h1>Who's Eating With You?</h1>
+<h1>Who's Eating Together?</h1>
 <hr class="my-4">
 <div class="spacer"></div>
 <div>
-	<form class="row" ng-submit="addOne(friendname)">
+	<form class="row" ng-submit="addToParty(partymember)">
 		<div class="form-group col-xs-12">
 		<div class="row">
+			<div class="col-xs-9 col-sm-8"><p>Select from existing users:</p></div>
+		</div>
+		<div class="row">
 			<div class="col-xs-9 col-sm-8">
-			<input class="form-control" ng-model="friendname" type="text" name="friendname" placeholder="Add yourself and your friends">
+			<input type="text" class="form-control" name="partymember" placeholder="Add a user to your party..." ng-model="partymember" uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:5">
 			</div>
 			<div class="col-xs-3 col-sm-2">
 			<input class="form-control btn btn-primary" type="submit" value="Add">
@@ -15,13 +18,35 @@
 		</div>
 	</form>
 
+	<form class="row" ng-submit="addToPartyManual(memberManual, emailManual)">
+		<div class="form-group col-xs-12">
+			<div class="row">
+				<div class="col-xs-9 col-sm-8"><p>...or enter manually:</p></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-9 col-sm-8">
+					<input type="text" class="form-control" name="memberManual" placeholder="Name" ng-model="memberManual">
+				</div>
+			</div>
+			<div class="row">
+			  <div class="col-xs-9 col-sm-8">
+			  	<input type="text" class="form-control" name="emailManual" placeholder="Email" ng-model="emailManual">
+			  </div>
+				<div class="col-xs-3 col-sm-2">
+					<input class="form-control btn btn-primary" type="submit" value="Add">
+				</div>
+			</div>
+		</div>
+	</form>
+
 	<div ng-if="friends">
 		<table class="table table-striped">
 			<tbody>
-			<tr ng-repeat="friend in friends">
-				<th scope="row">{{friends.indexOf(friend) + 1}}</th>
-				<td>{{friend.name}}</td>
-				<td class='remove' ng-click="removeOne(friend)">Remove</td>
+			<tr ng-repeat="friend in party">
+				<th scope="row">{{party.indexOf(friend) + 1}}</th>
+				<td>{{friend.username}}</td>
+				<td>{{friend.email}}</td>
+				<td class='remove' ng-click="removeFromParty(friend)">Remove</td>
 			</tr>
 			</tbody>
 		</table>

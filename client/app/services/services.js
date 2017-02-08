@@ -44,30 +44,6 @@ angular.module('myApp.services',[])
       removeAll: removeAll
     }
 
-/*
-    var getAll = function () {
-      return $http({
-        method: 'GET',
-        url: '/api/friends'
-      })
-      .then(function (response) {
-        return response.data;
-      });
-    };
-
-    var addOne = function (friend) {
-      return $http({
-        method: 'POST',
-        url: '/api/friends',
-        data: friend
-      });
-    };
-
-    return {
-      getAll: getAll,
-      addOne: addOne
-    };
-*/
   })
 
   /************ fetch data from database **************/
@@ -147,6 +123,7 @@ angular.module('myApp.services',[])
     }
 
 
+
     return {
       allItems: allItems,
       subtotal: subtotal,
@@ -162,9 +139,36 @@ angular.module('myApp.services',[])
       getTipRate: getTipRate,
       getTaxRate: getTaxRate,
     }
+  })
+
+  .factory('Party', function() {
+  	var party = [];
+
+  	var addOne = function(userObj) {
+  		var user = {
+  			username: userObj.username,
+  			email: userObj.email
+  		};
+  		party.push(user);
+  	}
+
+  	var getAll = function() {
+  		return party;
+  	}
+
+  	var remove = function(username) {
+  		for (var i = 0; i < party.length; i++) {
+  			if (party[i].username === username) {
+  				party.splice(i, 1);
+  			}
+  		}
+  	}
+
+  	return {
+  		party: party,
+  		addOne: addOne,
+  		getAll: getAll,
+  		remove: remove
+  	}
+
   });
-
-
-
-
- 
