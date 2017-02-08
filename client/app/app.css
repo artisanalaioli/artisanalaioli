@@ -124,6 +124,7 @@ li {
 
 .remove:hover {
   cursor: pointer;
+  color: #c12323;
 }
 
 .inputfile {
@@ -145,4 +146,8 @@ li {
   cursor: pointer;
 }
 
+.table-hover tbody tr:hover {
+  cursor: pointer;
+  background-color: #ffc6c6;
 }
+

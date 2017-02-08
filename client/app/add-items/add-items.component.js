@@ -33,6 +33,22 @@ angular.module('myApp.addItems', ['ngRoute'])
     Bill.updateSubtotal($scope.subtotal);
   }
 
+  $scope.cameraInput = function () {
+    $http({
+      method: 'POST',
+      url: '/upload',
+      data: {
+        image: $scope.cameraInput,
+      }
+    })
+    .then(function(response) {
+      console.log('image uploaded', response);
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  };
+
   // $scope.removeimg = function() {
   //  $scope.image = "";
   // }
