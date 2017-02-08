@@ -8,6 +8,9 @@ export default function routes(app, express) {
 
   app.post('/bills', postBill);
   app.get('/bills', getOwnBills); 
+  app.post('/upload', (req, res, next) => {
+    console.log(req.body);
+  })
 
   app.get('/users', getAllUsers); // to use when adding friends
   app.get('/me/friends', getFriends);
