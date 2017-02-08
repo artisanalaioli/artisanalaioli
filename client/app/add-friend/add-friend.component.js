@@ -6,24 +6,34 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   $scope.friends = []; 
   $scope.party = [];
 
+  ///// NEW INIT FUNCTION
+  
+  $scope.init = function () {
+    $scope.friends = Friends.getAll();
+  }
+
+  $scope.init();
+
+  //////
+
   $scope.addOne = function(user) {
     var yourName = $rootScope.username;
     console.log(user.username);
     Friends.addOne(user.username, yourName); 
-  	$scope.getAll();
-  	$scope.friendname = "";
+    $scope.getAll();
+    $scope.friendname = "";
   }
 
-  $scope.getAll = function() {   	
-  	$scope.friends = Friends.getAll();
+  $scope.getAll = function() {    
+    $scope.friends = Friends.getAll();
   }
 
   $scope.removeOne = function(friend) {
-  	Friends.removeOne(friend);
-  	$scope.getAll();
+    Friends.removeOne(friend);
+    $scope.getAll();
   }
 
-  // NEW FUNCTIONALITY - 2.8.17 - JB
+  // NEW FUNCTIONALITY - 2.8.17
 
   $http.get('users').then(function(res) {
       $scope.users = res.data;
@@ -60,5 +70,6 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
     $scope.emailManual = '';
     $scope.memberManual = '';
   }
+
 
 });

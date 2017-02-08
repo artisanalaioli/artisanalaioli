@@ -1,5 +1,5 @@
 angular.module('myApp.services',[])
-  .factory('Friends', function() {
+  .factory('Friends', function($http) {
 
     var friends = []; // friend is object
 
@@ -37,11 +37,12 @@ angular.module('myApp.services',[])
       friends = [];
     }
 
+
    return {
       getAll: getAll,
       addOne: addOne,
       removeOne: removeOne,
-      removeAll: removeAll
+      removeAll: removeAll,
     }
 
   })
@@ -62,7 +63,7 @@ angular.module('myApp.services',[])
 
   /*****************************************************/
   
-  .factory('Bill', function() {
+  .factory('Bill', function($http) {
     var mybill = {}; 
     mybill.name;
     mybill.items; // an array of [itemName, price, people]
@@ -122,6 +123,27 @@ angular.module('myApp.services',[])
       return mybill.bill.taxRate;
     }
 
+    var clearAllBill = function() {
+      mybill = {}; 
+      mybill.name;
+      mybill.items; // an array of [itemName, price, people]
+      mybill.priceBeforeTip;
+      mybill.tipRate;
+      mybill.taxRate;
+
+      allItems = [];
+
+      subtotal = 0;
+    }
+
+    var submitSplit = function(data) {
+      // console.log('she gave me a straight up grape soda')
+      return $http({
+        method: 'POST',
+        url: '/bills',
+        data: data
+      })
+    }
 
 
     return {
@@ -138,6 +160,8 @@ angular.module('myApp.services',[])
       getPriceBeforeTip: getPriceBeforeTip,
       getTipRate: getTipRate,
       getTaxRate: getTaxRate,
+      clearAllBill: clearAllBill,
+      submitSplit: submitSplit
     }
   })
 

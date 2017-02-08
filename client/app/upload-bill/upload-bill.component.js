@@ -24,12 +24,16 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 
   $scope.addBill = function() {
     var bill = {};
+    $scope.addbillinfo();
     bill.name = $scope.name;
     bill.items = $scope.items;
     bill.subtotal = $scope.subtotal;
     bill.taxRate = $scope.taxRate; 
     bill.tipRate = $scope.tipRate / 100; // convert percentage to decimal
     Bill.addBill(bill);
+    console.log('tax', $scope.tax);
+    console.log('taxRate', $scope.taxRate);
+    console.log('Bill', Bill.getBill());
   }
 
   $scope.init = function () {
