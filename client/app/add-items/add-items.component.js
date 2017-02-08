@@ -1,32 +1,15 @@
 'use strict';
 
-angular.module('myApp.uploadbill', ['ngRoute'])
+angular.module('myApp.addItems', ['ngRoute'])
 
-.controller('UploadBillCtrl', function ($scope, Bill) {
+.controller('AddItemCtrl', function ($scope, Bill) {
   // $scope.image = "";
-  $scope.priceBeforeTip = 0;
-  $scope.readyToSplit = true;
+  $scope.readyToSplit = true; // need this to be true to proceed
   $scope.item; // single item
   $scope.price; // price for single item
-  $scope.tax;
-  $scope.taxRate = 0;
-  $scope.tipRate = 0; // this 'rate' is percentage 
   $scope.items = []; // items is an array of [id, item, price, people]
   $scope.count = 0; // when remove item, currentItemId will not decrease
 
-  $scope.addbillinfo = function() {
-    $scope.priceBeforeTip = Number.parseFloat($scope.priceBeforeTip);
-    // calculate tax rate
-    if ($scope.tax) {
-      $scope.tax = Number.parseFloat($scope.tax);
-      $scope.taxRate = $scope.tax / $scope.priceBeforeTip;
-    }
-    // calculate tiprate
-    if (!$scope.tipRate) {
-      $scope.tipRate = ($scope.tipnum / $scope.priceBeforeTip * 100).toFixed(2);
-    } 
-    $scope.readyToSplit = true;
-  }
 
   $scope.additeminfo = function() {
     $scope.count += 1;
@@ -34,16 +17,6 @@ angular.module('myApp.uploadbill', ['ngRoute'])
     $scope.items.push([$scope.count, $scope.item, $scope.price, '']);
     $scope.item = "";
     $scope.price = 0;
-  }
-
-  $scope.addBill = function() {
-    var bill = {};
-    bill.name = $scope.name;
-    bill.items = $scope.items;
-    bill.priceBeforeTip = $scope.priceBeforeTip;
-    bill.taxRate = $scope.taxRate; 
-    bill.tipRate = $scope.tipRate / 100; // convert percentage to decimal
-    Bill.addBill(bill);
   }
 
   $scope.removeitem = function(singleitem) {
@@ -54,6 +27,8 @@ angular.module('myApp.uploadbill', ['ngRoute'])
       $scope.items[i][0] = i + 1;
     }
   }
+
+
 
   // $scope.removeimg = function() {
   //  $scope.image = "";
@@ -75,6 +50,8 @@ angular.module('myApp.uploadbill', ['ngRoute'])
     }
   };
 });
+
+
 // .directive('myUpload', [function () {
 //  return {
 //    restrict: 'A',

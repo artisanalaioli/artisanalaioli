@@ -8,7 +8,8 @@ angular.module('myApp', [
   'myApp.split',
   'myApp.services',
   'myApp.auth',
-  'myApp.bills'
+  'myApp.bills',
+  'myApp.addItems'
 ])
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
@@ -37,6 +38,10 @@ angular.module('myApp', [
     .when('/uploadbill', {
       templateUrl: 'upload-bill/upload-bill.template.html',
       controller: 'UploadBillCtrl'
+    })
+    .when('/additems', {
+      templateUrl: 'add-items/add-items.template.html',
+      controller: 'AddItemCtrl'
     })
     .otherwise({redirectTo: '/signin'});
 }
