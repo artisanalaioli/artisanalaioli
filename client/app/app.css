@@ -122,3 +122,7 @@ li {
   color: #b5ddff;
 }
 
+.remove:hover {
+  cursor: pointer;
+}
+
