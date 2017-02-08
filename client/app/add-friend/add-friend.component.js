@@ -3,7 +3,6 @@
 angular.module('myApp.addfriend', ['ngRoute'])
 
 .controller('AddFriendCtrl',  function($scope, Friends, $rootScope) {
-  $scope.friends = []; 
 
   $scope.addOne = function(friendname) {
     var yourName = $rootScope.username;
@@ -20,5 +19,10 @@ angular.module('myApp.addfriend', ['ngRoute'])
   	Friends.removeOne(friend);
   	$scope.getAll();
   }
-}
-);
+
+  $scope.init = function () {
+    $scope.friends = Friends.getAll();
+  }
+
+  $scope.init();
+});
