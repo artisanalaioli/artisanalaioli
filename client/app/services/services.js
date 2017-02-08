@@ -147,7 +147,8 @@ angular.module('myApp.services',[])
   	var addOne = function(userObj) {
   		var user = {
   			username: userObj.username,
-  			email: userObj.email
+  			email: userObj.email,
+  			items: []
   		};
   		party.push(user);
   	}
