@@ -95,11 +95,12 @@ function postBill(req, res, next) {
     restaurant: req.body.restaurant,
     total: req.body.total,
     people: req.body.people,
-    info: req.body.info
+    info: req.body.info,
+    date: req.body.date
   };
   Bill.create(newBill)
   .then(function(createdBill) {
-    User.findOne({_id: req.session.passport.user})
+    User.findOne({username: req.params.username})
     .then(function(user) {
       user.bills.push(createdBill._id);
       user.save(function(error, savedUser) {
@@ -110,6 +111,9 @@ function postBill(req, res, next) {
           // res.redirect('/#!/bills')
         }
       });
+    })
+    .catch(function(err) {
+      console.log('Party member', req.params.username, 'is not a registered user to save to - ignoring.');
     });
   });
 }

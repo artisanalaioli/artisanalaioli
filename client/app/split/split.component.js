@@ -127,8 +127,10 @@ angular.module('myApp.split', [])
       restaurant: $scope.bill.name,
       total: $scope.bill.subtotal * (1 + $scope.bill.tipRate + $scope.bill.taxRate),
       people: $scope.friendNames,
-      info: $scope.friends
+      info: $scope.friends,
+      date: new Date()
     }
+    console.log('Setting date on bill:', finalBill.date);
     Bill.clearAllBill();
     Party.removeAll();
     Bill.submitSplit(finalBill);

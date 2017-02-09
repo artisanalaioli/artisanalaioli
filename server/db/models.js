@@ -25,7 +25,8 @@ var BillSchema = new mongoose.Schema({
     userID: mongoose.Schema.Types.ObjectId, 
     amount: Number
   }],
-  image: String
+  image: String,
+  date: Date
 });
 
 module.exports = {
