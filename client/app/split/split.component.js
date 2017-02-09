@@ -24,7 +24,7 @@ angular.module('myApp.split', [])
     return array;
   }
 
-  $scope.isActive = false;
+  $scope.isSelected = [];
   $scope.friendNames = $scope.getAllFriendName();
   /**
   * This function calculate the grand total price for a single friend. Grand total
@@ -110,14 +110,9 @@ angular.module('myApp.split', [])
 
   }
 
-  $scope.changeClass = function() {
-    for (var i = 0; i < $scope.items.length; i++) {
-      if ($scope.items[i][3]) {
-        $scope.class = "table-success"
-      } else {
-        $scope.class = "";
-      }
-    }
+  $scope.changeClass = function(id) {
+    $scope.isSelected = $scope.isSelected[id]=='active'?'':'active';;
+    console.log($scope.isSelected)
   }  
 
   /**
