@@ -1,8 +1,48 @@
-<h1>Split the bill</h1>
+<h1>Split the Bill</h1>
 <hr class="my-4">
 <div class="spacer"></div>
+
 <div class='container'>
-  <slick infinite='false' arrows='false'>
+  <div class="row">
+    <div class="card col-sm-12 col-md-offset-4 col-md-8 col-lg-offset-3 col-lg-6">
+      <div class="card-header text-center">
+        <h4>Your Receipt</h4>
+      </div>
+      <div class="card-block">
+        <table class="table table-striped">
+          <thead class="thead-default">
+            <tr>
+              <th >#</th>
+              <th >item</th>
+              <th >price</th>
+            </tr>
+          </thead>  
+          <tbody>
+            <tr ng-repeat="item in items" class='table-row' ng-click="checkAssign(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td>{{item[2]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+<!---->
+<div class="spacer"></div>
+<hr class="my-4">
+
+<a ng-if="assigneditems.length > 0" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the bill</a>
+<a class="btn btn-primary pull-right" href='/#!/uploadbill'>Back</a>
+
+
+<!-- CAROUSEL CARDS -->
+  <!-- <slick infinite='false' arrows='false'>
     <li class="col-xs-12" ng-repeat="friend in friends">
     <div class="card">
       <div class="card-header text-center">
@@ -25,7 +65,7 @@
             </tr>
           </thead>  
           <tbody>
-            <tr ng-repeat="item in items" ng-click="checkAssign(item, friend); changeClass($index)" ng-class="{'isSelected': active}">
+            <tr ng-repeat="item in items" class='table-row' ng-click="checkAssign(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
               <td>{{item[2]}}</td>
@@ -35,11 +75,4 @@
       </div>
     </div>
     </li>
-  </slick>
-</div>
-<!---->
-<div class="spacer"></div>
-<hr class="my-4">
-
-<a ng-if="assigneditems.length > 0" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the bill</a>
-<a class="btn btn-primary pull-right" href='/#!/uploadbill'>Back</a>
+  </slick> -->
