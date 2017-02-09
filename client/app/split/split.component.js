@@ -1,13 +1,7 @@
 'use strict';
 
-angular.module('myApp.split', ['ngRoute'])
+angular.module('myApp.split', [])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/split', {
-    templateUrl: 'split/split.template.html',
-    controller: 'SplitCtrl'
-  });
-}])
 
 .controller('SplitCtrl', function($scope, Bill, Party) {
   $scope.friends = Party.getAll();
@@ -30,6 +24,7 @@ angular.module('myApp.split', ['ngRoute'])
     return array;
   }
 
+  $scope.isActive = false;
   $scope.friendNames = $scope.getAllFriendName();
   /**
   * This function calculate the grand total price for a single friend. Grand total
@@ -83,6 +78,7 @@ angular.module('myApp.split', ['ngRoute'])
    */
   $scope.checkAssign = function(item, friend) {
     var needReassign = false;
+    $scope.isActive = !$scope.isActive;
 
     for (var i = 0; i < $scope.assigneditems.length; i++) {
       if ($scope.assigneditems[i][0] === item[0]) {

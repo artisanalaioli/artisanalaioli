@@ -12,9 +12,7 @@ angular.module('myApp', [
   'myApp.auth',
   'myApp.bills',
   'myApp.addItems',
-  'ngTouch',
-  'angular-carousel.shifty',
-  'angular-carousel'
+  'slickCarousel'
 ])
 
 // FRONT-END MIDDLEWARE CONFIG

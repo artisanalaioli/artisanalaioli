@@ -2,8 +2,8 @@
 <hr class="my-4">
 <div class="spacer"></div>
 <div class='container'>
-  <ul rn-carousel rn-carousel-controls rn-carousel-transition="fadeAndSlide" rn-carousel-controls-allow-loop class="carousel1 ng-scope row align-items-start bill-cards">
-    <li class="col-sm-12 col-md-6 col-lg-4" ng-repeat="friend in friends">
+  <slick infinite='false' arrows='false'>
+    <li class="col-xs-12" ng-repeat="friend in friends">
     <div class="card">
       <div class="card-header text-center">
         <h4>{{friend.name}}</h4>
@@ -35,7 +35,7 @@
       </div>
     </div>
     </li>
-  </ul>
+  </slick>
 </div>
 <!---->
 <div class="spacer"></div>
