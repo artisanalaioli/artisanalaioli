@@ -27,6 +27,9 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
     Party.addOne(user);
     getParty();
     $scope.partymember = '';
+    $http.get('/auth/isLoggedIn').then(function(res) {
+      console.log(res.data);
+    });
   }
 
   $scope.removeFromParty = function(name) {

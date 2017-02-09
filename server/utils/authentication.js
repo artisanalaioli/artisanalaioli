@@ -40,6 +40,8 @@ function auth(req, res, next) {
 
 function login(req, res, next) {
   req.session.username = req.user.username;
+  console.log('Logged in user:', req.session.username);
+  console.log('Session', req.session);
   res.redirect('/');
 }
 

@@ -12,41 +12,54 @@ angular.module('myApp', [
   'myApp.bills',
   'myApp.addItems'
 ])
-.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider, $httpProvider) {
   $locationProvider.hashPrefix('!');
 
-  $routeProvider
-    .when('/addfriend', {
-      templateUrl: 'add-friend/add-friend.template.html',
-      controller: 'AddFriendCtrl'
-    })
-    .when('/signin', {
+  window.routes = {
+    '/signin': {
       templateUrl: 'auth/signin.html',
-      controller: 'AuthController'
-    })
-    .when('/signup', {
+      controller: 'AuthController',
+      allowAnonymous: true
+    },
+    '/addfriend': {
+      templateUrl: 'add-friend/add-friend.template.html',
+      controller: 'AddFriendCtrl',
+      allowAnonymous: false
+    },
+    '/signup': {
       templateUrl: 'auth/signup.html',
-      controller: 'AuthController'
-    })
-    .when('/split', {
+      controller: 'AuthController',
+      allowAnonymous: true
+    },
+    '/split': {
       templateUrl: 'split/split.template.html',
-      controller: 'SplitCtrl'
-    })
-    .when('/bills', {
+      controller: 'SplitCtrl',
+      allowAnonymous: false
+    },
+    '/bills': {
       templateUrl: 'user-details/bills.html',
-      controller: 'BillsController'
-    })
-    .when('/uploadbill', {
+      controller: 'BillsController',
+      allowAnonymous: false
+    },
+    '/uploadbill': {
       templateUrl: 'upload-bill/upload-bill.template.html',
-      controller: 'UploadBillCtrl'
-    })
-    .when('/additems', {
+      controller: 'UploadBillCtrl',
+      allowAnonymous: false
+    },
+    '/additems': {
       templateUrl: 'add-items/add-items.template.html',
-      controller: 'AddItemCtrl'
-    })
-    .otherwise({redirectTo: '/signin'});
-}
-])
+      controller: 'AddItemCtrl',
+      allowAnonymous: false
+    }
+  };
+
+  for (var path in window.routes) {
+    $routeProvider.when(path, window.routes[path]);
+  }
+
+  $routeProvider.otherwise({redirectTo: '/signin'});
+}])
+
 .run(function($rootScope, $http, $window, Party) {
 
   $rootScope.clearParty = function() {

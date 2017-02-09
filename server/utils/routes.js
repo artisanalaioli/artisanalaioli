@@ -5,6 +5,15 @@ export default function routes(app, express) {
   app.post('/auth/register', register, passport.authenticate('local'), login);
   app.post('/auth/login', passport.authenticate('local'), login);
   app.post('/auth/logout', logout);
+  app.get('/auth/isLoggedIn', function(req, res) {
+    if (req.session.username) {
+      res.json({'loggedIn': true});
+      console.log('LOGGED IN:', req.session.username);
+    } else {
+      res.json({'loggedIn': false});
+      console.log('NOT LOGGED IN');
+    }
+  });
 
   app.post('/bills', postBill);
   app.get('/bills', getOwnBills); 
