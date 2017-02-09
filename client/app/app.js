@@ -29,7 +29,7 @@ angular.module('myApp', [
     },
 
     /** Wait for async authentication. */
-    'async-auth': ['$http', function asyncAuth($http) {
+    'async-auth': ['$http', '$rootScope', function asyncAuth($http, $rootScope) {
       // We'll need access to "this" in a deeper context
       var request = this;
 
@@ -40,6 +40,8 @@ angular.module('myApp', [
       .then(function success(res) {
         if ( res.data.loggedIn === true ) {
           console.log('LOGGED IN: APPROVING.');
+          $rootScope.username = res.data.username;
+          $rootScope.signedIn = true;
           return request.next();
         }
         console.error('You must be logged in to visit this page!');
@@ -104,7 +106,7 @@ angular.module('myApp', [
   $routeProvider.otherwise({redirectTo: '/signin'});
 }])
 
-.run(function($rootScope, Party, Auth) {
+.run(function($rootScope, Party, Auth, $location) {
 
   $rootScope.clearParty = function() {
     Party.removeAll();
