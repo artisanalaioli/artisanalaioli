@@ -11,7 +11,8 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.auth',
   'myApp.bills',
-  'myApp.addItems'
+  'myApp.addItems',
+  'slickCarousel'
 ])
 
 // FRONT-END MIDDLEWARE CONFIG

@@ -32,7 +32,8 @@
     "node": "0.0.0",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "browser-sync": "^2.18.7",

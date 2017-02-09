@@ -209,3 +209,22 @@ form .progress {
   font-weight: bold;
   padding-left: 10px;
 }
+
+
+.bill-cards {
+  display: inline-flex;
+  overflow-x: scroll;
+}
+
+
+.active {
+  background-color: green;
+}
+
+
+
+
+
+
+
+
