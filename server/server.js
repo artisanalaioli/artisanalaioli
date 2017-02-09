@@ -55,7 +55,6 @@ var parseImageData = function( data ) {
 		}
 	}
 	itemList = itemList.filter( (value) => {
-		console.log(!Number(value.name))
 		return (!Number(value.name))
 	})
 	return itemList
