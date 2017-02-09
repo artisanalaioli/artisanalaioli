@@ -6,6 +6,7 @@ logs
 
 
 *.DS_Store
+*/*.DS_store
 
 
 # Runtime data
