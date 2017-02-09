@@ -70,10 +70,13 @@ angular.module('myApp.services',[])
 
     var submitSplit = function(data) {
       // console.log('she gave me a straight up grape soda')
-      return $http({
-        method: 'POST',
-        url: '/bills',
-        data: data
+      console.log('Final bill submitted data:', data);
+      data.people.forEach(function(person) {
+        $http({
+          method: 'POST',
+          url: '/bills/' + person,
+          data: data
+        });
       })
     }
 

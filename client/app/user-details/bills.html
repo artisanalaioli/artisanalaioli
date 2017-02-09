@@ -3,7 +3,7 @@
   <span ng-show='!signedIn'>Please login</span>
   <div ng-show='retrieved'>
     <div ng-repeat="bill in bills">
-      <strong>{{bill.restaurant || 'unknown restaurant'}}</strong>
+      <strong>{{bill.restaurant || 'unknown restaurant'}}</strong> ({{bill.date.split('T')[0]}}, {{bill.date.split('T')[1].substring(0, 5)}})
       <li ng-repeat='person in bill.info'> {{person.name + ': ' + person.total}} </li>
     </div>
   </div>
