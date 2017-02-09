@@ -2,9 +2,15 @@
 
 angular.module('myApp.addfriend', ['ui.bootstrap'])
 
-.controller('AddFriendCtrl',  function($scope, $rootScope, $http, Party) {
+.controller('AddFriendCtrl',  function($scope, $rootScope, $http, Party, Auth) {
 
   $scope.party = [];
+
+  var init = function() {
+    Auth.checkAuth('#!/signin', '#!/addfriend');
+  }
+
+  init();
 
   $http.get('users').then(function(res) {
       $scope.users = res.data;
@@ -44,6 +50,10 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
     $scope.emailManual = '';
     $scope.memberManual = '';
   }
+
+  $scope.checkAuth = function() {
+    Auth.checkAuth('#!/signin', '#!/additems');
+  };
 
 
 });

@@ -182,9 +182,25 @@ angular.module('myApp.services',[])
     });
   };
 
+  var checkAuth = function(failUrl, successUrl) {
+    $http({
+      method: 'GET',
+      url: '/auth/isLoggedIn'
+    })
+    .then(function(res) {
+      console.log(res.data);
+      console.log('THIS IS FACTORY AUTH');
+      res.data.loggedIn === true ? $window.location.href = successUrl : $window.location.href = failUrl;
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
+  };
+
   return {
     signin: signin,
-    signup: signup
+    signup: signup,
+    checkAuth: checkAuth
   }
-  
+
 });
