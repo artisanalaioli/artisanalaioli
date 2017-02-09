@@ -44,7 +44,12 @@ body {
 }
 
 .navbar-brand {
-  padding-top: 12px;
+  opacity: 0.6;
+  display: inline-block;
+}
+
+.navbar-brand {
+  opacity: 1;
 }
 
 label {
@@ -185,3 +190,22 @@ form .progress {
   padding: 0px;
 }
 
+.top-margin {
+  margin-top: 10px;
+}
+
+#logo {
+  opacity: 0.6;
+  display: inline-block;
+  height: 42px;
+  width: 42px;
+}
+
+#logo:hover {
+  opacity: 1;
+}
+
+.divvy {
+  font-weight: bold;
+  padding-left: 10px;
+}
