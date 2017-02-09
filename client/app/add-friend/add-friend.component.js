@@ -8,21 +8,22 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
 
   var init = function() {
     $rootScope.clearParty();
+
+    $http.get('users').then(function(res) {
+        $scope.users = res.data;
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          if (res.data[i].username === $rootScope.username) {
+            $scope.addToParty(res.data[i]);
+            console.log('Added current user to party.');
+            return;
+          }
+        }
+    });
   }
 
   init();
 
-  $http.get('users').then(function(res) {
-      $scope.users = res.data;
-      console.log(res.data);
-      for (var i = 0; i < res.data.length; i++) {
-        if (res.data[i].username === $rootScope.username) {
-          $scope.addToParty(res.data[i]);
-          console.log('Added current user to party.');
-          return;
-        }
-      }
-  });
 
   var getParty = function() {
     $scope.party = Party.getAll();
