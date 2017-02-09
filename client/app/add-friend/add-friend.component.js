@@ -8,11 +8,11 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
 
   ///// NEW INIT FUNCTION
   
-  $scope.init = function () {
-    $scope.friends = Friends.getAll();
-  }
+  // $scope.init = function () {
+  //   $scope.friends = Friends.getAll();
+  // }
 
-  $scope.init();
+  // $scope.init();
 
   //////
 
