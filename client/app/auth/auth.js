@@ -1,4 +1,4 @@
-angular.module('myApp.auth', ['ngRoute'])
+angular.module('myApp.auth', [])
 
 .controller('AuthController', function ($scope, Auth) {
   $scope.user = {};

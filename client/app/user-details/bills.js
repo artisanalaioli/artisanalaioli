@@ -1,4 +1,4 @@
-angular.module('myApp.bills', ['ngRoute'])
+angular.module('myApp.bills', [])
 
 .controller('BillsController', function ($scope, $rootScope, $http) {
   $scope.bills = [];
