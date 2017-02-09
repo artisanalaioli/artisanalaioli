@@ -7,7 +7,7 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   $scope.party = [];
 
   ///// NEW INIT FUNCTION
-  
+
   // $scope.init = function () {
   //   $scope.friends = Friends.getAll();
   // }
@@ -58,9 +58,9 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
     $scope.partymember = '';
   }
 
-  $scope.removeFromParty = function(friend) {
-    console.log('Removing', friend.username);
-    Party.remove(friend.username);
+  $scope.removeFromParty = function(name) {
+    console.log('Removing', name);
+    Party.remove(name);
     getParty();
   }
 

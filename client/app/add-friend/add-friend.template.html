@@ -46,7 +46,7 @@
 				<th scope="row">{{party.indexOf(friend) + 1}}</th>
 				<td>{{friend.name}}</td>
 				<td>{{friend.email}}</td>
-				<td class='remove' ng-click="removeFromParty(friend)">Remove</td>
+				<td class='remove' ng-click="removeFromParty(friend.name)">Remove</td>
 			</tr>
 			</tbody>
 		</table>
