@@ -7,7 +7,7 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   $scope.party = [];
 
   var init = function() {
-    Auth.checkAuth('#!/signin', '#!/addfriend');
+    $rootScope.clearParty();
   }
 
   init();
@@ -33,9 +33,6 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
     Party.addOne(user);
     getParty();
     $scope.partymember = '';
-    $http.get('/auth/isLoggedIn').then(function(res) {
-      console.log(res.data);
-    });
   }
 
   $scope.removeFromParty = function(name) {
@@ -50,10 +47,5 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
     $scope.emailManual = '';
     $scope.memberManual = '';
   }
-
-  $scope.checkAuth = function() {
-    Auth.checkAuth('#!/signin', '#!/additems');
-  };
-
 
 });

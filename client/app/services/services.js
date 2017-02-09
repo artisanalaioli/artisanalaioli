@@ -182,25 +182,26 @@ angular.module('myApp.services',[])
     });
   };
 
-  var checkAuth = function(failUrl, successUrl) {
+  var signout = function() {
+    console.log('Attempting to sign out.');
     $http({
-      method: 'GET',
-      url: '/auth/isLoggedIn'
+      method: 'POST',
+      url: '/auth/logout/'
     })
-    .then(function(res) {
-      console.log(res.data);
-      console.log('THIS IS FACTORY AUTH');
-      res.data.loggedIn === true ? $window.location.href = successUrl : $window.location.href = failUrl;
+    .then(function(response) {
+      console.log('logged out', response);
+      $rootScope.signedIn = false;
+      $window.location.href = '/#!/signin';
     })
-    .catch(function(err) {
-      console.log(err);
+    .catch(function(error) {
+      console.log('Error: ', error);
     });
-  };
+  }
 
   return {
     signin: signin,
     signup: signup,
-    checkAuth: checkAuth
+    signout: signout
   }
 
 });

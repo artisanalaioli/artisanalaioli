@@ -83,4 +83,14 @@ function logout(req, res, next) {
   });
 }
 
-export { passport, login, register, logout };
+function checkAuth(req, res) {
+  if (req.session.username) {
+    res.json({'loggedIn': true});
+    console.log('LOGGED IN:', req.session.username);
+  } else {
+    res.json({'loggedIn': false});
+    console.log('NOT LOGGED IN');
+  }
+};
+
+export { passport, login, register, logout, checkAuth };
