@@ -30,16 +30,9 @@ angular.module('myApp.uploadbill', ['ngRoute'])
     bill.subtotal = $scope.subtotal;
     bill.taxRate = $scope.taxRate; 
     bill.tipRate = $scope.tipRate / 100; // convert percentage to decimal
+    bill.tip = $scope.tip;
+    bill.tax = $scope.tax;
     Bill.addBill(bill);
-    console.log('tax', $scope.tax);
-    console.log('taxRate', $scope.taxRate);
-    console.log('Bill', Bill.getBill());
-  }
-
-  $scope.init = function () {
-    $scope.subtotal = Bill.getSubtotal();
-    $scope.items = Bill.getItems();
-    $scope.total = $scope.subtotal + $scope.tip + $scope.tax;
   }
 
   $scope.$watch('displayTax', function() {
@@ -82,6 +75,16 @@ angular.module('myApp.uploadbill', ['ngRoute'])
 
   $scope.findTotal = function() {
     $scope.total = (parseFloat($scope.subtotal) + parseFloat($scope.tax) + parseFloat($scope.tip)).toFixed(2);
+  }
+
+  $scope.init = function () {
+    $scope.bill = Bill.getBill();
+    $scope.subtotal = $scope.bill.subtotal;
+    $scope.items = $scope.bill.items;
+    $scope.displayTax = $scope.bill.tax;
+    $scope.displayTip = $scope.bill.tip;
+    $scope.displayTipRate = $scope.bill.tipRate * 100;
+    $scope.total = $scope.subtotal + $scope.tip + $scope.tax;
   }
 
   $scope.init();
