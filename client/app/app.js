@@ -47,12 +47,13 @@ angular.module('myApp', [
     .otherwise({redirectTo: '/signin'});
 }
 ])
-.controller('AppCtrl', function($scope, Party) {
-  $scope.clearParty = function() {
+.run(function($rootScope, $http, $window, Party) {
+
+  $rootScope.clearParty = function() {
     Party.removeAll();
+    console.log('Clearing party on New Bill!');
   }
-})
-.run(function($rootScope, $http, $window) {
+
   $rootScope.signout = function() {
     console.log('trying to sign out');
     $http({
