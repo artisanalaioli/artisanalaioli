@@ -38,7 +38,7 @@ angular.module('myApp.addItems', [])
     $scope.errFiles = errFiles;
     angular.forEach(files, function(file) {
       file.upload = Upload.upload({
-        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+        url: '/upload',
         data: {file: file}
       });
 
