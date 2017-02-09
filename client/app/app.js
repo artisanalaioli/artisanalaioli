@@ -10,7 +10,10 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.auth',
   'myApp.bills',
-  'myApp.addItems'
+  'myApp.addItems',
+  'ngTouch',
+  'angular-carousel.shifty',
+  'angular-carousel'
 ])
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
