@@ -1,10 +1,11 @@
-import { passport, login, register, logout } from './authentication';
+import { passport, login, register, logout, checkAuth } from './authentication';
 import { postBill, getOwnBills, getAllUsers, getFriends, addFriend, removeFriend } from '../db/controllers';
 
 export default function routes(app, express) {
   app.post('/auth/register', register, passport.authenticate('local'), login);
   app.post('/auth/login', passport.authenticate('local'), login);
   app.post('/auth/logout', logout);
+  app.get('/auth/isLoggedIn', checkAuth);
 
   app.post('/bills', postBill);
   app.get('/bills', getOwnBills); 

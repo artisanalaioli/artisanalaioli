@@ -1,67 +1,4 @@
 angular.module('myApp.services',[])
-  .factory('Friends', function($http) {
-
-    var friends = []; // friend is object
-
-    var getAll = function() {
-       return friends;
-    }
-
-
-    var addOne = function(friendname, yourName) {
-      var index = -1;
-      for (var i = 0; i < friends.length; i++) {
-        if (friends[i].name === friendname) {
-          index = i;
-        }
-      }
-      if (index === -1) {
-        if (friends.length === 0) friends.push({ name: yourName, items: []});
-        friends.push({name: friendname, items: []});
-      }
-    }
-
-    var removeOne = function(friend) {
-      var index = -1;
-      for (var i = 0; i < friends.length; i++) {
-        if (friends[i].name === friend.name) {
-          index = i;
-        }
-      }
-      if (index !== -1) {
-        friends.splice(index, 1);
-      }
-    }
-
-    var removeAll = function() {
-      friends = [];
-    }
-
-
-   return {
-      getAll: getAll,
-      addOne: addOne,
-      removeOne: removeOne,
-      removeAll: removeAll,
-    }
-
-  })
-
-  /************ fetch data from database **************/
-
-  // .factory('Friends',['$resource', function($resource) {
-
-  // 	return $resource('/frinds/:friendId.json', {}, {
-  // 		query: {
-  //         	method: 'GET',
-  //         	params: {friendId: 'friends'},
-  //         	isArray: true
-  //         }
-  //		});
-  // }
-  // ])
-
-  /*****************************************************/
   
   .factory('Bill', function($http) {
     var mybill = {}; 
@@ -194,4 +131,70 @@ angular.module('myApp.services',[])
   		removeAll: removeAll
   	}
 
-  });
+  })
+
+  .factory('Auth', function($window, $rootScope, $http) {
+
+  var signin = function (username, password) {
+    $http({
+      method: 'POST',
+      url: '/auth/login',
+      data: {
+        username: username,
+        password: password
+      }
+    })
+    .then(function(response) {
+      $rootScope.username = username;
+      $rootScope.signedIn = true;
+      $window.location.href = '/#!/addfriend';
+      console.log('login', response);
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  };
+
+  var signup = function (username, email, pasword) {
+    $http({
+      method: 'POST',
+      url: '/auth/register',
+      data: {
+        username: username,
+        email: email,
+        password: password
+      }
+    })
+    .then(function(response) {
+      $rootScope.signedIn = true;
+      $window.location.href = '/#!/addfriend';
+      console.log('signed up', response);
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  };
+
+  var signout = function() {
+    console.log('Attempting to sign out.');
+    $http({
+      method: 'POST',
+      url: '/auth/logout/'
+    })
+    .then(function(response) {
+      console.log('logged out', response);
+      $rootScope.signedIn = false;
+      $window.location.href = '/#!/signin';
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  }
+
+  return {
+    signin: signin,
+    signup: signup,
+    signout: signout
+  }
+
+});
