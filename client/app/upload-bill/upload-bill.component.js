@@ -39,6 +39,49 @@ angular.module('myApp.uploadbill', ['ngRoute'])
   $scope.init = function () {
     $scope.subtotal = Bill.getSubtotal();
     $scope.items = Bill.getItems();
+    $scope.total = $scope.subtotal + $scope.tip + $scope.tax;
+  }
+
+  $scope.$watch('displayTax', function() {
+    $scope.anyNan();
+    $scope.findTotal();
+  })
+
+  $scope.$watch('displayTip', function() {
+    $scope.anyNan();
+    $scope.findTotal();
+  })
+
+  $scope.updateTips = function(type) {
+    if (type === 'rate') {
+      $scope.displayTip = ($scope.displayTipRate * $scope.subtotal / 100).toFixed(2);
+    } else {
+      $scope.displayTipRate = ($scope.displayTip / $scope.subtotal * 100).toFixed(2);
+    }
+  }
+
+  // takes the display value and detects if there are any NaN values
+  // $scope.display_ allows the app to display the placeholder values
+  $scope.anyNan = function() {
+    if (isNaN($scope.displayTax)) {
+      $scope.tax = 0;
+    } else if ($scope.displayTax) {
+      $scope.tax = $scope.displayTax;
+    }
+    if (isNaN($scope.displayTipRate)) {
+      $scope.tipRate = 0;
+    } else if ($scope.displayTipRate) {
+      $scope.tipRate = $scope.displayTipRate;
+    }
+    if (isNaN($scope.displayTip)) {
+      $scope.tip = 0;
+    } else if ($scope.displayTip) {
+      $scope.tip = $scope.displayTip;
+    }
+  }
+
+  $scope.findTotal = function() {
+    $scope.total = (parseFloat($scope.subtotal) + parseFloat($scope.tax) + parseFloat($scope.tip)).toFixed(2);
   }
 
   $scope.init();
