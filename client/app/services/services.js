@@ -3,29 +3,26 @@ angular.module('myApp.services',[])
   .factory('Bill', function($http) {
     var mybill = {}; 
     mybill.name;
-    mybill.items; // an array of [itemName, price, people]
-    mybill.priceBeforeTip;
+    mybill.items = []; // an array of [itemName, price, people]
+    mybill.subtotal;
     mybill.tipRate;
     mybill.taxRate;
 
-    var allItems = [];
-
-    var subtotal = 0;
 
     var getItems = function() {
-      return allItems;
+      return mybill.items;
     }
 
     var pushItems = function(items) {
-      allItems = items;
+      mybill.items = items;
     }
 
     var getSubtotal = function() {
-      return subtotal;
+      return mybill.subtotal;
     }
 
     var updateSubtotal = function(newSub) {
-      subtotal = newSub;
+      mybill.subtotal = newSub;
     }
 
    var addBill = function(bill) {
@@ -33,7 +30,9 @@ angular.module('myApp.services',[])
       mybill.items = bill.items; // an array of [itemName, price, people]
       mybill.subtotal = bill.subtotal;
       mybill.tipRate = bill.tipRate;  
-      mybill.taxRate = bill.taxRate;    
+      mybill.taxRate = bill.taxRate;  
+      mybill.tax = bill.tax;
+      mybill.tip = bill.tip
     }
 
     var removeBill = function() {
@@ -63,14 +62,10 @@ angular.module('myApp.services',[])
     var clearAllBill = function() {
       mybill = {}; 
       mybill.name;
-      mybill.items; // an array of [itemName, price, people]
+      mybill.items = []; // an array of [itemName, price, people]
       mybill.priceBeforeTip;
       mybill.tipRate;
       mybill.taxRate;
-
-      allItems = [];
-
-      subtotal = 0;
     }
 
     var submitSplit = function(data) {
@@ -84,8 +79,6 @@ angular.module('myApp.services',[])
 
 
     return {
-      allItems: allItems,
-      subtotal: subtotal,
       getItems: getItems,
       pushItems: pushItems,
       getSubtotal: getSubtotal,

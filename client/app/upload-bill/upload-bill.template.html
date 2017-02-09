@@ -4,7 +4,7 @@
 <div>
     <h3>Add Tax and Tip</h3>
     <h4>Subtotal: ${{ subtotal }}</h4>
-    <!-- <h4>Total: ${{ +subtotal + +tax }}</h4> -->
+    <h4>Total: ${{ total }}</h4>
         <form class="row">
             <!-- <div class="form-group col-xs-12">
                 <label class="col-form-label">Who is the bill from?</label>
@@ -18,17 +18,17 @@
 
             <div class="form-group col-xs-12 col-sm-12 col-md-6">
                 <label class="col-form-label">Tax</label>
-                <input class="form-control" type="number" string-to-number step="any" name="tax" ng-model="tax" placeholder="$">
+                <input class="form-control" type="number" string-to-number step="any" name="displayTax" ng-model="displayTax" placeholder="$">
             </div>
 
             <div class="form-group col-xs-12">
                 <label class="col-form-label">Tip rate or amount</label>
                 <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
-                    <input class="form-control" type="number" string-to-number step="any" name="tipRate" ng-model="tipRate" placeholder="%">
+                    <input class="form-control" type="number" string-to-number step="any" name="displayTipRate" ng-model="displayTipRate" placeholder="%" ng-change="updateTips('rate')">
                 </div>            
                 <div class="col-xs-12 col-sm-12 col-md-6">
-                <input class="form-control" type="number" string-to-number step="any" name="tip" ng-model="tip" placeholder="$">
+                <input class="form-control" type="number" string-to-number step="any" name="displayTip" ng-model="displayTip" placeholder="$" ng-change="updateTips()">
                 </div>
                 </div>
                 </div>
