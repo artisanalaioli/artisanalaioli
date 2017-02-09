@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.uploadbill', ['ngRoute'])
+angular.module('myApp.uploadbill', [])
 
 .controller('UploadBillCtrl', function ($scope, Bill) {
   // $scope.image = "";

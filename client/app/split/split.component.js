@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('myApp.split', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/split', {
-    templateUrl: 'split/split.template.html',
-    controller: 'SplitCtrl'
-  });
-}])
+angular.module('myApp.split', [])
 
 .controller('SplitCtrl', function($scope, Bill, Party) {
   $scope.friends = Party.getAll();
