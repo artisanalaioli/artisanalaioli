@@ -7,7 +7,7 @@ export default function routes(app, express) {
   app.post('/auth/logout', logout);
   app.get('/auth/isLoggedIn', checkAuth);
 
-  app.post('/bills', postBill);
+  app.post('/bills/:username', postBill);
   app.get('/bills', getOwnBills); 
   app.post('/upload', (req, res, next) => {
     console.log(req.body);
