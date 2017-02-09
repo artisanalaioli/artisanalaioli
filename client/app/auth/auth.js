@@ -1,51 +1,25 @@
 angular.module('myApp.auth', ['ngRoute'])
 
-.controller('AuthController', function ($scope, $http, $rootScope, $window) {
+.controller('AuthController', function ($scope, Auth) {
   $scope.user = {};
 
 
   $scope.signin = function () {
-    $http({
-      method: 'POST',
-      url: '/auth/login',
-      data: {
-        username: $scope.user.username,
-        password: $scope.user.password
-      }
-    })
-    .then(function(response) {
-      $rootScope.username = $scope.user.username;
-      $scope.user.username = '';
-      $scope.user.password = '';
-      $rootScope.signedIn = true;
-      $window.location.href = '/#!/addfriend';
-      console.log('login', response);
-    })
-    .catch(function(error) {
-      console.log('Error: ', error);
-    });
+    Auth.signin($scope.user.username, $scope.user.password);
+
+    $scope.user.username = '';
+    $scope.user.password = '';
+
   };
 
+
   $scope.signup = function () {
-    $http({
-      method: 'POST',
-      url: '/auth/register',
-      data: {
-        username: $scope.user.username,
-        email: $scope.user.email,
-        password: $scope.user.password
-      }
-    })
-    .then(function(response) {
-      $scope.user.username = '';
-      $scope.user.email = '';
-      $scope.user.password = '';
-      $rootScope.signedIn = true;
-      $window.location.href = '/#!/addfriend';
-      console.log('signed up', response);
-    })
-    .catch(function(error) {
-      console.log('Error: ', error);
-    });
+    Auth.signup($scope.user.username, $scope.user.email, $scope.user.password);
+
+    $scope.user.username = '';
+    $scope.user.email = '';
+    $scope.user.password = '';
+
   };
+
 });

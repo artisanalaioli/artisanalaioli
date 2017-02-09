@@ -131,4 +131,70 @@ angular.module('myApp.services',[])
   		removeAll: removeAll
   	}
 
-  });
+  })
+
+  .factory('Auth', function($window, $rootScope, $http) {
+
+  var signin = function (username, password) {
+    $http({
+      method: 'POST',
+      url: '/auth/login',
+      data: {
+        username: username,
+        password: password
+      }
+    })
+    .then(function(response) {
+      $rootScope.username = username;
+      $rootScope.signedIn = true;
+      $window.location.href = '/#!/addfriend';
+      console.log('login', response);
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  };
+
+  var signup = function (username, email, pasword) {
+    $http({
+      method: 'POST',
+      url: '/auth/register',
+      data: {
+        username: username,
+        email: email,
+        password: password
+      }
+    })
+    .then(function(response) {
+      $rootScope.signedIn = true;
+      $window.location.href = '/#!/addfriend';
+      console.log('signed up', response);
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  };
+
+  var signout = function() {
+    console.log('Attempting to sign out.');
+    $http({
+      method: 'POST',
+      url: '/auth/logout/'
+    })
+    .then(function(response) {
+      console.log('logged out', response);
+      $rootScope.signedIn = false;
+      $window.location.href = '/#!/signin';
+    })
+    .catch(function(error) {
+      console.log('Error: ', error);
+    });
+  }
+
+  return {
+    signin: signin,
+    signup: signup,
+    signout: signout
+  }
+
+});
