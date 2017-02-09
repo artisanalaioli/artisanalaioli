@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+  'ngFileUpload',
   'myApp.uploadbill',
   'myApp.addfriend',
   'myApp.split',

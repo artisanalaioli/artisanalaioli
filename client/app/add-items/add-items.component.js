@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp.addItems', ['ngRoute'])
+angular.module('myApp.addItems', [])
 
-.controller('AddItemCtrl', function ($scope, Bill) {
+.controller('AddItemCtrl', ['$scope', 'Upload', '$timeout', 'Bill', function ($scope, Upload, $timeout, Bill) {
   // $scope.image = "";
   $scope.readyToSplit = true; // need this to be true to proceed
   $scope.price; // price for single item
@@ -33,28 +33,29 @@ angular.module('myApp.addItems', ['ngRoute'])
     Bill.updateSubtotal($scope.subtotal);
   }
 
-  $scope.cameraInput = function () {
-    $http({
-      method: 'POST',
-      url: '/upload',
-      data: {
-        image: $scope.cameraInput,
-      }
-    })
-    .then(function(response) {
-      console.log('image uploaded', response);
-    })
-    .catch(function(error) {
-      console.log('Error: ', error);
+  $scope.uploadFiles = function(files, errFiles) {
+    $scope.files = files;
+    $scope.errFiles = errFiles;
+    angular.forEach(files, function(file) {
+      file.upload = Upload.upload({
+        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+        data: {file: file}
+      });
+
+      file.upload.then(function (response) {
+        $timeout(function () {
+          console.log(response.data)
+          file.result = response.data;
+        });
+      }, function (response) {
+        if (response.status > 0)
+          $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        file.progress = Math.min(100, parseInt(100.0 * 
+         evt.loaded / evt.total));
+      });
     });
-  };
-
-  // $scope.removeimg = function() {
-  //  $scope.image = "";
-  // }
-  // $scope.process = function() {
-  // }
-
+  }
 
   $scope.init = function() {
     $scope.items = Bill.getItems(); // items is an array of [id, item, price, people]
@@ -63,7 +64,8 @@ angular.module('myApp.addItems', ['ngRoute'])
 
   $scope.init();
 
-})
+
+}])
 .directive('stringToNumber', function() {
   return {
     require: 'ngModel',
