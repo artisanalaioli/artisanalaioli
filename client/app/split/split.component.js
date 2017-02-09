@@ -9,7 +9,7 @@ angular.module('myApp.split', ['ngRoute'])
   });
 }])
 
-.controller('SplitCtrl', function($scope, Friends, Bill, Party) {
+.controller('SplitCtrl', function($scope, Bill, Party) {
   $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];

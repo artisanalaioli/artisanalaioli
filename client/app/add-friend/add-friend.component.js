@@ -2,7 +2,7 @@
 
 angular.module('myApp.addfriend', ['ui.bootstrap'])
 
-.controller('AddFriendCtrl',  function($scope, Friends, $rootScope, $http, Party) {
+.controller('AddFriendCtrl',  function($scope, $rootScope, $http, Party) {
   $scope.friends = []; 
   $scope.party = [];
 
