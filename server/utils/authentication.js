@@ -85,7 +85,10 @@ function logout(req, res, next) {
 
 function checkAuth(req, res) {
   if (req.session.username) {
-    res.json({'loggedIn': true});
+    res.json({
+      'loggedIn': true,
+      'username': req.session.username
+    });
     console.log('LOGGED IN:', req.session.username);
   } else {
     res.json({'loggedIn': false});
