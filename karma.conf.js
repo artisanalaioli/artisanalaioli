@@ -39,7 +39,8 @@ module.exports = function (config) {
       // 'client/app/**/*.js',
 
       // our spec files - in order of the README
-      'specs/client/AddItemCtrlSpec.js',
+      // 'specs/client/AddItemCtrlSpec.js',
+      'specs/client/SplitCtrlSpec.js'
     ],
 
     // test results reporter to use
