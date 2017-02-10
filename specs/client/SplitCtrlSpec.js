@@ -46,7 +46,8 @@ describe('SplitCtrl', function () {
 
     $scope.bill = {
       items: $scope.items,
-      name: 'rest',
+
+      name: 'Restaurant Name',
       subtotal: '51',
       tax: '5',
       taxRate: 0.098,
@@ -57,9 +58,8 @@ describe('SplitCtrl', function () {
   }));
 
   afterEach(function () {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-    // $window.localStorage.removeItem('com.shortly');
+
+
   });
   
   it('bill contains all items', function() {
@@ -72,3 +72,8 @@ describe('SplitCtrl', function () {
 
 
 });
+
+
+
+
+

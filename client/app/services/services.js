@@ -77,7 +77,12 @@ angular.module('myApp.services',[])
           url: '/bills/' + person,
           data: data
         });
-      })
+      });
+      $http({
+        method: 'POST',
+        url: '/mail',
+        data: data
+      });
     }
 
 

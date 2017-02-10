@@ -31,9 +31,9 @@ describe('AddItemCtrl', function () {
   }));
 
   afterEach(function () {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-    // $window.localStorage.removeItem('com.shortly');
+    // $httpBackend.verifyNoOutstandingExpectation();
+    // $httpBackend.verifyNoOutstandingRequest();
+
   });
 
   it('1 to equal 1', function () {
