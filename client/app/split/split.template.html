@@ -11,7 +11,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend)" ng-class="friendSelected[$index]">
+      <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
         <p>{{friend.name}}</p>
       </div>
       <div class="modal-footer">
@@ -47,7 +47,7 @@
             </tr>
           </thead>  
           <tbody>
-            <tr ng-repeat="item in items" class='table-row' ng-click="assignItem(item, $index)" ng-class="isSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
+            <tr ng-repeat="item in items" class='table-row' ng-click="openModal(item, $index)" ng-class="itemSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
               <td>{{item[2]}}</td>
@@ -90,7 +90,7 @@
             </tr>
           </thead>  
           <tbody>
-            <tr ng-repeat="item in items" class='table-row' ng-click="assignItem(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
+            <tr ng-repeat="item in items" class='table-row' ng-click="clearModal(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
               <td>{{item[2]}}</td>

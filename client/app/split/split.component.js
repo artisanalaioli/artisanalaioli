@@ -106,10 +106,14 @@ angular.module('myApp.split', [])
    * the origin person, and assign the item to the new person.
    * @param {array} input an item object, {object} input a friend object.
    */
-  $scope.assignItem = function(item, index) {
-    // var needReassign = false;
-    $scope.addedItem = item;
+  $scope.openModal = function(item, index) {
     $scope.friendSelected =[];
+    $scope.addedItem = item;
+    $scope.itemIndex = index;
+  }
+  
+  $scope.highlightItem = function(item, index) {
+    // var needReassign = false;
     if (item[3].length > 0) {
       $scope.itemSelected[index]='selected'
     } else {
@@ -152,18 +156,29 @@ angular.module('myApp.split', [])
 
   // }
 
-  $scope.selectFriend = function(index, item, friend) {
+  $scope.selectFriend = function(index, item, friend, itemIndex) {
     if (friend.items.includes(item)) {
       var removedIndex = friend.items.indexOf(item);
       friend.items.splice(removedIndex, 1);
+      item[3].splice(item[3].indexOf(friend.name), 1)
     } else {
+      item[3].push(friend.name)
       friend.items.push(item);
     }
-    console.log(friend.items)
+    console.log(friend.name, ' has the following items: ',friend.items)
+    console.log(item[1],' is contained by these friends:', item[3])
     $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
+    $scope.highlightItem(item, itemIndex);
     //Assign item to friend
     //Visually apply item name and total next to assignee
   }  
+
+  $scope.assignCost = function(friend) {
+    for (var i = 0; i < friend.items.length; i++) {
+      friend.items[i][1]
+    }
+    var itemCost = item[2] / item[3].length
+  }
 
   /**
   * This function is sending a post request to server
