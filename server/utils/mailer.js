@@ -21,6 +21,7 @@ export default function mailSender(app, express, rootDir) {
 
   // MAILER ROUTING
 
+  // this sends mails
   app.post('/mail', function(req, res, next) {
     // for each person in the bill's info array...
     req.body.info.forEach(function(person) {
@@ -48,6 +49,7 @@ export default function mailSender(app, express, rootDir) {
     })
   });
 
+  // this simply renders the e-mail template (views/email.ejs) for easy rendering during editing
   app.get('/mailrender', function (req, res, next) {
     res.end(ejs.renderFile('../artisanalaioli/server/views/email.ejs',
     {
