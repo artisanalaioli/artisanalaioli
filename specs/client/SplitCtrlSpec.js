@@ -46,6 +46,7 @@ describe('SplitCtrl', function () {
 
     $scope.bill = {
       items: $scope.items,
+
       name: 'Restaurant Name',
       subtotal: '51',
       tax: '5',
@@ -57,6 +58,7 @@ describe('SplitCtrl', function () {
   }));
 
   afterEach(function () {
+
 
   });
   

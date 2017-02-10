@@ -9,7 +9,7 @@ angular.module('myApp.addItems', [])
   $scope.additeminfo = function() {
     $scope.count += 1;
     $scope.price = Number.parseFloat($scope.price);
-    $scope.items.push([$scope.count, $scope.item, $scope.price, '']);
+    $scope.items.push([$scope.count, $scope.item, $scope.price, []]);
     Bill.pushItems($scope.items);
     $scope.item = "";
     $scope.price = 0;
