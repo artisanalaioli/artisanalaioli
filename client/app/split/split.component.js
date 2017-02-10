@@ -8,10 +8,40 @@ angular.module('myApp.split', [])
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];
   $scope.items = $scope.bill.items;
+
+  /************** TEST DATA ****************/
+  $scope.items = [
+      [1, 'pizza', 10, []],
+      [2, 'beer', 16, []],
+      [3, 'rice', 13, []],
+      [4, 'potato', 12, []]
+    ]
+
+    $scope.friends = [
+      {name: 'Pat', email: 'email', items: []},
+      {name: 'Frank', email: 'email', items: []},
+      {name: 'Greg', email: 'email', items: []},
+      {name: 'James', email: 'email', items: []}
+    ]
+
+    $scope.bill = {
+      items: $scope.items,
+      name: 'rest',
+      subtotal: '51',
+      tax: '5',
+      taxRate: 0.098,
+      tip: '7.65',
+      tipRate: 0.15
+    }
+  /************************************/
+
+  console.log('friends: ', $scope.friends)
+  console.log('bill: ', $scope.bill)
+  console.log('items: ', $scope.items)
   /******************************************/
   /* THIS IS STRUCTURE OF bill, item, friend
   /* bill: {name: string, items:[], subtotal: number, taxRate: number, tipRate: number}
-  /* item: [id, itemname, price, people.name];
+  /* item: [id, itemname, price, [people.names]];
   /* friend: {name: string, items: []}
   /*****************************************/ 
 
@@ -24,7 +54,7 @@ angular.module('myApp.split', [])
     return array;
   }
 
-  $scope.isSelected = [];
+  $scope.itemSelected = [];
   $scope.friendNames = $scope.getAllFriendName();
   /**
   * This function calculate the grand total price for a single friend. Grand total
@@ -76,48 +106,63 @@ angular.module('myApp.split', [])
    * the origin person, and assign the item to the new person.
    * @param {array} input an item object, {object} input a friend object.
    */
-  $scope.checkAssign = function(item, friend, id) {
-    var needReassign = false;
+  $scope.assignItem = function(item, index) {
+    // var needReassign = false;
+    $scope.addedItem = item;
     $scope.friendSelected =[];
+    if (item[3].length > 0) {
+      $scope.itemSelected[index]='selected'
+    } else {
+      $scope.itemSelected[index]='';
+    }
 
-    for (var i = 0; i < $scope.assigneditems.length; i++) {
-      if ($scope.assigneditems[i][0] === item[0]) {
-        needReassign = true;
-          // if the item belongs to the 'friend'
-        if ($scope.assigneditems[i][3] === friend.name) { 
-          // unassign this item from 'friend's item list
-          $scope.unassign(item, friend);
-          $scope.isSelected[id]='';
+    // for (var i = 0; i < $scope.assigneditems.length; i++) {
+    //   if ($scope.assigneditems[i][0] === item[0]) {
+    //     needReassign = true;
+    //       // if the item belongs to the 'friend'
+    //     if ($scope.assigneditems[i][3] === friend.name) { 
+    //       // unassign this item from 'friend's item list
+    //      // $scope.unassign(item, friend);
+          
 
                     
-        } else { // if the item belongs to another friend
-          // find the ANOTHER friend by friend.name
-          var anotherFriend;
-          $scope.friends.forEach(function(singlefriend) {
-            if (singlefriend.name === item[3]) {
-              anotherFriend = singlefriend;
-            }
-          })
-          console.log('another friend', anotherFriend.name);
-          $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
-          $scope.assign(item, friend); // assign this item to THIS friend
-          $scope.isSelected[id]='selected'
+    //     } else { // if the item belongs to another friend
+    //       // find the ANOTHER friend by friend.name
+    //       var anotherFriend;
+    //       $scope.friends.forEach(function(singlefriend) {
+    //         if (singlefriend.name === item[3]) {
+    //           anotherFriend = singlefriend;
+    //         }
+    //       })
+    //       console.log('another friend', anotherFriend.name);
+    //       $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
+    //       $scope.assign(item, friend); // assign this item to THIS friend
+    //       console.log(item[3]);
 
-        }
-        break;
-      }
+      //   }
+      //   break;
+      // }
     }
 
-    if (!needReassign) {
-     // $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';
-      $scope.isSelected[id]='selected';
-      $scope.assign(item, friend);            
+    // if (!needReassign) {
+    //  // $scope.itemSelected[index] = $scope.itemSelected[index]=='selected'?'':'selected';
+    //   $scope.itemSelected[index]='selected';
+    //   $scope.assign(item, friend);            
+  //   }
+
+  // }
+
+  $scope.selectFriend = function(index, item, friend) {
+    if (friend.items.includes(item)) {
+      var removedIndex = friend.items.indexOf(item);
+      friend.items.splice(removedIndex, 1);
+    } else {
+      friend.items.push(item);
     }
-
-  }
-
-  $scope.selectFriend = function(id) {
-    $scope.friendSelected[id] = $scope.friendSelected[id]=='selected'?'':'selected'
+    console.log(friend.items)
+    $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
+    //Assign item to friend
+    //Visually apply item name and total next to assignee
   }  
 
   /**
