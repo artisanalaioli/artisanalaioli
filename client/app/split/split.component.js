@@ -24,7 +24,7 @@ angular.module('myApp.split', [])
     return array;
   }
 
-  $scope.isActive = false;
+  $scope.isSelected = [];
   $scope.friendNames = $scope.getAllFriendName();
   /**
   * This function calculate the grand total price for a single friend. Grand total
@@ -76,9 +76,8 @@ angular.module('myApp.split', [])
    * the origin person, and assign the item to the new person.
    * @param {array} input an item object, {object} input a friend object.
    */
-  $scope.checkAssign = function(item, friend) {
+  $scope.checkAssign = function(item, friend, id) {
     var needReassign = false;
-    $scope.isActive = !$scope.isActive;
 
     for (var i = 0; i < $scope.assigneditems.length; i++) {
       if ($scope.assigneditems[i][0] === item[0]) {
@@ -87,6 +86,8 @@ angular.module('myApp.split', [])
         if ($scope.assigneditems[i][3] === friend.name) { 
           // unassign this item from 'friend's item list
           $scope.unassign(item, friend);
+          $scope.isSelected[id]='';
+
                     
         } else { // if the item belongs to another friend
           // find the ANOTHER friend by friend.name
@@ -99,25 +100,23 @@ angular.module('myApp.split', [])
           console.log('another friend', anotherFriend.name);
           $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
           $scope.assign(item, friend); // assign this item to THIS friend
+          $scope.isSelected[id]='selected'
+
         }
         break;
       }
     }
 
     if (!needReassign) {
+     // $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';;
+      $scope.isSelected[id]='selected';
       $scope.assign(item, friend);            
     }
 
   }
 
-  $scope.changeClass = function() {
-    for (var i = 0; i < $scope.items.length; i++) {
-      if ($scope.items[i][3]) {
-        $scope.class = "table-success"
-      } else {
-        $scope.class = "";
-      }
-    }
+  $scope.changeClass = function(id) {
+    console.log($scope.isSelected[id])
   }  
 
   /**

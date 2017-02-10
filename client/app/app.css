@@ -216,13 +216,13 @@ form .progress {
   overflow-x: scroll;
 }
 
-
-.active {
-  background-color: green;
+.selected { 
+  background-color: #a0ffbd !important; 
 }
 
-
-
+.table-row:hover {
+  cursor: pointer;
+}
 
 
 
