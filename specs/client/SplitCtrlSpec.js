@@ -57,9 +57,7 @@ describe('SplitCtrl', function () {
   }));
 
   afterEach(function () {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-    // $window.localStorage.removeItem('com.shortly');
+
   });
   
   it('bill contains all items', function() {
