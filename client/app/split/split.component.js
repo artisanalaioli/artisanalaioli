@@ -78,6 +78,7 @@ angular.module('myApp.split', [])
    */
   $scope.checkAssign = function(item, friend, id) {
     var needReassign = false;
+    $scope.friendSelected =[];
 
     for (var i = 0; i < $scope.assigneditems.length; i++) {
       if ($scope.assigneditems[i][0] === item[0]) {
@@ -108,15 +109,15 @@ angular.module('myApp.split', [])
     }
 
     if (!needReassign) {
-     // $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';;
+     // $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';
       $scope.isSelected[id]='selected';
       $scope.assign(item, friend);            
     }
 
   }
 
-  $scope.changeClass = function(id) {
-    console.log($scope.isSelected[id])
+  $scope.selectFriend = function(id) {
+    $scope.friendSelected[id] = $scope.friendSelected[id]=='selected'?'':'selected'
   }  
 
   /**
