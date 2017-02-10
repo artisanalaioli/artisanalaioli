@@ -1,5 +1,6 @@
 import mailer from 'express-mailer';
 import path from 'path';
+import ejs from 'ejs';
 
 export default function mailSender(app, express, rootDir) {
 
@@ -31,7 +32,7 @@ export default function mailSender(app, express, rootDir) {
           otherProperty: 'Other Property', // All additional properties are also passed to the template as local variables.
           name: person.name,
           owner: req.body.owner,
-          restaurant: req.body.restaurant || 'some place',
+          restaurant: req.body.restaurant || 'an eating establishment',
           split: person.total
         }, function (err) {
           if (err) {
@@ -45,6 +46,23 @@ export default function mailSender(app, express, rootDir) {
       }
       
     })
+  });
+
+  app.get('/mailrender', function (req, res, next) {
+    res.end(ejs.renderFile('../artisanalaioli/server/views/email.ejs',
+    {
+      subject: 'A Payment Owed Reminder from Divvy!', // REQUIRED.
+      name: 'John',
+      owner: 'exampleuser55',
+      restaurant: 'Tu Lan',
+      split: '12.75'
+    },
+    function(err, data) {
+      if (err) {
+        console.log(err);
+      }
+      return data;
+    }));
   });
 
 }
