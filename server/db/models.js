@@ -26,7 +26,8 @@ var BillSchema = new mongoose.Schema({
     amount: Number
   }],
   image: String,
-  date: Date
+  date: Date,
+  owner: String
 });
 
 module.exports = {
