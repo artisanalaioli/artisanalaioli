@@ -53,6 +53,14 @@ describe('AddItemCtrl', function () {
     expect($scope.count).to.equal(0);
   });
 
+  it('should successfully add an item to the list', function () {
+    $scope.price = 10;
+    $scope.item = 'foody food';
+    $scope.additeminfo();
+    expect($scope.count).to.equal(1);
+  });
+  
+
 });
 
 //   it('should have a signup method', function () {
