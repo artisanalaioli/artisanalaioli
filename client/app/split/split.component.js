@@ -3,7 +3,7 @@
 angular.module('myApp.split', [])
 
 
-.controller('SplitCtrl', function($scope, Bill, Party, ModalService) {
+.controller('SplitCtrl', function($scope, Bill, Party) {
   $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];
@@ -100,7 +100,7 @@ angular.module('myApp.split', [])
           console.log('another friend', anotherFriend.name);
           $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
           $scope.assign(item, friend); // assign this item to THIS friend
-          $scope.isSelected[id]='selected';
+          $scope.isSelected[id]='selected'
 
         }
         break;
@@ -116,10 +116,6 @@ angular.module('myApp.split', [])
   }
 
   $scope.changeClass = function(id) {
-    $modal.open({
-      templateUrl: 'auth/signin.html',
-      controller: 'AuthController',
-    })
     console.log($scope.isSelected[id])
   }  
 
