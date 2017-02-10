@@ -7,7 +7,7 @@ angular.module('myApp.addfriend', ['ui.bootstrap'])
   $scope.party = [];
 
   var init = function() {
-    $rootScope.clearParty();
+    $rootScope.newBill();
 
     $http.get('users').then(function(res) {
         $scope.users = res.data;
