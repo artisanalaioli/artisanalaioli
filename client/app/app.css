@@ -216,13 +216,26 @@ form .progress {
   overflow-x: scroll;
 }
 
-
-.active {
-  background-color: green;
+.selected { 
+  background-color: #a0ffbd !important; 
 }
 
+.table-row:hover {
+  cursor: pointer;
+}
 
+.friend-chooser {
+  padding: 20px 10px 10px 40px;
+  font-size: 20px;
+  /*background-color: #80e1ff;*/
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: gainsboro;
+}
 
+.friend-chooser:hover {
+  cursor: pointer;
+}
 
 
 

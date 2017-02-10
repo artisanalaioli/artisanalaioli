@@ -1,4 +1,3 @@
-
 describe('AddItemCtrl', function () {
   console.log('AddItemCtrl Tests');
   var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;

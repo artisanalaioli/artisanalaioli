@@ -11,10 +11,7 @@ angular.module('myApp.uploadbill', [])
 
   $scope.addbillinfo = function() {
     // calculate tax rate
-    if ($scope.tax) {
-      $scope.tax = Number.parseFloat($scope.tax);
-      $scope.taxRate = $scope.tax / $scope.subtotal;
-    }
+    $scope.taxRate = $scope.tax / $scope.subtotal;
     // calculate tiprate
     if (!$scope.tipRate) {
       $scope.tipRate = ($scope.tip / $scope.subtotal * 100).toFixed(2);
@@ -23,6 +20,7 @@ angular.module('myApp.uploadbill', [])
   }
 
   $scope.addBill = function() {
+    $scope.anyNaN();
     var bill = {};
     $scope.addbillinfo();
     bill.name = $scope.name;
@@ -36,12 +34,12 @@ angular.module('myApp.uploadbill', [])
   }
 
   $scope.$watch('displayTax', function() {
-    $scope.anyNan();
+    $scope.anyNaN();
     $scope.findTotal();
   })
 
   $scope.$watch('displayTip', function() {
-    $scope.anyNan();
+    $scope.anyNaN();
     $scope.findTotal();
   })
 
@@ -53,23 +51,19 @@ angular.module('myApp.uploadbill', [])
     }
   }
 
-  // takes the display value and detects if there are any NaN values
-  // $scope.display_ allows the app to display the placeholder values
-  $scope.anyNan = function() {
+  $scope.anyNaN = function() {
+    $scope.tax = $scope.displayTax;
+    $scope.tipRate = $scope.displayTipRate;
+    $scope.tip = $scope.displayTip;
+    
     if (isNaN($scope.displayTax)) {
       $scope.tax = 0;
-    } else if ($scope.displayTax) {
-      $scope.tax = $scope.displayTax;
     }
     if (isNaN($scope.displayTipRate)) {
       $scope.tipRate = 0;
-    } else if ($scope.displayTipRate) {
-      $scope.tipRate = $scope.displayTipRate;
     }
     if (isNaN($scope.displayTip)) {
       $scope.tip = 0;
-    } else if ($scope.displayTip) {
-      $scope.tip = $scope.displayTip;
     }
   }
 
@@ -84,6 +78,7 @@ angular.module('myApp.uploadbill', [])
     $scope.displayTax = $scope.bill.tax;
     $scope.displayTip = $scope.bill.tip;
     $scope.displayTipRate = $scope.bill.tipRate * 100;
+    $scope.anyNaN();
     $scope.total = $scope.subtotal + $scope.tip + $scope.tax;
   }
 

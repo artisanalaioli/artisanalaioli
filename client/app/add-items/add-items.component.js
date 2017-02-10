@@ -33,6 +33,7 @@ angular.module('myApp.addItems', [])
   }
 
   $scope.uploadFiles = function(files, errFiles) {
+    console.log(files)
     $scope.files = files;
     $scope.errFiles = errFiles;
     angular.forEach(files, function(file) {
@@ -43,7 +44,7 @@ angular.module('myApp.addItems', [])
 
       file.upload.then(function (response) {
         $timeout(function () {
-          console.log(response.data)
+          console.log(response);
           file.result = response.data;
         });
       }, function (response) {

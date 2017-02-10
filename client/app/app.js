@@ -12,7 +12,6 @@ angular.module('myApp', [
   'myApp.auth',
   'myApp.bills',
   'myApp.addItems',
-  'slickCarousel'
 ])
 
 // FRONT-END MIDDLEWARE CONFIG
@@ -105,10 +104,11 @@ angular.module('myApp', [
   $routeProvider.otherwise({redirectTo: '/signin'});
 }])
 
-.run(function($rootScope, Party, Auth, $location) {
+.run(function($rootScope, Party, Auth, Bill, $location) {
 
-  $rootScope.clearParty = function() {
+  $rootScope.newBill = function() {
     Party.removeAll();
+    Bill.clearAllBill();
   }
 
   $rootScope.signout = function() {
