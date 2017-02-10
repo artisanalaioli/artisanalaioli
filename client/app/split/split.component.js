@@ -3,7 +3,7 @@
 angular.module('myApp.split', [])
 
 
-.controller('SplitCtrl', function($scope, Bill, Party) {
+.controller('SplitCtrl', function($scope, Bill, $rootScope, Party) {
   $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];
@@ -131,7 +131,8 @@ angular.module('myApp.split', [])
       total: $scope.bill.subtotal * (1 + $scope.bill.tipRate + $scope.bill.taxRate),
       people: $scope.friendNames,
       info: $scope.friends,
-      date: new Date()
+      date: new Date(),
+      owner: $rootScope.username
     }
     console.log('Setting date on bill:', finalBill.date);
     Bill.clearAllBill();
