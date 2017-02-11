@@ -36,9 +36,12 @@ angular.module('myApp.addItems', [])
     console.log(files)
     $scope.files = files;
     $scope.errFiles = errFiles;
+    
     angular.forEach(files, function(file) {
+      console.log(file)
       file.upload = Upload.upload({
-        url: '/upload',
+        url: 'POST https://www.googleapis.com/upload/storage/v1/b/divvy_receipts/?uploadType=media&name=myObject',
+        
         data: {file: file}
       });
 

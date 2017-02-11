@@ -28,15 +28,17 @@ const vision = require('@google-cloud/vision')({
   	projectId: 'AIzaSyDp_Bl-MD9PhAu3-SqWaLo5vf9cQLQa3NM',
   	keyFilename: './server/Divvy-8f936cd51c11.json'
 })
+export default function OCR() {
+	vision.detectText('http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012')
+		.then((results => {
+			// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
+			console.log( parseRows(assignRows(results)) )
+		})).catch( (err) => {
+			console.log(err)
+		});
 
-vision.detectText('http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012')
-.then((results => {
-	// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
-	console.log( parseRows(assignRows(results)) )
-})).catch( (err) => {
-	console.log(err)
-});
-  
+}
+
 var checkRows = function(rows, yValue) {
 	var bool = false
 	rows.forEach( (row, i) => {
