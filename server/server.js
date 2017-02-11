@@ -2,6 +2,8 @@ import express from 'express';
 import routes from './utils/routes';
 import middleware from './utils/middleware';
 
+
+
 var _ = require('underscore');
 var app = express();
 
@@ -15,16 +17,17 @@ app.listen(3000, function() {
 
 export { app };
 
+const storage = require('@google-cloud/storage')();
+
 // Imports the Google Cloud client library
 const vision = require('@google-cloud/vision')({
   	projectId: 'AIzaSyDp_Bl-MD9PhAu3-SqWaLo5vf9cQLQa3NM',
   	keyFilename: './server/Divvy-8f936cd51c11.json'
 })
 
-vision.detectText('https://static3.businessinsider.com/~~/f?id=4acb9b500000000000bf65ea')
+vision.detectText('http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012')
 .then((results => {
 	// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
-
 	console.log( parseRows(assignRows(results)) )
 })).catch( (err) => {
 	console.log(err)
@@ -46,12 +49,12 @@ var assignRows = function(data) {
 	listWithVertices.shift()
 	var rows = [];
 	var row = {};
-	var rowIndex;
+	var rowExists;
 	
 	listWithVertices.forEach( (el, i) => {
 		//check rows 
-		rowIndex = checkRows(rows, el.boundingPoly.vertices[0].y);
-		if(!rowIndex) {
+		rowExists = checkRows(rows, el.boundingPoly.vertices[0].y);
+		if(!rowExists) {
 			//create new row
 			rows.push({
 				bounds: {
@@ -91,13 +94,11 @@ var parseRows = function(rows) {
 	var filteredRows = [];
 	rows.forEach( (row) => {
 		row.strings.forEach( (string) => {
-
 				if(isFoodItem(string)) {
 					filteredRows.push( formatItem( row.strings ) ) 
-
 			}
-		})
-	})
+		});
+	});
 	return filteredRows		
 }
 
@@ -148,45 +149,6 @@ var parseRows = function(rows) {
 // 	})
 // 	return itemList
 // } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // var determineAreaOfInterest = function(array) {
 // 	var areaOfInterest;
