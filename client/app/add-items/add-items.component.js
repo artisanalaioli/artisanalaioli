@@ -38,8 +38,9 @@ angular.module('myApp.addItems', [])
     $scope.errFiles = errFiles;
     angular.forEach(files, function(file) {
       file.upload = Upload.upload({
-        url: '/upload',
-        data: {file: file}
+        headers: {'Authorization': 'Client-ID 010fe699c18e3c9'},
+        url: 'https://api.imgur.com/3/image',
+        data: {image: file}
       });
 
       file.upload.then(function (response) {

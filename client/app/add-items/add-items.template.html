@@ -2,7 +2,6 @@
 <hr class="my-4">
 
 <div>
-  
   <form class="row" ng-submit="additeminfo()">
     <div class="form-group col-xs-12">
       <div class="row">
@@ -49,8 +48,8 @@
     <hr class="my-4">
 
 
-    <h4>Upload a receipt</h4>
-    <button ngf-select="uploadFiles($files, $invalidFiles)" class="btn btn-primary" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Select Files</button>
+    <h4>Take a picture of your receipt</h4>
+    <button ngf-select="uploadFiles($files, $invalidFiles)" id="cameraInput" name="cameraInput" capture="camera" class="btn btn-primary" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Camera</button>
     <br><br>
     Files:
     <ul class="loading-bar">

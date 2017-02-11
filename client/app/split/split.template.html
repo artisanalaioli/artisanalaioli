@@ -1,7 +1,5 @@
 <h1>Split the Bill</h1>
 <hr class="my-4">
-<div class="spacer"></div>
-
 <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -17,7 +15,7 @@
           <tbody>
             <tr>
               <td ng-repeat="(item, price) in friend.cost" >
-                <p class="individual-items">[{{item}} - ${{price}}]</p>
+                <p class="individual-items card added-item">{{item}} - ${{price}}</p>
               </td>
             </tr>
           </tbody>
@@ -38,16 +36,19 @@
   <div class="row">
     <div class="card col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
       <div class="card-header text-center">
-        <h4>Your Receipt</h4>
+        <h4>{{bill.name}}</h4>
       </div>
       <div class="card-block">
         <div class="price-for-friend row">
-          <div class="col-sm-3">Tax: ${{final.tax}}</div>
+          <div class="col-sm-3">Tax: ${{(final.tax).toFixed(2)}}</div>
           <div class="col-sm-3">Tip: ${{final.tip}}</div>
           <div class="col-sm-6 bill-total"><strong>Total:</strong> ${{final.total}}</div>
         </div>
-        <ul ng-repeat='friend in friends'>
-          <li class="col-3">{{friend.name}}: ${{ friend.displayTotal }}</li>
+        <ul ng-repeat='friend in friends' class='remove-bottom-margin'>
+          <li>
+            <div class="col-sm-2 friend-portion">{{friend.name}}: </div>
+            <div class="col-sm-10 friend-portion">${{ friend.displayTotal }}</div>
+          </li>
         </ul>
       </div>
       <div>
@@ -63,7 +64,7 @@
             <tr ng-repeat="item in items" class='table-row' ng-click="openModal(item, $index)" ng-class="itemSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
-              <td>{{item[2]}}</td>
+              <td>${{item[2].toFixed(2)}}</td>
             </tr>
           </tbody>
         </table>
@@ -76,7 +77,7 @@
 <hr class="my-4">
 
 <a class="btn btn-primary pull-left" href='/#!/uploadbill'>Back</a>
-<a ng-if="assigneditems.length === items.length" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the bill</a>
+<a ng-if="assigneditems.length === items.length" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the Bill</a>
 
 
 <!-- CAROUSEL CARDS -->
