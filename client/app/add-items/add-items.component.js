@@ -40,9 +40,15 @@ angular.module('myApp.addItems', [])
     angular.forEach(files, function(file) {
       console.log(file)
       file.upload = Upload.upload({
+<<<<<<< HEAD
         url: 'POST https://www.googleapis.com/upload/storage/v1/b/divvy_receipts/?uploadType=media&name=myObject',
         
         data: {file: file}
+=======
+        headers: {'Authorization': 'Client-ID 010fe699c18e3c9'},
+        url: 'https://api.imgur.com/3/image',
+        data: {image: file}
+>>>>>>> 2a50fb37cc8c2d9c035baec25df6accd4a1c5cc6
       });
 
       file.upload.then(function (response) {
@@ -54,15 +60,24 @@ angular.module('myApp.addItems', [])
         if (response.status > 0)
           $scope.errorMsg = response.status + ': ' + response.data;
       }, function (evt) {
-        file.progress = Math.min(100, parseInt(100.0 * 
-         evt.loaded / evt.total));
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
       });
     });
+  }
+
+  $scope.restaurantName = function() {
+    Bill.updateName($scope.name);
+  }
+
+  $scope.submitRestaurantInfo = function() {
+    $scope.calculateSubtotal();
+    $scope.restaurantName();
   }
 
   $scope.init = function() {
     $scope.items = Bill.getItems(); // items is an array of [id, item, price, people]
     $scope.count = $scope.items.length;
+    $scope.name = Bill.getName();
   }
 
   $scope.init();

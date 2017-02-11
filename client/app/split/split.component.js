@@ -31,7 +31,7 @@ angular.module('myApp.split', [])
 
     $scope.bill = {
       items: $scope.items,
-      name: 'rest',
+      name: 'Pizzeria',
       subtotal: 51,
       tax: 5,
       taxRate: 0.098,
@@ -210,6 +210,11 @@ angular.module('myApp.split', [])
     }
   }
 
+  $scope.randomColor = function() {
+    console.log('yay')
+    var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    return hue;
+  }
   // $scope.init = function() {
   //   $scope.subtotal = Bill.getSubtotal();
   //   $scope.bill = Bill.getBill();

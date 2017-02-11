@@ -71,6 +71,10 @@ h3 {
 	padding-right: 45px;
 }
 
+.price-for-friend {
+  padding-bottom: 10px !important;
+}
+
 .price-for-friend > li {
   display: inline;
 }
@@ -257,10 +261,36 @@ form .progress {
   float: right;*/
 }
 
+.form-control {
+  margin-bottom: 10px;
+}
+
 .card {
   padding: 0px;
 }
 
+.bill-total {
+  text-align: right;
+}
 
+.table-striped {
+  margin: 0px;
+}
 
+.card-block {
+  padding: 20px;
+  padding-bottom: 0;
+}
 
+.friend-portion {
+  margin-bottom: 10px !important;
+}
+
+.remove-bottom-margin {
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+}
+
+.added-item {
+  background-color: white;
+}

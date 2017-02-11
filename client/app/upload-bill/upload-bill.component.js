@@ -23,7 +23,7 @@ angular.module('myApp.uploadbill', [])
     $scope.anyNaN();
     var bill = {};
     $scope.addbillinfo();
-    bill.name = $scope.name;
+    bill.name = $scope.bill.name;
     bill.items = $scope.items;
     bill.subtotal = parseFloat($scope.subtotal);
     bill.taxRate = $scope.taxRate; 

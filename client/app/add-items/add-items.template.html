@@ -1,21 +1,26 @@
-<h1>Add Items</h1>
+<h1>Restaurant Info</h1>
 <hr class="my-4">
 
 <div>
-  <h4>Enter items from receipt</h3>
   <form class="row" ng-submit="additeminfo()">
     <div class="form-group col-xs-12">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6">
-          <label class="col-form-label">Add item</label>
+          <div class="form-group col-xs-12">
+              <label class="col-form-label">Restaurant Name:</label>
+                <input class="form-control" type="text" name="restaurant-name" ng-model="name" placeholder="Restaurant Name">
+            </div>
+   
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 col-xl-7">
+          <label class="col-form-label">Item Name</label>
           <input class="form-control" type="text" name="item" ng-model="item" placeholder="item">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4">
-          <label class="col-form-label">Add price</label>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+          <label class="col-form-label">Item Price</label>
           <input class="form-control" type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-2">
-          <label><br></label><input class="btn btn-primary form-control" type="submit" value="Add">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-offset-1 col-xl-1">
+          <label><br></label>
+          <input class="btn btn-primary form-control pull-right" type="submit" value="Add">
         </div>
       </div>
     </form>
@@ -43,8 +48,8 @@
     <hr class="my-4">
 
 
-    <h4>Upload a receipt</h4>
-    <button ngf-select="uploadFiles($files, $invalidFiles)" class="btn btn-primary" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Select Files</button>
+    <h4>Take a picture of your receipt</h4>
+    <button ngf-select="uploadFiles($files, $invalidFiles)" id="cameraInput" name="cameraInput" capture="camera" class="btn btn-primary" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Camera</button>
     <br><br>
     Files:
     <ul class="loading-bar">
@@ -58,7 +63,7 @@
       </li> 
     </ul>
     <a class="btn btn-primary pull-left" href='/#!/addfriend'>Back</a>
-    <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="calculateSubtotal()" href="/#!/uploadbill">Next</a>
+    <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="submitRestaurantInfo()" href="/#!/uploadbill">Next</a>
 <!-- the following is for uploading bill image -->
 <!---->
 <!-- a
