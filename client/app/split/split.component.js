@@ -17,6 +17,7 @@ angular.module('myApp.split', [])
 
 
   /************** TEST DATA ****************/
+
   // $scope.items = [
   //     [1, 'pizza', 10, []],
   //     [2, 'beer', 16, []],
