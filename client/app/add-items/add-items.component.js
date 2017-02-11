@@ -57,9 +57,19 @@ angular.module('myApp.addItems', [])
     });
   }
 
+  $scope.restaurantName = function() {
+    Bill.updateName($scope.name);
+  }
+
+  $scope.submitRestaurantInfo = function() {
+    $scope.calculateSubtotal();
+    $scope.restaurantName();
+  }
+
   $scope.init = function() {
     $scope.items = Bill.getItems(); // items is an array of [id, item, price, people]
     $scope.count = $scope.items.length;
+    $scope.name = Bill.getName();
   }
 
   $scope.init();
