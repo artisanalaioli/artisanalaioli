@@ -1,5 +1,28 @@
 <div id='bills'>
   <h1>My Bills</h1>
+
+    <div class='container'>
+      <div class="row">
+        <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+          <div class='panel-group' role='tablist'>
+            <div class="panel panel-default" ng-repeat="bill in bills">
+              <div class='panel-heading receipt-header' role='tab' id='collapseListGroupHeading1'>
+                <h4 class='panel-title'>
+                <a data-target='#{{$index}}' class='collapsed' role='button' data-toggle='collapse' aria-expanded='true' aria-controls='{{$index}}'> <strong>{{bill.restaurant || 'unknown restaurant'}}</strong> ({{bill.date.split('T')[0]}}, {{bill.date.split('T')[1].substring(0, 5)}})</a>
+                </h4>
+              </div>
+              <div class="collapse panel-collapse" role='tabpanel' id='{{$index}}' aria-labelledby='collapseListGroupHeading1'>
+                <ul class='list-group'>
+                  <li class='list-group-item' ng-repeat='person in bill.info'> {{person.name + ': ' + person.total}} </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   <span ng-show='!signedIn'>Please login</span>
   <div ng-show='retrieved'>
     <div ng-repeat="bill in bills">
@@ -8,4 +31,8 @@
     </div>
   </div>
 </div>
+
+
+
+
 <!---->
