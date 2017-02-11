@@ -41,13 +41,13 @@
         <h4>Your Receipt</h4>
       </div>
       <div class="card-block">
-        <ul class="price-for-friend row">
-          <li class="col-3">tax: {{final.tax}}</li>
-          <li class="col-3">tip: {{final.tip}}</li>
-          <li class="col-3">Total: {{final.total}}</li>
-        </ul>
+        <div class="price-for-friend row">
+          <div class="col-sm-3">Tax: ${{final.tax}}</div>
+          <div class="col-sm-3">Tip: ${{final.tip}}</div>
+          <div class="col-sm-6 bill-total"><strong>Total:</strong> ${{final.total}}</div>
+        </div>
         <ul ng-repeat='friend in friends'>
-          <li class="col-3">{{friend.name}}: ${{ friend.total }}</li>
+          <li class="col-3">{{friend.name}}: ${{ friend.displayTotal }}</li>
         </ul>
       </div>
       <div>
@@ -76,7 +76,7 @@
 <hr class="my-4">
 
 <a class="btn btn-primary pull-left" href='/#!/uploadbill'>Back</a>
-<a ng-if="assigneditems.length > 0" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the bill</a>
+<a ng-if="assigneditems.length === items.length" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the bill</a>
 
 
 <!-- CAROUSEL CARDS -->
