@@ -132,7 +132,7 @@ angular.module('myApp.split', [])
       }
     } else {
       $scope.itemSelected[index]='';
-      $scope.splice($scope.assigneditems.indexOf(item), 1);
+      $scope.assigneditems.splice($scope.assigneditems.indexOf(item), 1);
     }
   }
 
@@ -210,11 +210,7 @@ angular.module('myApp.split', [])
     }
   }
 
-  $scope.randomColor = function() {
-    console.log('yay')
-    var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    return { 'background-color': hue }
-  }
+
   // $scope.init = function() {
   //   $scope.subtotal = Bill.getSubtotal();
   //   $scope.bill = Bill.getBill();
