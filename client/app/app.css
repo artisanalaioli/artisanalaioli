@@ -261,8 +261,7 @@ form .progress {
 }
 
 .table-ind-items {
-  /*padding: 10px;
-  float: right;*/
+  /*padding-bottom: 10px !important;*/
 }
 
 .form-control {
@@ -303,5 +302,10 @@ form .progress {
 .amount {
   text-align: right;
   padding-right: 235px;
+}
+
+.fixed-size {
+  width: 598px;
+  height: 110px;
 }
 

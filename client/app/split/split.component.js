@@ -3,6 +3,7 @@
 angular.module('myApp.split', [])
 
 .controller('SplitCtrl', function($scope, Bill, $rootScope, Party) {
+  $scope.friendSelected = [];
   $scope.subtotal = Bill.getSubtotal();
   $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
@@ -14,6 +15,7 @@ angular.module('myApp.split', [])
     total: parseFloat(($scope.bill.subtotal + $scope.bill.tax + $scope.bill.tip).toFixed(2))
   }
 
+
   /************** TEST DATA ****************/
   $scope.items = [
       [1, 'pizza', 10, []],
@@ -23,10 +25,10 @@ angular.module('myApp.split', [])
     ]
 
     $scope.friends = [
-      {name: 'Pat', email: null, items: [], cost: {}, total: 0},
-      {name: 'Frank', email: null, items: [], cost: {}, total: 0},
-      {name: 'Greg', email: null, items: [], cost: {}, total: 0},
-      {name: 'James', email: null, items: [], cost: {}, total: 0}
+      {name: 'Pat', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+      {name: 'Frank', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+      {name: 'Greg', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+      {name: 'James', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'}
     ]
 
     $scope.bill = {
@@ -119,6 +121,11 @@ angular.module('myApp.split', [])
    */
   $scope.openModal = function(item, index) {
     $scope.friendSelected =[];
+    for (var i = 0; i < $scope.friends.length; i++) {
+      if ($scope.friends[i].items.includes(item)) {
+        $scope.friendSelected[i] = 'selected';
+      }
+    }
     $scope.addedItem = item;
     $scope.itemIndex = index;
   }
@@ -140,15 +147,16 @@ angular.module('myApp.split', [])
     if (friend.items.includes(item)) {
       var removedIndex = friend.items.indexOf(item);
       friend.items.splice(removedIndex, 1);
-      item[3].splice(item[3].indexOf(friend.name), 1)
+      item[3].splice(item[3].indexOf(friend.name), 1);
+      $scope.friendSelected[index] = '';
     } else {
       item[3].push(friend.name)
       friend.items.push(item);
+      $scope.friendSelected[index] = 'selected';
     }
-    console.log(friend.name, ' has the following items: ',friend.items)
-    console.log(item[1],' is contained by these friends:', item[3])
+
     $scope.assignCost(friend, item);
-    $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
+    // $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
     $scope.highlightItem(item, itemIndex);
     $scope.individualTotal();
     //Assign item to friend
@@ -200,6 +208,7 @@ angular.module('myApp.split', [])
   $scope.individualTotal = function() {
     for (var i = 0; i < $scope.friends.length; i++) {
       $scope.friends[i].total = 0;
+      $scope.friends[i].displayTotal = $scope.friends[i].total.toFixed(2)
     }
 
     for (var i = 0; i < $scope.friends.length; i++) {
