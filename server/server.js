@@ -1,14 +1,18 @@
 import express from 'express';
 import routes from './utils/routes';
 import middleware from './utils/middleware';
+import mailSender from './utils/mailer';
 
 
 
 var _ = require('underscore');
 var app = express();
 
+var rootDir = __dirname;
+
 middleware(app,express);
 routes(app, express);
+mailSender(app, express, rootDir);
 
 app.listen(3000, function() {
   console.log('listening on port 3000');

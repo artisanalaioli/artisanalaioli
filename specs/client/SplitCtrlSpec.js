@@ -38,14 +38,15 @@ describe('SplitCtrl', function () {
     ]
 
     $scope.friends = [
-      {name: 'Pat', email: 'email'},
-      {name: 'Frank', email: 'email'},
-      {name: 'Greg', email: 'email'},
-      {name: 'James', email: 'email'}
+      {name: 'Pat', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Frank', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Greg', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'James', email: 'email', items: [], cost: {}, total: 0}
     ]
 
     $scope.bill = {
       items: $scope.items,
+
       name: 'Restaurant Name',
       subtotal: '51',
       tax: '5',
@@ -57,16 +58,15 @@ describe('SplitCtrl', function () {
   }));
 
   afterEach(function () {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-    // $window.localStorage.removeItem('com.shortly');
+
+
   });
   
   it('bill contains all items', function() {
     expect($scope.bill.items).to.deep.equal($scope.items);
   });
 
-  it('contains 4 friends', function () {
+  it('friends list should contain 4 friends', function () {
     expect($scope.friends.length).to.equal(4);
   });
 

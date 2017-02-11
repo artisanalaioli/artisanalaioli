@@ -6,17 +6,27 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Who Ordered This?</h5>
+        <h5 class="modal-title" id="exampleModalLiveLabel">Who Ordered {{addedItem[1]}}?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index)" ng-class="friendSelected[$index]">
+      <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
         <p>{{friend.name}}</p>
+        <table class="table-ind-items">
+          <tbody>
+            <tr>
+              <td ng-repeat="(item, price) in friend.cost" >
+                <p class="individual-items">[{{item}} - ${{price}}]</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
@@ -26,15 +36,18 @@
 
 <div class='container'>
   <div class="row">
-    <div class="card col-sm-12 col-md-offset-4 col-md-8 col-lg-offset-3 col-lg-6">
+    <div class="card col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
       <div class="card-header text-center">
         <h4>Your Receipt</h4>
       </div>
       <div class="card-block">
         <ul class="price-for-friend row">
-          <li class="col-3">tax: {{friend.tax}}</li>
-          <li class="col-3">tip: {{friend.tip}}</li>
-          <li class="col-3">Total: {{friend.total}}</li>
+          <li class="col-3">tax: {{final.tax}}</li>
+          <li class="col-3">tip: {{final.tip}}</li>
+          <li class="col-3">Total: {{final.total}}</li>
+        </ul>
+        <ul ng-repeat='friend in friends'>
+          <li class="col-3">{{friend.name}}: ${{ friend.total }}</li>
         </ul>
       </div>
       <div>
@@ -47,7 +60,7 @@
             </tr>
           </thead>  
           <tbody>
-            <tr ng-repeat="item in items" class='table-row' ng-click="checkAssign(item, friend, $index)" ng-class="isSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
+            <tr ng-repeat="item in items" class='table-row' ng-click="openModal(item, $index)" ng-class="itemSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
               <td>{{item[2]}}</td>
@@ -90,7 +103,7 @@
             </tr>
           </thead>  
           <tbody>
-            <tr ng-repeat="item in items" class='table-row' ng-click="checkAssign(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
+            <tr ng-repeat="item in items" class='table-row' ng-click="clearModal(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
               <td>{{item[0]}}</td>
               <td>{{item[1]}}</td>
               <td>{{item[2]}}</td>

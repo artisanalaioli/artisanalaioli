@@ -77,7 +77,12 @@ angular.module('myApp.services',[])
           url: '/bills/' + person,
           data: data
         });
-      })
+      });
+      $http({
+        method: 'POST',
+        url: '/mail',
+        data: data
+      });
     }
 
 
@@ -105,7 +110,9 @@ angular.module('myApp.services',[])
   		var user = {
   			name: userObj.username,
   			email: userObj.email,
-  			items: []
+  			items: [],
+        cost: {},
+        total: 0
   		};
   		party.push(user);
   	}
@@ -158,7 +165,7 @@ angular.module('myApp.services',[])
     });
   };
 
-  var signup = function (username, email, pasword) {
+  var signup = function (username, email, password) {
     $http({
       method: 'POST',
       url: '/auth/register',

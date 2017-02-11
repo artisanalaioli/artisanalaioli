@@ -2,17 +2,57 @@
 
 angular.module('myApp.split', [])
 
-
-.controller('SplitCtrl', function($scope, Bill, Party) {
+.controller('SplitCtrl', function($scope, Bill, $rootScope, Party) {
+  $scope.subtotal = Bill.getSubtotal();
   $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];
   $scope.items = $scope.bill.items;
+  $scope.final = {
+    tax: $scope.bill.tax,
+    tip: $scope.bill.tip,
+    total: parseFloat(($scope.bill.subtotal + $scope.bill.tax + $scope.bill.tip).toFixed(2))
+  }
+
+  /************** TEST DATA ****************/
+  $scope.items = [
+      [1, 'pizza', 10, []],
+      [2, 'beer', 16, []],
+      [3, 'rice', 13, []],
+      [4, 'potato', 12, []]
+    ]
+
+    $scope.friends = [
+      {name: 'Pat', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Frank', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Greg', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'James', email: 'email', items: [], cost: {}, total: 0}
+    ]
+
+    $scope.bill = {
+      items: $scope.items,
+      name: 'rest',
+      subtotal: 51,
+      tax: 5,
+      taxRate: 0.098,
+      tip: 7.65,
+      tipRate: 0.15
+    }
+  $scope.final = {
+    tax: $scope.bill.tax,
+    tip: $scope.bill.tip,
+    total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
+  }
+  /************************************/
+
+  console.log('friends: ', $scope.friends)
+  console.log('bill: ', $scope.bill)
+  console.log('items: ', $scope.items)
   /******************************************/
   /* THIS IS STRUCTURE OF bill, item, friend
   /* bill: {name: string, items:[], subtotal: number, taxRate: number, tipRate: number}
-  /* item: [id, itemname, price, people.name];
-  /* friend: {name: string, items: []}
+  /* item: [id, itemname, price, [people.names]];
+  /* friend: {name: string, items: [], cost: {}, total: number}
   /*****************************************/ 
 
   $scope.getAllFriendName = function() {
@@ -24,7 +64,7 @@ angular.module('myApp.split', [])
     return array;
   }
 
-  $scope.isSelected = [];
+  $scope.itemSelected = [];
   $scope.friendNames = $scope.getAllFriendName();
   /**
   * This function calculate the grand total price for a single friend. Grand total
@@ -32,13 +72,14 @@ angular.module('myApp.split', [])
   * @param {object} input a friend object
   */
   $scope.grandTotal = function(friend) {
-    var totalBeforeTip = 0;
-    friend.items.forEach(function(singleitem) {
-      totalBeforeTip += singleitem[2];
-    });
-    friend.tip = Number.parseFloat((totalBeforeTip * $scope.bill.tipRate).toFixed(2));
-    friend.tax = Number.parseFloat((totalBeforeTip * $scope.bill.taxRate).toFixed(2));
-    friend.total = Number.parseFloat((totalBeforeTip + friend.tip + friend.tax).toFixed(2));
+    // var totalBeforeTip = 0;
+    // friend.items.forEach(function(singleitem) {
+    //   totalBeforeTip += singleitem[2];
+    // });
+
+    $scope.final.tip = Number.parseFloat(($scope.bill.subtotal * $scope.bill.tipRate).toFixed(2));
+    $scope.final.tax = Number.parseFloat(($scope.bill.subtotal * $scope.bill.taxRate).toFixed(2));
+    $scope.final.total = Number.parseFloat(($scope.bill.subtotal + $scope.final.tip + $scope.final.tax).toFixed(2));
     Party.getAll();        
   }
 
@@ -76,49 +117,96 @@ angular.module('myApp.split', [])
    * the origin person, and assign the item to the new person.
    * @param {array} input an item object, {object} input a friend object.
    */
-  $scope.checkAssign = function(item, friend, id) {
-    var needReassign = false;
+  $scope.openModal = function(item, index) {
     $scope.friendSelected =[];
+    $scope.addedItem = item;
+    $scope.itemIndex = index;
+  }
+  
+  $scope.highlightItem = function(item, index) {
+    // var needReassign = false;
+    if (item[3].length > 0) {
+      $scope.itemSelected[index]='selected'
+    } else {
+      $scope.itemSelected[index]='';
+    }
 
-    for (var i = 0; i < $scope.assigneditems.length; i++) {
-      if ($scope.assigneditems[i][0] === item[0]) {
-        needReassign = true;
-          // if the item belongs to the 'friend'
-        if ($scope.assigneditems[i][3] === friend.name) { 
-          // unassign this item from 'friend's item list
-          $scope.unassign(item, friend);
-          $scope.isSelected[id]='';
+    // for (var i = 0; i < $scope.assigneditems.length; i++) {
+    //   if ($scope.assigneditems[i][0] === item[0]) {
+    //     needReassign = true;
+    //       // if the item belongs to the 'friend'
+    //     if ($scope.assigneditems[i][3] === friend.name) { 
+    //       // unassign this item from 'friend's item list
+    //      // $scope.unassign(item, friend);
+          
 
                     
-        } else { // if the item belongs to another friend
-          // find the ANOTHER friend by friend.name
-          var anotherFriend;
-          $scope.friends.forEach(function(singlefriend) {
-            if (singlefriend.name === item[3]) {
-              anotherFriend = singlefriend;
-            }
-          })
-          console.log('another friend', anotherFriend.name);
-          $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
-          $scope.assign(item, friend); // assign this item to THIS friend
-          $scope.isSelected[id]='selected'
+    //     } else { // if the item belongs to another friend
+    //       // find the ANOTHER friend by friend.name
+    //       var anotherFriend;
+    //       $scope.friends.forEach(function(singlefriend) {
+    //         if (singlefriend.name === item[3]) {
+    //           anotherFriend = singlefriend;
+    //         }
+    //       })
+    //       console.log('another friend', anotherFriend.name);
+    //       $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
+    //       $scope.assign(item, friend); // assign this item to THIS friend
+    //       console.log(item[3]);
 
+      //   }
+      //   break;
+      // }
+    }
+
+    // if (!needReassign) {
+    //  // $scope.itemSelected[index] = $scope.itemSelected[index]=='selected'?'':'selected';
+    //   $scope.itemSelected[index]='selected';
+    //   $scope.assign(item, friend);            
+  //   }
+
+  // }
+
+  $scope.selectFriend = function(index, item, friend, itemIndex) {
+    if (friend.items.includes(item)) {
+      var removedIndex = friend.items.indexOf(item);
+      friend.items.splice(removedIndex, 1);
+      item[3].splice(item[3].indexOf(friend.name), 1)
+    } else {
+      item[3].push(friend.name)
+      friend.items.push(item);
+    }
+    console.log(friend.name, ' has the following items: ',friend.items)
+    console.log(item[1],' is contained by these friends:', item[3])
+    $scope.assignCost(friend, item);
+    $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
+    $scope.highlightItem(item, itemIndex);
+    $scope.individualTotal();
+    //Assign item to friend
+    //Visually apply item name and total next to assignee
+  }
+
+  $scope.assignCost = function(friend, item) {
+    // can't do it at the friend level as it doesn't update properly
+    // need to do the logic on the food level
+      // then push it out to the friends in the food friend array
+    var itemCost = parseFloat((item[2] / item[3].length).toFixed(2));
+    itemCost = itemCost * (1 + $scope.bill.taxRate + $scope.bill.tipRate);
+    itemCost = parseFloat(itemCost.toFixed(2));
+
+    for (var i = 0; i < $scope.friends.length; i++) {
+      delete $scope.friends[i].cost[item[1]];
+    }
+
+    for  (var i = 0; i < item[3].length; i++) {
+      for (var j = 0; j < $scope.friends.length; j++) {
+        if (item[3][i] === $scope.friends[j].name) {
+          $scope.friends[j].cost[item[1]] = itemCost;
         }
-        break;
       }
     }
 
-    if (!needReassign) {
-     // $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';
-      $scope.isSelected[id]='selected';
-      $scope.assign(item, friend);            
-    }
-
   }
-
-  $scope.selectFriend = function(id) {
-    $scope.friendSelected[id] = $scope.friendSelected[id]=='selected'?'':'selected'
-  }  
 
   /**
   * This function is sending a post request to server
@@ -131,7 +219,8 @@ angular.module('myApp.split', [])
       total: $scope.bill.subtotal * (1 + $scope.bill.tipRate + $scope.bill.taxRate),
       people: $scope.friendNames,
       info: $scope.friends,
-      date: new Date()
+      date: new Date(),
+      owner: $rootScope.username
     }
     console.log('Setting date on bill:', finalBill.date);
     Bill.clearAllBill();
@@ -139,10 +228,22 @@ angular.module('myApp.split', [])
     Bill.submitSplit(finalBill);
   }
 
-  $scope.init = function() {
-    $scope.subtotal = Bill.getSubtotal();
-    $scope.bill = Bill.getBill();
+  $scope.individualTotal = function() {
+    for (var i = 0; i < $scope.friends.length; i++) {
+      $scope.friends[i].total = 0;
+    }
+
+    for (var i = 0; i < $scope.friends.length; i++) {
+      for (var key in $scope.friends[i].cost) {
+        $scope.friends[i].total += parseFloat(($scope.friends[i].cost[key]).toFixed(2));
+      }
+    }
   }
 
-  $scope.init();
+  // $scope.init = function() {
+  //   $scope.subtotal = Bill.getSubtotal();
+  //   $scope.bill = Bill.getBill();
+  // }
+
+  // $scope.init();
 });

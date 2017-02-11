@@ -9,7 +9,7 @@ angular.module('myApp.addItems', [])
   $scope.additeminfo = function() {
     $scope.count += 1;
     $scope.price = Number.parseFloat($scope.price);
-    $scope.items.push([$scope.count, $scope.item, $scope.price, '']);
+    $scope.items.push([$scope.count, $scope.item, $scope.price, []]);
     Bill.pushItems($scope.items);
     $scope.item = "";
     $scope.price = 0;
@@ -29,7 +29,7 @@ angular.module('myApp.addItems', [])
     for (var i = 0; i < $scope.items.length; i++) {
       $scope.subtotal += $scope.items[i][2];
     }
-    Bill.updateSubtotal($scope.subtotal.toFixed(2));
+    Bill.updateSubtotal(parseFloat($scope.subtotal.toFixed(2)));
   }
 
   $scope.uploadFiles = function(files, errFiles) {
