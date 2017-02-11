@@ -94,6 +94,11 @@ angular.module('myApp', [
       templateUrl: 'add-items/add-items.template.html',
       controller: 'AddItemCtrl',
       middleware: 'async-auth'
+    },
+    '/collapseListGroup1': {
+      templateUrl: '',
+      controller: '',
+      middleware: ''
     }
   };
 

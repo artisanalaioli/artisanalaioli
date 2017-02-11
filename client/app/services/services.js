@@ -165,7 +165,7 @@ angular.module('myApp.services',[])
     });
   };
 
-  var signup = function (username, email, pasword) {
+  var signup = function (username, email, password) {
     $http({
       method: 'POST',
       url: '/auth/register',

@@ -237,6 +237,17 @@ form .progress {
   cursor: pointer;
 }
 
+.receipt-header {
+  background-color: rgb(245, 245, 245) !important;
+  color: black !important;
+}
+
+.btn-primary {
+  width: 116px;
+  height: 34px
+  vertical-align: center !important;
+}
+
 .individual-items {
   font-size: 14px;
 }
