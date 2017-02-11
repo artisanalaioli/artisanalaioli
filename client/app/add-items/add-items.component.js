@@ -29,7 +29,7 @@ angular.module('myApp.addItems', [])
     for (var i = 0; i < $scope.items.length; i++) {
       $scope.subtotal += $scope.items[i][2];
     }
-    Bill.updateSubtotal($scope.subtotal.toFixed(2));
+    Bill.updateSubtotal(parseFloat($scope.subtotal.toFixed(2)));
   }
 
   $scope.uploadFiles = function(files, errFiles) {

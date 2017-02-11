@@ -2,13 +2,17 @@
 
 angular.module('myApp.split', [])
 
-
 .controller('SplitCtrl', function($scope, Bill, $rootScope, Party) {
   $scope.subtotal = Bill.getSubtotal();
   $scope.friends = Party.getAll();
   $scope.bill = Bill.getBill();
   $scope.assigneditems = [];
   $scope.items = $scope.bill.items;
+  $scope.final = {
+    tax: $scope.bill.tax,
+    tip: $scope.bill.tip,
+    total: parseFloat(($scope.bill.subtotal + $scope.bill.tax + $scope.bill.tip).toFixed(2))
+  }
 
   /************** TEST DATA ****************/
   $scope.items = [
@@ -19,21 +23,26 @@ angular.module('myApp.split', [])
     ]
 
     $scope.friends = [
-      {name: 'Pat', email: 'email', items: [], cost: {}},
-      {name: 'Frank', email: 'email', items: [], cost: {}},
-      {name: 'Greg', email: 'email', items: [], cost: {}},
-      {name: 'James', email: 'email', items: [], cost: {}}
+      {name: 'Pat', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Frank', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Greg', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'James', email: 'email', items: [], cost: {}, total: 0}
     ]
 
     $scope.bill = {
       items: $scope.items,
       name: 'rest',
-      subtotal: '51',
-      tax: '5',
+      subtotal: 51,
+      tax: 5,
       taxRate: 0.098,
-      tip: '7.65',
+      tip: 7.65,
       tipRate: 0.15
     }
+  $scope.final = {
+    tax: $scope.bill.tax,
+    tip: $scope.bill.tip,
+    total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
+  }
   /************************************/
 
   console.log('friends: ', $scope.friends)
@@ -43,7 +52,7 @@ angular.module('myApp.split', [])
   /* THIS IS STRUCTURE OF bill, item, friend
   /* bill: {name: string, items:[], subtotal: number, taxRate: number, tipRate: number}
   /* item: [id, itemname, price, [people.names]];
-  /* friend: {name: string, items: []}
+  /* friend: {name: string, items: [], cost: {}, total: number}
   /*****************************************/ 
 
   $scope.getAllFriendName = function() {
@@ -68,9 +77,9 @@ angular.module('myApp.split', [])
     //   totalBeforeTip += singleitem[2];
     // });
 
-    $scope.final.tip = Number.parseFloat((parseFloat($scope.bill.subtotal) * $scope.bill.tipRate).toFixed(2));
-    $scope.final.tax = Number.parseFloat((parseFloat($scope.bill.subtotal) * $scope.bill.taxRate).toFixed(2));
-    $scope.final.total = Number.parseFloat((parseFloat($scope.bill.subtotal) + $scope.final.tip + $scope.final.tax).toFixed(2));
+    $scope.final.tip = Number.parseFloat(($scope.bill.subtotal * $scope.bill.tipRate).toFixed(2));
+    $scope.final.tax = Number.parseFloat(($scope.bill.subtotal * $scope.bill.taxRate).toFixed(2));
+    $scope.final.total = Number.parseFloat(($scope.bill.subtotal + $scope.final.tip + $scope.final.tax).toFixed(2));
     Party.getAll();        
   }
 
@@ -172,19 +181,18 @@ angular.module('myApp.split', [])
     $scope.assignCost(friend, item);
     $scope.friendSelected[index] = $scope.friendSelected[index]=='selected'?'':'selected';
     $scope.highlightItem(item, itemIndex);
+    $scope.individualTotal();
     //Assign item to friend
     //Visually apply item name and total next to assignee
-  }  
+  }
 
   $scope.assignCost = function(friend, item) {
     // can't do it at the friend level as it doesn't update properly
     // need to do the logic on the food level
       // then push it out to the friends in the food friend array
     var itemCost = parseFloat((item[2] / item[3].length).toFixed(2));
-    console.log('$scope.bill', $scope.bill);
     itemCost = itemCost * (1 + $scope.bill.taxRate + $scope.bill.tipRate);
     itemCost = parseFloat(itemCost.toFixed(2));
-    console.log('itemCost', itemCost);
 
     for (var i = 0; i < $scope.friends.length; i++) {
       delete $scope.friends[i].cost[item[1]];
@@ -218,6 +226,18 @@ angular.module('myApp.split', [])
     Bill.clearAllBill();
     Party.removeAll();
     Bill.submitSplit(finalBill);
+  }
+
+  $scope.individualTotal = function() {
+    for (var i = 0; i < $scope.friends.length; i++) {
+      $scope.friends[i].total = 0;
+    }
+
+    for (var i = 0; i < $scope.friends.length; i++) {
+      for (var key in $scope.friends[i].cost) {
+        $scope.friends[i].total += parseFloat(($scope.friends[i].cost[key]).toFixed(2));
+      }
+    }
   }
 
   // $scope.init = function() {
