@@ -12,6 +12,7 @@ angular.module('myApp', [
   'myApp.auth',
   'myApp.bills',
   'myApp.addItems',
+  'myApp.payment'
 ])
 
 // FRONT-END MIDDLEWARE CONFIG
@@ -99,6 +100,11 @@ angular.module('myApp', [
       templateUrl: '',
       controller: '',
       middleware: ''
+    },
+    '/pay': {
+      templateUrl: 'payment/payment.template.html',
+      controller: 'PaymentCtrl',
+      middleware: 'async-auth'
     }
   };
 
