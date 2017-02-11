@@ -13,6 +13,7 @@
       </div>
       <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
         <p>{{friend.name}}</p>
+        <p>{{ friend.cost }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -32,9 +33,9 @@
       </div>
       <div class="card-block">
         <ul class="price-for-friend row">
-          <li class="col-3">tax: {{friend.tax}}</li>
-          <li class="col-3">tip: {{friend.tip}}</li>
-          <li class="col-3">Total: {{friend.total}}</li>
+          <li class="col-3">tax: {{final.tax}}</li>
+          <li class="col-3">tip: {{final.tip}}</li>
+          <li class="col-3">Total: {{final.total}}</li>
         </ul>
       </div>
       <div>

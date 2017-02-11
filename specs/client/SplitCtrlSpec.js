@@ -38,10 +38,10 @@ describe('SplitCtrl', function () {
     ]
 
     $scope.friends = [
-      {name: 'Pat', email: 'email'},
-      {name: 'Frank', email: 'email'},
-      {name: 'Greg', email: 'email'},
-      {name: 'James', email: 'email'}
+      {name: 'Pat', email: 'email', items: [], cost: {}},
+      {name: 'Frank', email: 'email', items: [], cost: {}},
+      {name: 'Greg', email: 'email', items: [], cost: {}},
+      {name: 'James', email: 'email', items: [], cost: {}}
     ]
 
     $scope.bill = {
@@ -66,7 +66,7 @@ describe('SplitCtrl', function () {
     expect($scope.bill.items).to.deep.equal($scope.items);
   });
 
-  it('contains 4 friends', function () {
+  it('friends list should contain 4 friends', function () {
     expect($scope.friends.length).to.equal(4);
   });
 
