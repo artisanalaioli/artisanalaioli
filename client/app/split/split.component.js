@@ -132,7 +132,7 @@ angular.module('myApp.split', [])
       }
     } else {
       $scope.itemSelected[index]='';
-      $scope.splice($scope.assigneditems.indexOf(item), 1);
+      $scope.assigneditems.splice($scope.assigneditems.indexOf(item), 1);
     }
   }
 
