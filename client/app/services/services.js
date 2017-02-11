@@ -110,7 +110,9 @@ angular.module('myApp.services',[])
   		var user = {
   			name: userObj.username,
   			email: userObj.email,
-  			items: []
+  			items: [],
+        cost: {},
+        total: 0
   		};
   		party.push(user);
   	}

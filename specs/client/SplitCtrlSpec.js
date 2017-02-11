@@ -38,10 +38,10 @@ describe('SplitCtrl', function () {
     ]
 
     $scope.friends = [
-      {name: 'Pat', email: 'email', items: [], cost: {}},
-      {name: 'Frank', email: 'email', items: [], cost: {}},
-      {name: 'Greg', email: 'email', items: [], cost: {}},
-      {name: 'James', email: 'email', items: [], cost: {}}
+      {name: 'Pat', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Frank', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'Greg', email: 'email', items: [], cost: {}, total: 0},
+      {name: 'James', email: 'email', items: [], cost: {}, total: 0}
     ]
 
     $scope.bill = {

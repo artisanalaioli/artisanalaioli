@@ -25,7 +25,7 @@ angular.module('myApp.uploadbill', [])
     $scope.addbillinfo();
     bill.name = $scope.name;
     bill.items = $scope.items;
-    bill.subtotal = $scope.subtotal;
+    bill.subtotal = parseFloat($scope.subtotal);
     bill.taxRate = $scope.taxRate; 
     bill.tipRate = $scope.tipRate / 100; // convert percentage to decimal
     bill.tip = $scope.tip;
@@ -45,16 +45,16 @@ angular.module('myApp.uploadbill', [])
 
   $scope.updateTips = function(type) {
     if (type === 'rate') {
-      $scope.displayTip = ($scope.displayTipRate * $scope.subtotal / 100).toFixed(2);
+      $scope.displayTip = parseFloat(($scope.displayTipRate * $scope.subtotal / 100).toFixed(2));
     } else {
-      $scope.displayTipRate = ($scope.displayTip / $scope.subtotal * 100).toFixed(2);
+      $scope.displayTipRate = parseFloat(($scope.displayTip / $scope.subtotal * 100).toFixed(2));
     }
   }
 
   $scope.anyNaN = function() {
-    $scope.tax = $scope.displayTax;
-    $scope.tipRate = $scope.displayTipRate;
-    $scope.tip = $scope.displayTip;
+    $scope.tax = parseFloat($scope.displayTax);
+    $scope.tipRate = parseFloat($scope.displayTipRate);
+    $scope.tip = parseFloat($scope.displayTip);
     
     if (isNaN($scope.displayTax)) {
       $scope.tax = 0;
@@ -73,7 +73,7 @@ angular.module('myApp.uploadbill', [])
 
   $scope.init = function () {
     $scope.bill = Bill.getBill();
-    $scope.subtotal = $scope.bill.subtotal;
+    $scope.subtotal = $scope.bill.subtotal.toFixed(2);
     $scope.items = $scope.bill.items;
     $scope.displayTax = $scope.bill.tax;
     $scope.displayTip = $scope.bill.tip;

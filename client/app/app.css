@@ -248,6 +248,14 @@ form .progress {
   vertical-align: center !important;
 }
 
+.individual-items {
+  font-size: 14px;
+}
+
+.table-ind-items {
+  /*padding: 10px;
+  float: right;*/
+}
 
 
 
