@@ -5,7 +5,7 @@ body {
 }
 
 .signonBG {
-  background-image: url('https://1bk7xm3xz6cl1t7e5a1j641m-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/41203414-wine-bottles-with-grape-leaves-on-wooden-background-with-copy-space.jpg');
+  background-image: url('woodbg.jpg');
   background-size: 100% cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -253,12 +253,15 @@ form .progress {
 }
 
 .individual-items {
+  margin-right: 5px;
   font-size: 14px;
+  background-color: rgb(161, 232, 249);
+  padding: 0px 5px 0px 5px !important;
+  border-color: #8cbce2;
 }
 
 .table-ind-items {
-  /*padding: 10px;
-  float: right;*/
+  /*padding-bottom: 10px !important;*/
 }
 
 .form-control {
@@ -284,6 +287,7 @@ form .progress {
 
 .friend-portion {
   margin-bottom: 10px !important;
+  margin-top: 0px !important;
 }
 
 .remove-bottom-margin {
@@ -291,6 +295,17 @@ form .progress {
   padding: 0px !important;
 }
 
-.added-item {
-  background-color: white;
+.dolla-dolla-bill {
+  width: 20px;
 }
+
+.amount {
+  text-align: right;
+  padding-right: 235px;
+}
+
+.fixed-size {
+  width: 598px;
+  height: 110px;
+}
+

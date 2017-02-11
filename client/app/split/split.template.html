@@ -9,7 +9,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
+      <div class="modal-body friend-chooser fixed-size" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
         <p>{{friend.name}}</p>
         <table class="table-ind-items">
           <tbody>
@@ -46,8 +46,14 @@
         </div>
         <ul ng-repeat='friend in friends' class='remove-bottom-margin'>
           <li>
-            <div class="col-sm-2 friend-portion">{{friend.name}}: </div>
-            <div class="col-sm-10 friend-portion">${{ friend.displayTotal }}</div>
+            <div class="col-sm-3 friend-portion">{{friend.name}}: </div>
+            <table class="col-sm-9 friend-portion user-price-table">
+              <tr>
+                <td class='dolla-dolla-bill'>$</td>
+                <td class='amount'>{{ friend.displayTotal }}</td>
+                <td></td>
+              </tr>
+            </table>
           </li>
         </ul>
       </div>

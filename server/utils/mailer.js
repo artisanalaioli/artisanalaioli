@@ -24,8 +24,9 @@ export default function mailSender(app, express, rootDir) {
   // this sends mails
   app.post('/mail', function(req, res, next) {
     // for each person in the bill's info array...
+    console.log('INFO RECEIVED BY THE MAILER:', req.body);
     req.body.info.forEach(function(person) {
-      if (person.name !== req.body.owner) {
+      if (person.name !== req.body.owner && person.email) {
         // send an email to them telling them they owe money
         app.mailer.send('email', {
           to: person.email, // REQUIRED. This can be a comma delimited string just like a normal email to field. 

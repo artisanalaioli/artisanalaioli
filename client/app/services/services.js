@@ -117,7 +117,8 @@ angular.module('myApp.services',[])
   			email: userObj.email,
   			items: [],
         cost: {},
-        total: 0
+        total: 0,
+        displayTotal: '0.00'
   		};
   		party.push(user);
   	}
@@ -210,6 +211,20 @@ angular.module('myApp.services',[])
     signin: signin,
     signup: signup,
     signout: signout
+  }
+
+})
+
+.factory('Users', function($http) {
+
+  var getAll = function(cb) {
+    $http.get('users').then(function(res) {
+      cb(res);
+    });
+  };
+
+  return {
+    getAll: getAll
   }
 
 });
