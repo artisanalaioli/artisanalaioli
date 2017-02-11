@@ -46,8 +46,14 @@
         </div>
         <ul ng-repeat='friend in friends' class='remove-bottom-margin'>
           <li>
-            <div class="col-sm-2 friend-portion">{{friend.name}}: </div>
-            <div class="col-sm-10 friend-portion">${{ friend.displayTotal }}</div>
+            <div class="col-sm-3 friend-portion">{{friend.name}}: </div>
+            <table class="col-sm-9 friend-portion user-price-table">
+              <tr>
+                <td class='dolla-dolla-bill'>$</td>
+                <td class='amount'>{{ friend.displayTotal }}</td>
+                <td></td>
+              </tr>
+            </table>
           </li>
         </ul>
       </div>

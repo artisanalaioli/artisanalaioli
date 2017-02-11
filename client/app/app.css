@@ -253,7 +253,11 @@ form .progress {
 }
 
 .individual-items {
+  margin-right: 5px;
   font-size: 14px;
+  background-color: rgb(161, 232, 249);
+  padding: 0px 5px 0px 5px !important;
+  border-color: #8cbce2;
 }
 
 .table-ind-items {
@@ -284,6 +288,7 @@ form .progress {
 
 .friend-portion {
   margin-bottom: 10px !important;
+  margin-top: 0px !important;
 }
 
 .remove-bottom-margin {
@@ -291,6 +296,12 @@ form .progress {
   padding: 0px !important;
 }
 
-.added-item {
-  background-color: white;
+.dolla-dolla-bill {
+  width: 20px;
 }
+
+.amount {
+  text-align: right;
+  padding-right: 235px;
+}
+
