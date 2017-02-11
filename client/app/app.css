@@ -257,10 +257,17 @@ form .progress {
   float: right;*/
 }
 
+.form-control {
+  margin-bottom: 10px;
+}
+
 .card {
   padding: 0px;
 }
 
+.bill-total {
+  text-align: right;
+}
 
 
 
