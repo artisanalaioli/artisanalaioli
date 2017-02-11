@@ -9,7 +9,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body friend-chooser" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
+      <div class="modal-body friend-chooser fixed-size" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
         <p>{{friend.name}}</p>
         <table class="table-ind-items">
           <tbody>
