@@ -12,6 +12,7 @@ angular.module('myApp', [
   'myApp.auth',
   'myApp.bills',
   'myApp.addItems',
+  'myApp.payment'
 ])
 
 // FRONT-END MIDDLEWARE CONFIG

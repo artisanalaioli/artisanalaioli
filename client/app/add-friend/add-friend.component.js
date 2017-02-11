@@ -2,14 +2,14 @@
 
 angular.module('myApp.addfriend', ['ui.bootstrap'])
 
-.controller('AddFriendCtrl',  function($scope, $rootScope, $http, Party, Auth) {
+.controller('AddFriendCtrl',  function($scope, $rootScope, Users, Party, Auth) {
 
   $scope.party = [];
 
   var init = function() {
     $rootScope.newBill();
 
-    $http.get('users').then(function(res) {
+    Users.getAll(function(res) {
         $scope.users = res.data;
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {

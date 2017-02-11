@@ -163,7 +163,7 @@ angular.module('myApp.services',[])
     });
   };
 
-  var signup = function (username, email, pasword) {
+  var signup = function (username, email, password) {
     $http({
       method: 'POST',
       url: '/auth/register',
@@ -203,6 +203,20 @@ angular.module('myApp.services',[])
     signin: signin,
     signup: signup,
     signout: signout
+  }
+
+})
+
+.factory('Users', function($http) {
+
+  var getAll = function(cb) {
+    $http.get('users').then(function(res) {
+      cb(res);
+    });
+  };
+
+  return {
+    getAll: getAll
   }
 
 });
