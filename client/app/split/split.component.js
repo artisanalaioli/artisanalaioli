@@ -17,34 +17,63 @@ angular.module('myApp.split', [])
 
 
   /************** TEST DATA ****************/
-  $scope.items = [
-      [1, 'pizza', 10, []],
-      [2, 'beer', 16, []],
-      [3, 'rice', 13, []],
-      [4, 'potato', 12, []]
-    ]
+<<<<<<< HEAD
+  // $scope.items = [
+  //     [1, 'pizza', 10, []],
+  //     [2, 'beer', 16, []],
+  //     [3, 'rice', 13, []],
+  //     [4, 'potato', 12, []]
+  //   ]
 
-    $scope.friends = [
-      {name: 'Pat', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
-      {name: 'Frank', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
-      {name: 'Greg', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
-      {name: 'James', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'}
-    ]
+  //   $scope.friends = [
+  //     {name: 'Pat', email: null, items: [], cost: {}, total: 0},
+  //     {name: 'Frank', email: null, items: [], cost: {}, total: 0},
+  //     {name: 'Greg', email: null, items: [], cost: {}, total: 0},
+  //     {name: 'James', email: null, items: [], cost: {}, total: 0}
+  //   ]
 
-    $scope.bill = {
-      items: $scope.items,
-      name: 'Pizzeria',
-      subtotal: 51,
-      tax: 5,
-      taxRate: 0.098,
-      tip: 7.65,
-      tipRate: 0.15
-    }
-  $scope.final = {
-    tax: $scope.bill.tax,
-    tip: $scope.bill.tip,
-    total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
-  }
+  //   $scope.bill = {
+  //     items: $scope.items,
+  //     name: 'Pizzeria',
+  //     subtotal: 51,
+  //     tax: 5,
+  //     taxRate: 0.098,
+  //     tip: 7.65,
+  //     tipRate: 0.15
+  //   }
+  // $scope.final = {
+  //   tax: $scope.bill.tax,
+  //   tip: $scope.bill.tip,
+  //   total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
+  // }
+  // $scope.items = [
+  //     [1, 'pizza', 10, []],
+  //     [2, 'beer', 16, []],
+  //     [3, 'rice', 13, []],
+  //     [4, 'potato', 12, []]
+  //   ]
+
+  //   $scope.friends = [
+  //     {name: 'Pat', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+  //     {name: 'Frank', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+  //     {name: 'Greg', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'},
+  //     {name: 'James', email: null, items: [], cost: {}, total: 0, displayTotal: '0.00'}
+  //   ]
+
+  //   $scope.bill = {
+  //     items: $scope.items,
+  //     name: 'Pizzeria',
+  //     subtotal: 51,
+  //     tax: 5,
+  //     taxRate: 0.098,
+  //     tip: 7.65,
+  //     tipRate: 0.15
+  //   }
+  // $scope.final = {
+  //   tax: $scope.bill.tax,
+  //   tip: $scope.bill.tip,
+  //   total: $scope.bill.subtotal + parseFloat($scope.bill.tax) + parseFloat($scope.bill.tip)
+  // }
   /************************************/
 
   console.log('friends: ', $scope.friends)
@@ -219,11 +248,7 @@ angular.module('myApp.split', [])
     }
   }
 
-  $scope.randomColor = function() {
-    console.log('yay')
-    var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    return { 'background-color': hue }
-  }
+
   // $scope.init = function() {
   //   $scope.subtotal = Bill.getSubtotal();
   //   $scope.bill = Bill.getBill();
