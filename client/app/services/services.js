@@ -117,7 +117,8 @@ angular.module('myApp.services',[])
   			email: userObj.email,
   			items: [],
         cost: {},
-        total: 0
+        total: 0,
+        displayTotal: '0.00'
   		};
   		party.push(user);
   	}
