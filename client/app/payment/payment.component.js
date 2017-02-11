@@ -4,7 +4,21 @@ angular.module('myApp.payment', [])
 
 .controller('PaymentCtrl', function($scope, Bill, Users, $rootScope) {
 
+  $scope.enterPaymentInfo = false;
   $scope.selectedUser = null;
+  $scope.amountToPay = null;
+  $scope.amountString = null;
+  $scope.savedPayments = [];
+  $scope.cardNumber = null;
+  $scope.cvvNumber = null;
+  $scope.cardName = null;
+  $scope.address1 = null;
+  $scope.address2 = null;
+  $scope.cityName = null;
+  $scope.stateName = null;
+  $scope.zipCode = null;
+  $scope.paymentInfoReady = false;
+  $scope.paymentSubmitted = false;
 
   // on initialize, populates all users from DB into $scope.users for typeahead
   var init = function() {
@@ -24,11 +38,22 @@ angular.module('myApp.payment', [])
 
   init();
 
-  $scope.selectUser = function(username) {
+  $scope.selectUser = function(username, amount) {
     $scope.selectedUser = username;
-    console.log($scope.selectedUser);
-    $scope.userToPay = '';
+    $scope.amountToPay = amount;
+    $scope.amountString = amount.toFixed(2);
+    console.log($scope.selectedUser, $scope.amountString);
   };
 
+  $scope.prepPayment = function() {
+    $scope.paymentInfoReady = true;
+    $scope.enterPaymentInfo = false;
+  }
+
+  $scope.submitPayment = function() {
+    console.log('Payment submitted!');
+    $scope.paymentInfoReady = false;
+    $scope.paymentSubmitted = true;
+  }
 
 });
