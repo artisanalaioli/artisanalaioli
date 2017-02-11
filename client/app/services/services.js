@@ -44,7 +44,7 @@ angular.module('myApp.services',[])
     }
 
     var getName = function() {
-      return mybill.bill.name;
+      return mybill.name;
     }
 
     var getPriceBeforeTip = function() {
@@ -85,6 +85,10 @@ angular.module('myApp.services',[])
       });
     }
 
+    var updateName = function(name) {
+      mybill.name = name;
+    }
+
 
     return {
       getItems: getItems,
@@ -99,7 +103,8 @@ angular.module('myApp.services',[])
       getTipRate: getTipRate,
       getTaxRate: getTaxRate,
       clearAllBill: clearAllBill,
-      submitSplit: submitSplit
+      submitSplit: submitSplit,
+      updateName: updateName
     }
   })
 

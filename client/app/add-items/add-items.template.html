@@ -1,17 +1,21 @@
-<h1>Add Items</h1>
+<h1>Restaurant Info</h1>
 <hr class="my-4">
 
 <div>
-  <h4>Enter items from receipt</h3>
+  
   <form class="row" ng-submit="additeminfo()">
     <div class="form-group col-xs-12">
       <div class="row">
+          <div class="form-group col-xs-12">
+              <label class="col-form-label">Restaurant Name:</label>
+                <input class="form-control" type="text" name="restaurant-name" ng-model="name" placeholder="Restaurant Name">
+            </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7">
-          <label class="col-form-label">Add item</label>
+          <label class="col-form-label">Item Name</label>
           <input class="form-control" type="text" name="item" ng-model="item" placeholder="item">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <label class="col-form-label">Add price</label>
+          <label class="col-form-label">Item Price</label>
           <input class="form-control" type="number" string-to-number step="any" name="price" ng-model="price" placeholder="price">
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
@@ -59,7 +63,7 @@
       </li> 
     </ul>
     <a class="btn btn-primary pull-left" href='/#!/addfriend'>Back</a>
-    <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="calculateSubtotal()" href="/#!/uploadbill">Next</a>
+    <a ng-if="readyToSplit" class="btn btn-primary pull-right" ng-click="submitRestaurantInfo()" href="/#!/uploadbill">Next</a>
 <!-- the following is for uploading bill image -->
 <!---->
 <!-- a
