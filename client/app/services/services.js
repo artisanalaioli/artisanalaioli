@@ -213,4 +213,18 @@ angular.module('myApp.services',[])
     signout: signout
   }
 
+})
+
+.factory('Users', function($http) {
+
+  var getAll = function(cb) {
+    $http.get('users').then(function(res) {
+      cb(res);
+    });
+  };
+
+  return {
+    getAll: getAll
+  }
+
 });
