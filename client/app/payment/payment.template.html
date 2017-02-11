@@ -1,0 +1,46 @@
+<h1>Make a Payment</h1>
+<hr class="my-4">
+<div class="spacer"></div>
+<div ng-show="selectedUser === null">
+  <form class="row" ng-submit="selectUser(userToPay)">
+    <div class="form-group col-xs-12">
+    <div class="row">
+      <div class="col-xs-9 col-sm-8"><p>Select a user to pay:</p></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-9 col-sm-8">
+      <input type="text" class="form-control" name="userToPay" placeholder="Begin typing..." ng-model="userToPay" uib-typeahead="user as user.username for user in users | filter:$viewValue | limitTo:5">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3 col-sm-2">
+      <input class="form-control btn btn-primary" type="submit" value="Select">
+      </div>
+    </div>
+    </div>
+  </form>
+</div>
+
+<div ng-show="selectedUser !== null">
+  <div class="row col-xs-12"><h3>Paying user: <strong>{{selectedUser.username}}</strong></h3></div>
+    <form class="row">
+      <div class="form-group col-xs-12">
+        <div class="row">
+          <div class="col-xs-9 col-sm-8"><p>Enter payment information:</p></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Card #:</div>
+          <div class="col-xs-8">
+            <input type="text" class="form-control" name="card-number" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">CVV #:</div>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" name="cvv-number" />
+          </div>
+        </div>
+      </div>
+    </form>
+
+</div>

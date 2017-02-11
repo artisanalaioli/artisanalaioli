@@ -95,6 +95,11 @@ angular.module('myApp', [
       templateUrl: 'add-items/add-items.template.html',
       controller: 'AddItemCtrl',
       middleware: 'async-auth'
+    },
+    '/pay': {
+      templateUrl: 'payment/payment.template.html',
+      controller: 'PaymentCtrl',
+      middleware: 'async-auth'
     }
   };
 
