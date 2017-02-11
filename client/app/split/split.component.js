@@ -23,10 +23,10 @@ angular.module('myApp.split', [])
     ]
 
     $scope.friends = [
-      {name: 'Pat', email: 'email', items: [], cost: {}, total: 0},
-      {name: 'Frank', email: 'email', items: [], cost: {}, total: 0},
-      {name: 'Greg', email: 'email', items: [], cost: {}, total: 0},
-      {name: 'James', email: 'email', items: [], cost: {}, total: 0}
+      {name: 'Pat', email: null, items: [], cost: {}, total: 0},
+      {name: 'Frank', email: null, items: [], cost: {}, total: 0},
+      {name: 'Greg', email: null, items: [], cost: {}, total: 0},
+      {name: 'James', email: null, items: [], cost: {}, total: 0}
     ]
 
     $scope.bill = {
@@ -127,45 +127,14 @@ angular.module('myApp.split', [])
     // var needReassign = false;
     if (item[3].length > 0) {
       $scope.itemSelected[index]='selected'
+      if ($scope.assigneditems.indexOf(item) < 0) {
+        $scope.assigneditems.push(item);
+      }
     } else {
       $scope.itemSelected[index]='';
+      $scope.splice($scope.assigneditems.indexOf(item), 1);
     }
-
-    // for (var i = 0; i < $scope.assigneditems.length; i++) {
-    //   if ($scope.assigneditems[i][0] === item[0]) {
-    //     needReassign = true;
-    //       // if the item belongs to the 'friend'
-    //     if ($scope.assigneditems[i][3] === friend.name) { 
-    //       // unassign this item from 'friend's item list
-    //      // $scope.unassign(item, friend);
-          
-
-                    
-    //     } else { // if the item belongs to another friend
-    //       // find the ANOTHER friend by friend.name
-    //       var anotherFriend;
-    //       $scope.friends.forEach(function(singlefriend) {
-    //         if (singlefriend.name === item[3]) {
-    //           anotherFriend = singlefriend;
-    //         }
-    //       })
-    //       console.log('another friend', anotherFriend.name);
-    //       $scope.unassign(item, anotherFriend); // unassign this item from the ANOTHER friend
-    //       $scope.assign(item, friend); // assign this item to THIS friend
-    //       console.log(item[3]);
-
-      //   }
-      //   break;
-      // }
-    }
-
-    // if (!needReassign) {
-    //  // $scope.itemSelected[index] = $scope.itemSelected[index]=='selected'?'':'selected';
-    //   $scope.itemSelected[index]='selected';
-    //   $scope.assign(item, friend);            
-  //   }
-
-  // }
+  }
 
   $scope.selectFriend = function(index, item, friend, itemIndex) {
     if (friend.items.includes(item)) {
@@ -192,7 +161,7 @@ angular.module('myApp.split', [])
       // then push it out to the friends in the food friend array
     var itemCost = parseFloat((item[2] / item[3].length).toFixed(2));
     itemCost = itemCost * (1 + $scope.bill.taxRate + $scope.bill.tipRate);
-    itemCost = parseFloat(itemCost.toFixed(2));
+    itemCost = itemCost.toFixed(2);
 
     for (var i = 0; i < $scope.friends.length; i++) {
       delete $scope.friends[i].cost[item[1]];
@@ -235,7 +204,8 @@ angular.module('myApp.split', [])
 
     for (var i = 0; i < $scope.friends.length; i++) {
       for (var key in $scope.friends[i].cost) {
-        $scope.friends[i].total += parseFloat(($scope.friends[i].cost[key]).toFixed(2));
+        $scope.friends[i].total += parseFloat($scope.friends[i].cost[key]);
+        $scope.friends[i].displayTotal = $scope.friends[i].total.toFixed(2)
       }
     }
   }
