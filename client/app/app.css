@@ -5,7 +5,7 @@ body {
 }
 
 .signonBG {
-  background-image: url('https://1bk7xm3xz6cl1t7e5a1j641m-wpengine.netdna-ssl.com/wp-content/uploads/2015/07/41203414-wine-bottles-with-grape-leaves-on-wooden-background-with-copy-space.jpg');
+  background-image: url('woodbg.jpg');
   background-size: 100% cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -261,8 +261,7 @@ form .progress {
 }
 
 .table-ind-items {
-  /*padding: 10px;
-  float: right;*/
+  /*padding-bottom: 10px !important;*/
 }
 
 .form-control {
@@ -303,5 +302,10 @@ form .progress {
 .amount {
   text-align: right;
   padding-right: 235px;
+}
+
+.fixed-size {
+  width: 598px;
+  height: 110px;
 }
 
