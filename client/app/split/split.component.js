@@ -213,7 +213,7 @@ angular.module('myApp.split', [])
   $scope.randomColor = function() {
     console.log('yay')
     var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    return hue;
+    return { 'background-color': hue }
   }
   // $scope.init = function() {
   //   $scope.subtotal = Bill.getSubtotal();
