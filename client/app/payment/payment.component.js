@@ -19,6 +19,8 @@ angular.module('myApp.payment', [])
   $scope.zipCode = null;
   $scope.paymentInfoReady = false;
   $scope.paymentSubmitted = false;
+  $scope.saveCard = false;
+  $scope.paymentSaveName = '';
 
   // on initialize, populates all users from DB into $scope.users for typeahead
   var init = function() {
@@ -52,6 +54,9 @@ angular.module('myApp.payment', [])
 
   $scope.submitPayment = function() {
     console.log('Payment submitted!');
+    if ($scope.saveCard) {
+      console.log($scope.paymentSaveName);
+    }
     $scope.paymentInfoReady = false;
     $scope.paymentSubmitted = true;
   }

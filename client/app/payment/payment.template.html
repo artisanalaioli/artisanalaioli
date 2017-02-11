@@ -56,25 +56,25 @@
         <div class="row">
           <div class="col-xs-4">Card #:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="card-number" ng-model="cardNumber" />
+            <input type="text" class="form-control" name="card-number" ng-model="cardNumber" maxlength="16" minlength="16" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">CVV #:</div>
           <div class="col-xs-4">
-            <input type="text" class="form-control" name="cvv-number" ng-model="cvvNumber" />
+            <input type="text" class="form-control" name="cvv-number" ng-model="cvvNumber" maxlength="3" minlength="3" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Name on Card:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="card-name" ng-model="cardName" />
+            <input type="text" class="form-control" name="card-name" ng-model="cardName" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Address 1:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="address-1" ng-model="address1" />
+            <input type="text" class="form-control" name="address-1" ng-model="address1" required />
           </div>
         </div>
         <div class="row">
@@ -86,19 +86,19 @@
         <div class="row">
           <div class="col-xs-4">City:</div>
           <div class="col-xs-8">
-            <input type="text" class="form-control" name="city-name" ng-model="cityName" />
+            <input type="text" class="form-control" name="city-name" ng-model="cityName" required/>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">State:</div>
           <div class="col-xs-4">
-            <input type="text" class="form-control" name="state" ng-model="stateName"/>
+            <input type="text" class="form-control" name="state" ng-model="stateName" maxlength="2" required />
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4">Zip:</div>
           <div class="col-xs-4">
-            <input type="text" class="form-control" name="zip-code" ng-model="zipCode" />
+            <input type="text" class="form-control" name="zip-code" ng-model="zipCode" maxlength="5" required />
           </div>
         </div>
         <div class="row">
