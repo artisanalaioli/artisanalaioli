@@ -20,7 +20,7 @@ export default function routes(app, express) {
   app.post('/me/friends/remove', removeFriend);
 
   app.post('/ocr', OCR);
-
+  
   /*
   Possible endpoints:
   /me --> get own bills (and debts and debtors) 

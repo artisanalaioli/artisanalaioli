@@ -4,13 +4,21 @@ import middleware from './utils/middleware';
 import mailSender from './utils/mailer';
 
 
-
 var _ = require('underscore');
 var app = express();
 
+
+var bodyParser = require('body-parser');
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+
 var rootDir = __dirname;
 
-middleware(app,express);
+middleware(app, express);
 routes(app, express);
 mailSender(app, express, rootDir);
 
@@ -28,16 +36,21 @@ const vision = require('@google-cloud/vision')({
   	projectId: 'AIzaSyDp_Bl-MD9PhAu3-SqWaLo5vf9cQLQa3NM',
   	keyFilename: './server/Divvy-8f936cd51c11.json'
 })
-export default function OCR() {
-	vision.detectText('http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012')
+//http://www.trbimg.com/img-561c0d46/turbine/la-sp-sarkisian-alcohol-receipts-20151012
+export function OCR(req, res) {
+	var link = req.body;
+	for(var key in link) {
+		link = key
+	}
+	vision.detectText(link)
 		.then((results => {
 			// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
-			console.log( parseRows(assignRows(results)) )
+			res.data = parseRows(assignRows(results));
+			res.send(res.data)
 		})).catch( (err) => {
 			console.log(err)
 		});
-
-}
+};
 
 var checkRows = function(rows, yValue) {
 	var bool = false

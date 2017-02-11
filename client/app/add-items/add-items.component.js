@@ -1,7 +1,7 @@
 
 angular.module('myApp.addItems', [])
 
-.controller('AddItemCtrl', ['$scope', 'Upload', '$timeout', 'Bill', function ($scope, Upload, $timeout, Bill) {
+.controller('AddItemCtrl', ['$scope', 'Upload', '$timeout', 'Bill', '$http', function ($scope, Upload, $timeout, Bill, $http) {
   // $scope.image = "";
   $scope.readyToSplit = true; // need this to be true to proceed
   $scope.price; // price for single item
@@ -40,23 +40,33 @@ angular.module('myApp.addItems', [])
     angular.forEach(files, function(file) {
       console.log(file)
       file.upload = Upload.upload({
-<<<<<<< HEAD
-        url: 'POST https://www.googleapis.com/upload/storage/v1/b/divvy_receipts/?uploadType=media&name=myObject',
         
-        data: {file: file}
-=======
+        data: {file: file},
         headers: {'Authorization': 'Client-ID 010fe699c18e3c9'},
         url: 'https://api.imgur.com/3/image',
         data: {image: file}
->>>>>>> 2a50fb37cc8c2d9c035baec25df6accd4a1c5cc6
+
       });
 
       file.upload.then(function (response) {
         $timeout(function () {
-          console.log(response);
+          console.log('response data: ', response.data.data.link);
+          // $http.post('/ocr','hello')
+          $http({
+            method: 'POST',
+            url: '/ocr',
+            data: response.data.data.link,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          }).then(function(res) {
+            console.log(res)
+          })
+
+          
           file.result = response.data;
+
         });
       }, function (response) {
+        // console.log(response)
         if (response.status > 0)
           $scope.errorMsg = response.status + ': ' + response.data;
       }, function (evt) {
