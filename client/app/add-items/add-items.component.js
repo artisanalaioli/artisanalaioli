@@ -58,7 +58,8 @@ angular.module('myApp.addItems', [])
             data: response.data.data.link,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
           }).then(function(res) {
-            console.log(res)
+            console.log('res data', res.data)
+            $scope.uploadedScannedItems(res.data);
           })
 
           
@@ -73,6 +74,24 @@ angular.module('myApp.addItems', [])
         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
       });
     });
+  }
+
+  $scope.uploadedScannedItems = function(data) {
+    $scope.uploadedItems = data;
+    for (var i = 0; i < $scope.uploadedItems.length; i++) {
+
+      if ($scope.uploadedItems[i].price.charAt(0) === '$') {
+        $scope.uploadedItems[i].price = $scope.uploadedItems[i].price.slice(1);
+      }
+      if ($scope.uploadedItems[i].name.toLowerCase() === 'tax' || $scope.uploadedItems[i].name.toLowerCase() === 'sales tax') {
+        $scope.tax = parseFloat($scope.uploadedItems[i].price);
+        Bill.updateTax($scope.tax);
+      } else if (!isNaN(parseFloat($scope.uploadedItems[i].price))) {
+        $scope.item = $scope.uploadedItems[i].name;
+        $scope.price = $scope.uploadedItems[i].price;
+        $scope.additeminfo();
+      }
+    }
   }
 
   $scope.restaurantName = function() {
