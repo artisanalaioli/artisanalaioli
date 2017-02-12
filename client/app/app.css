@@ -1,5 +1,20 @@
 /* app css stylesheet */
 
+body {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.signonBG {
+  background-image: url('woodbg.jpg');
+  background-size: 100% cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.noSignonBG {
+  background-image: none;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -24,6 +39,18 @@
   padding-right: 0.3em;
 }
 
+.navbar {
+  border-radius: 0px;
+}
+
+.navbar-brand {
+  opacity: 0.6;
+  display: inline-block;
+}
+
+.navbar-brand {
+  opacity: 1;
+}
 
 label {
 	padding: 5px 15px 5px 5px;
@@ -42,6 +69,10 @@ h3 {
 .container {
 	padding-left: 45px;
 	padding-right: 45px;
+}
+
+.price-for-friend {
+  padding-bottom: 15px !important;
 }
 
 .price-for-friend > li {
@@ -80,5 +111,206 @@ li {
 .spacer {
   margin: 0;
   padding: 0;
-  height: 50px;
+  height: 44px;
 }
+
+.panel {
+  margin-bottom: 20px;
+  background-color: rgba(0,0,0,.5);
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.panel-default>.panel-heading {
+  background-image: none;
+  color: #eee;
+  background-color: rgba(46, 110, 165, 0.85);
+}
+
+.swap {
+  color: #b5ddff;
+}
+
+.remove:hover {
+  cursor: pointer;
+  color: #c12323;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.camera-input {
+  padding-left: 14px;
+  font-weight: normal;
+  border-radius: 4px;
+}
+
+.camera-input:hover {
+  cursor: pointer;
+}
+
+.table-hover tbody tr:hover {
+  cursor: pointer;
+  background-color: #ffc6c6;
+}
+
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 1;
+}
+}
+
+.progress {
+    display: inline-block;
+    width: 100px;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
+    padding-left: 12px;
+    background: #a0ffbd;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: green;
+    border-width: 0.5px
+}
+
+.loading-bar{
+  padding: 0px;
+}
+
+.top-margin {
+  margin-top: 10px;
+}
+
+#logo {
+  opacity: 0.6;
+  display: inline-block;
+  height: 42px;
+  width: 42px;
+}
+
+#logo:hover {
+  opacity: 1;
+}
+
+.divvy {
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+
+.bill-cards {
+  display: inline-flex;
+  overflow-x: scroll;
+}
+
+.selected { 
+  background-color: #a0ffbd !important; 
+}
+
+.table-row:hover {
+  cursor: pointer;
+}
+
+.friend-chooser {
+  padding: 20px 10px 10px 40px;
+  font-size: 20px;
+  /*background-color: #80e1ff;*/
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: gainsboro;
+}
+
+.friend-chooser:hover {
+  cursor: pointer;
+}
+
+.receipt-header {
+  background-color: rgb(245, 245, 245) !important;
+  color: black !important;
+}
+
+.btn-primary {
+  width: 116px;
+  height: 34px
+  vertical-align: center !important;
+}
+
+.individual-items {
+  margin-right: 5px;
+  font-size: 14px;
+  background-color: rgb(235, 212, 255);
+  padding: 0px 5px 0px 5px !important;
+  border-color: #b699e6;
+}
+
+.table-ind-items {
+  /*padding-bottom: 10px !important;*/
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.card {
+  padding: 0px;
+}
+
+.bill-total {
+  text-align: right;
+}
+
+.table-striped {
+  margin: 0px;
+}
+
+.card-block {
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.friend-portion {
+  margin-bottom: 10px !important;
+  margin-top: 0px !important;
+}
+
+.remove-bottom-margin {
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+}
+
+.dolla-dolla-bill {
+  width: 20px;
+  text-align: right;
+}
+
+.amount {
+  text-align: right;
+  padding-right: 235px;
+}
+
+.fixed-size {
+  width: 598px;
+  height: 110px;
+}
+
+.celebrate {
+  background-image: url('https://media.giphy.com/media/120ErahsQyf1q8/source.gif');
+}
+

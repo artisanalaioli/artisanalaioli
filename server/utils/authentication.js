@@ -40,6 +40,8 @@ function auth(req, res, next) {
 
 function login(req, res, next) {
   req.session.username = req.user.username;
+  console.log('Logged in user:', req.session.username);
+  console.log('Session', req.session);
   res.redirect('/');
 }
 
@@ -81,4 +83,17 @@ function logout(req, res, next) {
   });
 }
 
-export { passport, login, register, logout };
+function checkAuth(req, res) {
+  if (req.session.username) {
+    res.json({
+      'loggedIn': true,
+      'username': req.session.username
+    });
+    console.log('LOGGED IN:', req.session.username);
+  } else {
+    res.json({'loggedIn': false});
+    console.log('NOT LOGGED IN');
+  }
+};
+
+export { passport, login, register, logout, checkAuth };

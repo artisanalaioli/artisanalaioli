@@ -1,72 +1,88 @@
 'use strict';
 
-angular.module('myApp.uploadbill', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/uploadbill', {
-    templateUrl: 'upload-bill/upload-bill.template.html',
-    controller: 'UploadBillCtrl'
-  });
-}])
+angular.module('myApp.uploadbill', [])
 
 .controller('UploadBillCtrl', function ($scope, Bill) {
   // $scope.image = "";
-  $scope.priceBeforeTip = 0;
-  $scope.readyToSplit = false;
-  $scope.item; // single item
-  $scope.price; // price for single item
-  $scope.tax = 0;
-  $scope.taxRate = 0;
-  $scope.tipRate = 0; // this 'rate' is percentage 
-  $scope.items = []; // items is an array of [id, item, price, people]
-  $scope.count = 0; // when remove item, currentItemId will not decrease
+  $scope.readyToSplit = true;
+  
+  // $scope.taxRate = 0;
+  // $scope.tipRate = 0; // this 'rate' is percentage 
 
   $scope.addbillinfo = function() {
-    $scope.priceBeforeTip = Number.parseFloat($scope.priceBeforeTip);
     // calculate tax rate
-    if ($scope.tax) {
-      $scope.tax = Number.parseFloat($scope.tax);
-      $scope.taxRate = $scope.tax / $scope.priceBeforeTip;
-    }
+    $scope.taxRate = $scope.tax / $scope.subtotal;
     // calculate tiprate
     if (!$scope.tipRate) {
-      $scope.tipRate = ($scope.tipnum / $scope.priceBeforeTip * 100).toFixed(2);
+      $scope.tipRate = ($scope.tip / $scope.subtotal * 100).toFixed(2);
     } 
     $scope.readyToSplit = true;
   }
 
-  $scope.additeminfo = function() {
-    $scope.count += 1;
-    $scope.price = Number.parseFloat($scope.price);
-    $scope.items.push([$scope.count, $scope.item, $scope.price, '']);
-    $scope.item = "";
-    $scope.price = 0;
-  }
-
   $scope.addBill = function() {
+    $scope.anyNaN();
     var bill = {};
-    bill.name = $scope.name;
+    $scope.addbillinfo();
+    bill.name = $scope.bill.name;
     bill.items = $scope.items;
-    bill.priceBeforeTip = $scope.priceBeforeTip;
+    bill.subtotal = parseFloat($scope.subtotal);
     bill.taxRate = $scope.taxRate; 
     bill.tipRate = $scope.tipRate / 100; // convert percentage to decimal
+    bill.tip = $scope.tip;
+    bill.tax = $scope.tax;
     Bill.addBill(bill);
   }
 
-  $scope.removeitem = function(singleitem) {
-    var index = $scope.items.indexOf(singleitem);
-    $scope.items.splice(index, 1);
-    $scope.count -= 1;
-    for (var i = 0; i < $scope.items.length; i++) {
-      $scope.items[i][0] = i + 1;
+  $scope.$watch('displayTax', function() {
+    $scope.anyNaN();
+    $scope.findTotal();
+  })
+
+  $scope.$watch('displayTip', function() {
+    $scope.anyNaN();
+    $scope.findTotal();
+  })
+
+  $scope.updateTips = function(type) {
+    if (type === 'rate') {
+      $scope.displayTip = parseFloat(($scope.displayTipRate * $scope.subtotal / 100).toFixed(2));
+    } else {
+      $scope.displayTipRate = parseFloat(($scope.displayTip / $scope.subtotal * 100).toFixed(2));
     }
   }
 
-  // $scope.removeimg = function() {
-  //  $scope.image = "";
-  // }
-  // $scope.process = function() {
-  // }
+  $scope.anyNaN = function() {
+    $scope.tax = parseFloat($scope.displayTax);
+    $scope.tipRate = parseFloat($scope.displayTipRate);
+    $scope.tip = parseFloat($scope.displayTip);
+    
+    if (isNaN($scope.displayTax)) {
+      $scope.tax = 0;
+    }
+    if (isNaN($scope.displayTipRate)) {
+      $scope.tipRate = 0;
+    }
+    if (isNaN($scope.displayTip)) {
+      $scope.tip = 0;
+    }
+  }
+
+  $scope.findTotal = function() {
+    $scope.total = (parseFloat($scope.subtotal) + parseFloat($scope.tax) + parseFloat($scope.tip)).toFixed(2);
+  }
+
+  $scope.init = function () {
+    $scope.bill = Bill.getBill();
+    $scope.subtotal = $scope.bill.subtotal.toFixed(2);
+    $scope.items = $scope.bill.items;
+    $scope.displayTax = $scope.bill.tax;
+    $scope.displayTip = $scope.bill.tip;
+    $scope.displayTipRate = $scope.bill.tipRate * 100;
+    $scope.anyNaN();
+    $scope.total = $scope.subtotal + $scope.tip + $scope.tax;
+  }
+
+  $scope.init();
 
 })
 .directive('stringToNumber', function() {
@@ -82,20 +98,4 @@ angular.module('myApp.uploadbill', ['ngRoute'])
     }
   };
 });
-// .directive('myUpload', [function () {
-//  return {
-//    restrict: 'A',
-//    link: function ($scope, elem, attrs) {
-//    var reader = new FileReader();
-//    reader.onload = function (e) {
-//      $scope.image = e.target.result;
-//      $scope.$apply();
-//    }
-
-//    elem.on('change', function() {
-//      reader.readAsDataURL(elem[0].files[0]);
-//    });
-//  }
-//  };
-// }]);
 

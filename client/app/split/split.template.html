@@ -1,44 +1,125 @@
-<h1>Split the bill</h1>
+<h1>Split the Bill</h1>
 <hr class="my-4">
-<div class="spacer"></div>
-<div>
-  <ul class="row">
-    <li class="col-sm-12 col-md-6 col-lg-4" ng-repeat="friend in friends">
-    <div class="card">
-    <div class="card-header text-center">
-      <h4>{{friend.name}}</h4>
+<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Who Ordered {{addedItem[1]}}?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body friend-chooser fixed-size" ng-repeat="friend in friends" ng-click="selectFriend($index, addedItem, friend, itemIndex)" ng-class="friendSelected[$index]">
+        <p>{{friend.name}}</p>
+        <table class="table-ind-items">
+          <tbody>
+            <tr>
+              <td ng-repeat="(item, price) in friend.cost" >
+                <p class="individual-items card added-item">{{item}} - ${{price}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
     </div>
+  </div>
+</div>
+
+
+
+
+<div class='container' ng-style="assigneditems.length === items.length ? {'background-image':'url(https://media.giphy.com/media/120ErahsQyf1q8/giphy.gif)'} : { 'background-image': 'none'}">
+  <div class="row">
+    <div class="card col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+      <div class="card-header text-center">
+        <h4>{{bill.name}}</h4>
+      </div>
+      <div class="card-block">
+        <div class="price-for-friend row">
+          <div class="col-sm-3">Tax: ${{(final.tax).toFixed(2)}}</div>
+          <div class="col-sm-3">Tip: ${{(final.tip).toFixed(2)}}</div>
+          <div class="col-sm-6 bill-total"><strong>Total:</strong> ${{(final.total).toFixed(2)}}</div>
+        </div>
+        <ul ng-repeat='friend in friends' class='remove-bottom-margin'>
+          <li>
+            <div class="col-sm-3 friend-portion">{{friend.name}}: </div>
+            <table class="col-sm-9 friend-portion user-price-table">
+              <tr>
+                <td class='dolla-dolla-bill'>$</td>
+                <td class='amount'>{{ friend.displayTotal }}</td>
+                <td></td>
+              </tr>
+            </table>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <table class="table table-striped">
+          <thead class="thead-default">
+            <tr>
+              <th>#</th>
+              <th>item</th>
+              <th></th>
+              <th>price</th>
+            </tr>
+          </thead>  
+          <tbody>
+            <tr ng-repeat="item in items" class='table-row' ng-click="openModal(item, $index)" ng-class="itemSelected[$index]" data-toggle="modal" data-target="#exampleModalLive">
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td class='dolla-dolla-bill'>$</td>
+              <td>{{item[2].toFixed(2)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!---->
+<div class="spacer"></div>
+<hr class="my-4">
+<a class="btn btn-primary pull-left" href='/#!/uploadbill'>Back</a>
+<a ng-if="assigneditems.length === items.length" href="/#!/bills" class="btn btn-primary pull-right" ng-click="submitFinalBill()" >Split the Bill</a>
+
+
+<!-- CAROUSEL CARDS -->
+  <!-- <slick infinite='false' arrows='false'>
+    <li class="col-xs-12" ng-repeat="friend in friends">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4>{{friend.name}}</h4>
+      </div>
     <div class="card-block">
       <ul class="price-for-friend row">
         <li class="col-3">tax: {{friend.tax}}</li>
         <li class="col-3">tip: {{friend.tip}}</li>
-        <li class="col-3">Total:  {{friend.total}}</li>
+        <li class="col-3">Total: {{friend.total}}</li>
       </ul>
     </div>
       <div>
         <table class="table table-striped">
           <thead class="thead-default">
-                  <tr>
-                    <th >#</th>
-                    <th >item</th>
-                    <th >price</th>
-                  </tr>
-                </thead> 
-                <tbody>
-                <tr ng-repeat="item in items" ng-click="checkAssign(item, friend); changeClass()" ng-class="class">
-            <td>{{item[0]}}</td>
-            <td>{{item[1]}}</td>
-            <td>{{item[2]}}</td>
-          </tr>
+            <tr>
+              <th >#</th>
+              <th >item</th>
+              <th >price</th>
+            </tr>
+          </thead>  
+          <tbody>
+            <tr ng-repeat="item in items" class='table-row' ng-click="clearModal(item, friend, $index); changeClass($index)" ng-class="isSelected[$index]">
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td>{{item[2]}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
     </li>
-  </ul>
-</div>
-
-<div class="spacer"></div>
-<hr class="my-4">
-
-<button ng-if="assigneditems.length > 0" class="btn btn-primary pull-right" ng-click="submitSplit()">Split the bill</button>
+  </slick> -->

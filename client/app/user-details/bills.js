@@ -1,12 +1,4 @@
-angular.module('myApp.bills', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
-  .when('/bills', {
-    templateUrl: 'user-details/bills.html',
-    controller: 'BillsController'
-  });
-}])
+angular.module('myApp.bills', [])
 
 .controller('BillsController', function ($scope, $rootScope, $http) {
   $scope.bills = [];
