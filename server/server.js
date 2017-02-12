@@ -3,18 +3,14 @@ import routes from './utils/routes';
 import middleware from './utils/middleware';
 import mailSender from './utils/mailer';
 
-
 var _ = require('underscore');
 var app = express();
-
 
 var bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
 // parse application/json
 app.use(bodyParser.json())
-
 
 var rootDir = __dirname;
 
@@ -24,12 +20,9 @@ mailSender(app, express, rootDir);
 
 app.listen(3000, function() {
   console.log('listening on port 3000');
-
 });
 
 export { app };
-
-const storage = require('@google-cloud/storage')();
 
 // Imports the Google Cloud client library
 const vision = require('@google-cloud/vision')({
@@ -46,7 +39,9 @@ export function OCR(req, res) {
 		.then((results => {
 			// console.log( JSON.stringify(results[results.length-1].responses[0], null, 4) )
 			res.data = parseRows(assignRows(results));
+			console.log(res.data)
 			res.send(res.data)
+
 		})).catch( (err) => {
 			console.log(err)
 		});
@@ -102,7 +97,7 @@ var formatItem = function(strings) {
 	var foodItem = {}
 	strings.forEach( (str, i) => {
 		if(isFoodItem(str)) {
-			foodItem.price = strings.splice(i, 1)
+			foodItem.price = strings.splice(i, 1)[0]
 		}
 	})
 	foodItem.name = strings.join(' ')
